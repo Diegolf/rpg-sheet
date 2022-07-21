@@ -1,26 +1,26 @@
-import { OrdemRPGCharacterAtributes } from "../characters/ordem-rpg-character";
-import { DicesFormula, Dices } from "./dices";
+import { CharacterAtributes } from "../characters/character";
+import { DiceFormula, DicesFormulas, Dices } from "./dices";
 
-export interface OrdemRPGDicesFormula extends DicesFormula {
-   D3: string;
-   D4: string;
-   D6: string;
-   D10: string;
-   D20: string;
-   D100: string;
-   HIT: string;
-   Perception: string;
-   Flee: string;
-   Parry: string;
-   Parry_Counter: string;
-   Stealth: string;
-   Reanimate: string;
+export interface OrdemRPGDicesFormula extends DicesFormulas {
+   D3: DiceFormula;
+   D4: DiceFormula;
+   D6: DiceFormula;
+   D10: DiceFormula;
+   D20: DiceFormula;
+   D100: DiceFormula;
+   HIT: DiceFormula;
+   Perception: DiceFormula;
+   Flee: DiceFormula;
+   Parry: DiceFormula;
+   Parry_Counter: DiceFormula;
+   Stealth: DiceFormula;
+   Reanimate: DiceFormula;
 }
 
 export class OrdemRPGDices implements Dices {
    dicesFormulas: OrdemRPGDicesFormula;
 
-   throwDice(formula: string, atributes: OrdemRPGCharacterAtributes): () => number {
-      throw new Error('Method not implemented.');
-   }
+   rollDice(formula: DiceFormula, atributes?: CharacterAtributes): number {
+      return formula(atributes);
+   }   
 }

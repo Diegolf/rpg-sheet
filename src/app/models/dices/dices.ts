@@ -1,10 +1,16 @@
 import { CharacterAtributes } from '../characters/character';
 
-export interface DicesFormula {
-   [Name: string]: string
+export type DiceFormula = (atributes?: CharacterAtributes) => number;
+
+export interface DicesFormulas {
+   [Name: string]: DiceFormula;
 }
 
 export interface Dices {
-   dicesFormulas: DicesFormula;
-   throwDice(formula: string, atributes: CharacterAtributes): () => number | null;
+   dicesFormulas: DicesFormulas;
+   rollDice(formula: DiceFormula, atributes?: CharacterAtributes): number | null;
+}
+
+export const roll = (maxValue: number) => {
+   return 0;
 }
