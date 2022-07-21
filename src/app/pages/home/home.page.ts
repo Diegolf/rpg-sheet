@@ -1,5 +1,5 @@
-import { OrdemRPGCharacter } from './../../models/character';
 import { Component, OnInit } from '@angular/core';
+import { OrdemRPGCharacter } from 'src/app/models/characters/ordem-rpg-character';
 
 @Component({
   selector: 'app-home',

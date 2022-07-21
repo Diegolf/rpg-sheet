@@ -1,5 +1,5 @@
-import { OrdemRPGCharacterAtributes } from '../models/character';
-import { OrdemRPGDices, OrdemRPGDicesFormula } from './../models/dice';
+import { OrdemRPGCharacterAtributes } from '../models/characters/character';
+import { OrdemRPGDices, OrdemRPGDicesFormula } from '../models/dices/dices';
 
 const OrdemRPGDicesFormulaMock: OrdemRPGDicesFormula = {
    D3: '[3]',

@@ -1,13 +1,5 @@
-import { CharacterAtributes, OrdemRPGCharacterAtributes } from './character';
-
-export interface DicesFormula {
-   [Name: string]: string
-}
-
-export interface Dices {
-   dicesFormulas: DicesFormula;
-   throwDice(formula: string, atributes: CharacterAtributes): () => number | null;
-}
+import { OrdemRPGCharacterAtributes } from "../characters/ordem-rpg-character";
+import { DicesFormula, Dices } from "./dices";
 
 export interface OrdemRPGDicesFormula extends DicesFormula {
    D3: string;
