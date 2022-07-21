@@ -1,4 +1,4 @@
-import { DiceFormula } from './../models/dices/dices';
+import { DiceFormula } from '../models/dices/dices';
 import { OrdemRPGCharacterAtributes } from "../models/characters/ordem-rpg-character";
 import { OrdemRPGDicesFormula, OrdemRPGDices } from "../models/dices/orgem-rpg-dices";
 

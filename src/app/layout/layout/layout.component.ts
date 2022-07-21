@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { mainMenuRoutesMock } from 'src/app/mocks/main-menu-routes';
+import { mainMenuRoutesMock } from 'src/mocks/main-menu-routes';
 
 @Component({
   selector: 'app-layout',
