@@ -1,3 +1,4 @@
+import { asapScheduler } from 'rxjs';
 import { CharacterAtributes } from '../characters/character';
 
 export interface RollResult {
@@ -24,4 +25,4 @@ export interface Dices {
    rollDice(dice: Dice, atributes?: CharacterAtributes): RollResult;
 }
 
-export const rollFromTo = (minValue: number, maxValue: number) => 0;
+export const rollFromTo = (minValue: number, maxValue: number) => Math.round(Math.random() * (maxValue - minValue)) + minValue;

@@ -1,5 +1,5 @@
-import { OrdemRPGCharacterAtributes } from './../characters/ordem-rpg-character';
-import { DicesFormulas, Dices, Dice, rollFromTo, RollResult } from './dices';
+import { OrdemRPGCharacterAtributes } from '../../characters/ordem-rpg-character';
+import { DicesFormulas, Dices, Dice, rollFromTo, RollResult } from '../dices';
 
 export interface OrdemRPGDicesFormulas extends DicesFormulas {
    d3: Dice;
@@ -69,15 +69,15 @@ const ordemRPGDicesFormula: OrdemRPGDicesFormulas = {
       name: 'Aparar e Revidar',
       formulaDescription: 'D10 + (Destreza * 2)',
       roll: (atributes: OrdemRPGCharacterAtributes) => {
-         const d20Result = rollFromTo(1, 10);
+         const d10Result = rollFromTo(1, 10);
          const modifierResult = atributes.dex * 2;
-         return handleRollResult(d20Result, modifierResult);
+         return handleRollResult(d10Result, modifierResult);
       }
    },
    stealth: {
       description: 'Perícia para realizar movimentos sem ser notado pelo inimigo.',
       name: 'Furtividade',
-      formulaDescription: 'D10 + Destreza',
+      formulaDescription: 'D20 + Destreza',
       roll: (atributes: OrdemRPGCharacterAtributes) => {
          const d20Result = rollFromTo(1, 20);
          const modifierResult = atributes.dex;
@@ -105,6 +105,6 @@ export class OrdemRPGDices implements Dices {
 }
 
 const handleRollResult = (d20Result: number, modifierResult: number): RollResult => ({
-   value: d20Result <= 0 ? 0 : d20Result,
+   value: (d20Result + modifierResult) <= 0 ? 1 : (d20Result + modifierResult),
    formulaParsedDescription: `${d20Result} ${modifierResult > 0 ? '+' : '-'}${modifierResult}`
 });
