@@ -6,7 +6,7 @@ export interface CharacterInventory {
 }
 
 export interface CharacterAtributes {
-   [ID: string] : number;
+   [ID: string]: number;
 }
 
 export interface Character {

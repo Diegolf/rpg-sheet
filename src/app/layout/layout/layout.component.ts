@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { mainMenuRoutesMock } from 'src/mocks/main-menu-routes';
 
 @Component({
   selector: 'app-layout',
@@ -8,7 +7,9 @@ import { mainMenuRoutesMock } from 'src/mocks/main-menu-routes';
 })
 export class LayoutComponent implements OnInit {
 
-  public rotas = mainMenuRoutesMock;
+   public rotas = [
+      { routerLink: '/pages/dices', titulo: 'Dados' },
+   ];
 
   constructor() { }
 

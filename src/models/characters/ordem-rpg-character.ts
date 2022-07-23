@@ -1,28 +1,29 @@
-import { InventoryItem } from "../inventory-items/inventory-item";
-import { CharacterAtributes, Character, CharacterInventory } from "./character";
+import { InventoryItem } from '../inventory-items/inventory-item';
+import { CharacterAtributes, Character, CharacterInventory } from './character';
+
 
 export interface OrdemRPGCharacterAtributes extends CharacterAtributes {
-   AGI: number;
-   VIG: number;
-   DEX: number;
-   INT: number;
+   agi: number;
+   vig: number;
+   dex: number;
+   int: number;
 }
 
 export class OrdemRPGCharacter implements Character {
    healthPoints: number;
    inventory: CharacterInventory;
    atributes: OrdemRPGCharacterAtributes;
-   
+
    constructor(healthPoints, inventory, atributes) {
       this.healthPoints = healthPoints;
       this.inventory = inventory;
-      this.atributes = atributes;      
+      this.atributes = atributes;
    }
 
    addInventoryItem(inventoryItem: InventoryItem): () => boolean {
       throw new Error('Method not implemented.');
    }
-   removeInventoryItem(InventoryItem: InventoryItem): () => boolean {
+   removeInventoryItem(inventoryItem: InventoryItem): () => boolean {
       throw new Error('Method not implemented.');
    }
 

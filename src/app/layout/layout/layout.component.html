@@ -29,7 +29,7 @@
       </ion-header>
       <ion-content>
         <!-- <ion-list id="inbox-list">
-          
+
         </ion-list> -->
 
         <ion-list id="inbox-list">
@@ -37,11 +37,11 @@
           <ion-note>Consultas</ion-note>
 
           <ion-menu-toggle auto-hide="false">
-            <ion-item routerDirection="root" [routerLink]="rota.RouterLink" lines="none" detail="false"
+            <ion-item routerDirection="root" [routerLink]="rota.routerLink" lines="none" detail="false"
               *ngFor="let rota of rotas" routerLinkActive="selected">
               <ion-icon slot="start" name="cart-sharp"></ion-icon>
-              <ion-label>{{rota.Titulo}}</ion-label>
-            </ion-item> 
+              <ion-label>{{rota.titulo}}</ion-label>
+            </ion-item>
           </ion-menu-toggle>
         </ion-list>
 
