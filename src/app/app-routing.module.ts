@@ -5,7 +5,7 @@ import { LayoutComponent } from './layout/layout/layout.component';
 const routes: Routes = [
 
   // Rota vazia
-  { path: '', pathMatch: 'full', redirectTo: 'home'},
+  { path: '', pathMatch: 'full', redirectTo: 'pages/dices'},
 
   // Rotas com layout padrão
   { path: '',
