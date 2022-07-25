@@ -9,6 +9,7 @@ export class LayoutComponent implements OnInit {
 
    public rotas = [
       { routerLink: '/pages/dices', titulo: 'Dados' },
+      { routerLink: '/pages/teste', titulo: 'Teste' },
    ];
 
   constructor() { }

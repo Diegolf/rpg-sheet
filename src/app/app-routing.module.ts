@@ -17,8 +17,8 @@ const routes: Routes = [
         children: [
           // Rota "/pages/<vazio>"
           { path: '', pathMatch:'full', redirectTo: 'dices' },
-          
-          { path: 'dices', loadChildren: () => import('./pages/dices/dices.module').then( m => m.DicesPageModule)},          
+
+          { path: 'dices', loadChildren: () => import('./pages/dices/dices.module').then( m => m.DicesPageModule)},
 
           // Rota não encontrada
           { path: '**', redirectTo: 'dices' },

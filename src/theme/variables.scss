@@ -74,6 +74,13 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  /** Menu **/
+  --side-menu-header-background: #232230;
+  --side-menu-content-background: #333240;
+  --side-menu-submenu-selected: #282934;
+  --side-menu-submenu-selected-border: #FDA900;
+  --side-menu-text-color: #BEC2C2;
 }
 
 @media (prefers-color-scheme: dark) {

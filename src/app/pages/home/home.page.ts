@@ -11,7 +11,7 @@ export class HomePage implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    let character: OrdemRPGCharacter = new OrdemRPGCharacter(20,{},{});
+
   }
 
 }
