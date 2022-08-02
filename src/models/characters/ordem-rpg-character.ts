@@ -14,10 +14,10 @@ export class OrdemRPGCharacter implements Character {
    inventory: CharacterInventory;
    atributes: OrdemRPGCharacterAtributes;
 
-   constructor(healthPoints, inventory, atributes) {
-      this.healthPoints = healthPoints;
-      this.inventory = inventory;
-      this.atributes = atributes;
+   constructor(healthPoints?: number, inventory?: CharacterInventory, atributes?: OrdemRPGCharacterAtributes) {
+      this.healthPoints = healthPoints ?? 0;
+      this.inventory = inventory ?? { limit: 0, items: [] };
+      this.atributes = atributes ?? { agi: 0, dex: 0, int: 0, vig: 0 };
    }
 
    addInventoryItem(inventoryItem: InventoryItem): () => boolean {

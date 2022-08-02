@@ -8,8 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class LayoutComponent implements OnInit {
 
    public rotas = [
+      { routerLink: '/pages/character', titulo: 'Personagem' },
       { routerLink: '/pages/dices', titulo: 'Dados' },
-      { routerLink: '/pages/teste', titulo: 'Teste' },
    ];
 
   constructor() { }

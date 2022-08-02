@@ -1,3 +1,4 @@
+import { AnimatedDiceComponent } from './animated-dice/animated-dice.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,12 +10,15 @@ import { DicesPageRoutingModule } from './dices-routing.module';
 import { DicesPage } from './dices.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    DicesPageRoutingModule
-  ],
-  declarations: [DicesPage]
+   imports: [
+      CommonModule,
+      FormsModule,
+      IonicModule,
+      DicesPageRoutingModule
+   ],
+   declarations: [
+      DicesPage,
+      AnimatedDiceComponent
+   ]
 })
-export class DicesPageModule {}
+export class DicesPageModule { }
