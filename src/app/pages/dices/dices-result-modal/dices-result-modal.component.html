@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-   <div class="result-set">{{countdown$ | async}}</div>
+   <!-- <div class="result-set">{{countdown$ | async}}</div> -->
 
    <ion-text color="dark" *ngIf="dice.description">
       <h3 class="ion-text-center ion-no-margin"> {{dice.description}} </h3>
@@ -17,18 +17,20 @@
       <h5 class="ion-text-center" style="margin: 10px 0 25px 0;"> ({{dice.formulaDescription}}) </h5>
    </ion-text>
    <div class="result-set">
-      <div *ngFor="let result of dicesResultList">
-         <div class="default-dice ion-text-center">
-            <ion-text>
-               <span>{{result.value}}</span>
+      <div *ngFor="let result$ of resultList">
+         <ng-container *ngIf="(result$ | async) as result">
+            <div class="default-dice ion-text-center">
+               <ion-text>
+                  <span>{{result.value}}</span>
+               </ion-text>
+            </div>
+            <ion-text class="ion-text-center ion-text-uppercase" color="danger" *ngIf="result.lastOne && result.aditionalInfo">
+               <p>{{result.aditionalInfo}}</p>
             </ion-text>
-         </div>
-         <ion-text class="ion-text-center ion-text-uppercase" color="danger" *ngIf="result.aditionalInfo">
-            <p>{{result.aditionalInfo}}</p>
-         </ion-text>
-         <ion-text class="ion-text-center" color="medium" *ngIf="result.formulaParsedDescription">
-            <p>({{result.formulaParsedDescription}})</p>
-         </ion-text>
+            <ion-text class="ion-text-center" color="medium" *ngIf="result.lastOne && result.formulaParsedDescription">
+               <p>({{result.formulaParsedDescription}})</p>
+            </ion-text>
+         </ng-container>
       </div>
    </div>
 </ion-content>

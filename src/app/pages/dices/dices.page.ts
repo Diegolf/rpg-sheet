@@ -29,17 +29,13 @@ export class DicesPage implements OnInit {
    }
 
    async rollDices(dice: Dice) {
-      const times = (this.model.rollTimes < 1) ? 1 : (this.model.rollTimes > 6) ? 6 : this.model.rollTimes;
-      const dicesResultList = Array.from({ length: times }, () => dice.roll(this.gameService.character.atributes));
-
-      this.model.rollTimes = times;
-      // this.diceRollScreen.present();
+      this.model.rollTimes = (this.model.rollTimes < 1) ? 1 : (this.model.rollTimes > 6) ? 6 : this.model.rollTimes;
 
       const modal = await this.modalCtrl.create({
          component: DicesResultModalComponent,
          mode: 'ios',
          swipeToClose: true,
-         componentProps: { dicesResultList, dice }
+         componentProps: { times: this.model.rollTimes, dice, atributes: this.gameService.character.atributes }
       });
 
       modal.present();

@@ -1,3 +1,4 @@
+import { OrdemRPGCharacterAtributes } from './../../../../models/characters/ordem-rpg-character';
 import { RollResult, Dice } from './../../../../models/dices/dices';
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
@@ -11,28 +12,26 @@ import { map, startWith, switchMapTo, takeWhile } from 'rxjs/operators';
 })
 export class DicesResultModalComponent implements OnInit {
 
-   @Input() dicesResultList: [RollResult];
+   @Input() atributes: OrdemRPGCharacterAtributes;
    @Input() dice: Dice;
+   @Input() times: number;
 
-   readonly countdown$ = new Subject<void>().pipe(
-      startWith(0),
-      switchMapTo(this.countdownFrom(30))
-   );
-
+   public resultList;
    private readonly repeatRandomValueTimes = 30;
 
    constructor(public modalCtrl: ModalController) { }
 
-   ngOnInit() { }
-
-   countdownFrom(start: number): Observable<number> {
-      return timer(500, 100).pipe(
-         map((value, index) => {
-            const current = start - index;
-            return current === 0 ? 55 : current;
-         }),
-         takeWhile<number>((value, index) => index !== this.repeatRandomValueTimes, true)
-      );
+   ngOnInit() {
+      this.resultList = Array.from({ length: this.times }, () => new Subject<void>().pipe(
+         startWith(1),
+         switchMapTo(this.generateRandomResults())
+      ));
    }
 
+   generateRandomResults(): Observable<RollResult> {
+      return timer(500, 100).pipe(
+         map((_value, index) => ({ ...this.dice.roll(this.atributes), lastOne: index === this.repeatRandomValueTimes })),
+         takeWhile<RollResult>((_value, index) => index !== this.repeatRandomValueTimes, true)
+      );
+   }
 }
