@@ -18,6 +18,10 @@ export class GameService {
 
   init() {
    this.character = new OrdemRPGCharacter();
+   this.character.atributes.agi = 3;
+   this.character.atributes.vig = 3;
+   this.character.atributes.dex = 3;
+   this.character.atributes.int = 3;
    this.dices = new OrdemRPGDices();
   }
 }

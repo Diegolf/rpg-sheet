@@ -18,20 +18,21 @@ export interface OrdemRPGDicesFormulas extends DicesFormulas {
 }
 
 const ordemRPGDicesFormula: OrdemRPGDicesFormulas = {
-   d3: { roll: () => ({value: rollFromTo(1, 3)}) },
-   d4: { roll: () => ({value: rollFromTo(1, 4)}) },
-   d6: { roll: () => ({value: rollFromTo(1, 6)}) },
-   d10: { roll: () => ({value: rollFromTo(1, 10)}) },
-   d20: { roll: () => ({value: rollFromTo(1, 20)}) },
-   d100: { roll: () => ({value: rollFromTo(1, 100)}) },
+   d3: { name: 'D3', roll: () => ({value: rollFromTo(1, 3)}) },
+   d4: { name: 'D4', roll: () => ({value: rollFromTo(1, 4)}) },
+   d6: { name: 'D6', roll: () => ({value: rollFromTo(1, 6)}) },
+   d10: { name: 'D10', roll: () => ({value: rollFromTo(1, 10)}) },
+   d20: { name: 'D20', roll: () => ({value: rollFromTo(1, 20)}) },
+   d100: { name: 'D100', roll: () => ({value: rollFromTo(1, 100)}) },
    hit: {
       description: 'Habilidade de acertar um ataque.',
       name: 'Acerto',
       formulaDescription: 'D20 + (Destreza * 2)',
       roll: (atributes: OrdemRPGCharacterAtributes) => {
          const d20Result = rollFromTo(1, 20);
+         const hasCrit = 20 - atributes.int <= d20Result;
          const modifierResult = atributes.dex * 2;
-         return handleRollResult(d20Result, modifierResult);
+         return handleRollResult(d20Result, modifierResult, hasCrit ? 'Crítico!' : null);
       }
    },
    perception: {
@@ -104,7 +105,8 @@ export class OrdemRPGDices implements Dices {
    }
 }
 
-const handleRollResult = (d20Result: number, modifierResult: number): RollResult => ({
+const handleRollResult = (d20Result: number, modifierResult: number, aditionalInfo?: string): RollResult => ({
    value: (d20Result + modifierResult) <= 0 ? 1 : (d20Result + modifierResult),
-   formulaParsedDescription: `${d20Result} ${modifierResult > 0 ? '+' : '-'}${modifierResult}`
+   formulaParsedDescription: `${d20Result} ${modifierResult > 0 ? '+' : '-'} ${modifierResult}`,
+   aditionalInfo
 });

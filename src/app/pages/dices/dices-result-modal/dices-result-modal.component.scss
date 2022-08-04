@@ -1,0 +1,15 @@
+.result-set {
+   display: flex;
+   justify-content: space-around;
+   flex-flow: row wrap;
+   row-gap: 15px;
+}
+
+.default-dice {
+   width: 70px;
+   height: 70px;
+   margin: 0 10px;
+   border: 1px solid;
+   border-radius: 3px;
+   padding: 26px 20px;
+}

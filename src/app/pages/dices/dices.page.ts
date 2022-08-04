@@ -1,30 +1,48 @@
+import { DicesResultModalComponent } from './dices-result-modal/dices-result-modal.component';
+import { Dice } from './../../../models/dices/dices';
 import { GameService } from './../../services/game-service.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonModal } from '@ionic/angular';
+import { IonModal, ModalController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-dices',
-  templateUrl: './dices.page.html',
-  styleUrls: ['./dices.page.scss'],
+   selector: 'app-dices',
+   templateUrl: './dices.page.html',
+   styleUrls: ['./dices.page.scss'],
 })
 export class DicesPage implements OnInit {
 
-   @ViewChild('diceRollScreen', {read: IonModal}) diceRollScreen: IonModal;
+   @ViewChild('diceRollScreen', { read: IonModal }) diceRollScreen: IonModal;
 
+   public dicesFormulas;
    public model = {
-      numeroDados: 1,
-      resultadosDados: []
+      rollTimes: 1,
    };
 
-  constructor(private gameService: GameService) { }
+   constructor(
+      private gameService: GameService,
+      private modalCtrl: ModalController
+   ) {
+      this.dicesFormulas = Object.values(gameService.dices.dicesFormulas);
+   }
 
-  ngOnInit() {
-  }
+   ngOnInit() {
+   }
 
-  rollDices(){
-      this.model.resultadosDados = [this.gameService.dices.dicesFormulas.d20.roll()];
+   async rollDices(dice: Dice) {
+      const times = (this.model.rollTimes < 1) ? 1 : (this.model.rollTimes > 6) ? 6 : this.model.rollTimes;
+      const dicesResultList = Array.from({ length: times }, () => dice.roll(this.gameService.character.atributes));
 
-      this.diceRollScreen.present();
-  }
+      this.model.rollTimes = times;
+      // this.diceRollScreen.present();
+
+      const modal = await this.modalCtrl.create({
+         component: DicesResultModalComponent,
+         mode: 'ios',
+         swipeToClose: true,
+         componentProps: { dicesResultList, dice }
+      });
+
+      modal.present();
+   }
 
 }

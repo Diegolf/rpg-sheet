@@ -1,8 +1,8 @@
-import { asapScheduler } from 'rxjs';
 import { CharacterAtributes } from '../characters/character';
 
 export interface RollResult {
    value: number;
+   aditionalInfo?: string;
    formulaParsedDescription?: string;
 }
 
@@ -13,7 +13,6 @@ export interface Dice {
    description?: string;
    formulaDescription?: string;
    roll: DiceFormula;
-   getParsedFormulaDescription?: () => string;
 }
 
 export interface DicesFormulas {

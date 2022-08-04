@@ -1,4 +1,4 @@
-import { AnimatedDiceComponent } from './animated-dice/animated-dice.component';
+import { DicesResultModalComponent } from './dices-result-modal/dices-result-modal.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -18,7 +18,7 @@ import { DicesPage } from './dices.page';
    ],
    declarations: [
       DicesPage,
-      AnimatedDiceComponent
+      DicesResultModalComponent
    ]
 })
 export class DicesPageModule { }
