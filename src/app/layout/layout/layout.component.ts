@@ -1,9 +1,11 @@
+import { GameService } from './../../services/game.service';
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 
 @Component({
-  selector: 'app-layout',
-  templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss'],
+   selector: 'app-layout',
+   templateUrl: './layout.component.html',
+   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
 
@@ -12,8 +14,32 @@ export class LayoutComponent implements OnInit {
       { routerLink: '/pages/dices', titulo: 'Dados' },
    ];
 
-  constructor() { }
+   constructor(private alertController: AlertController, public gameService: GameService) { }
 
-  ngOnInit() {}
+   ngOnInit() { }
+
+   async openCodeInput() {
+      const alert = await this.alertController.create({
+         mode: 'ios',
+         header: '?',
+         inputs: [
+            {
+               name: 'code',
+               placeholder: '*******',
+               cssClass: 'ion-text-center'
+            },
+         ],
+         buttons: [
+            {
+               text: 'OK',
+               handler: (data) => {
+                  // TODO
+               }
+            }
+         ],
+      });
+
+      await alert.present();
+   }
 
 }
