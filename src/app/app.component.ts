@@ -1,4 +1,4 @@
-import { GameService } from './services/game-service.service';
+import { GameService } from './services/game.service';
 import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 @Component({
