@@ -1,7 +1,7 @@
 export interface InventoryItem {
    name: string;
+   code: string;
    description?: string;
-   height?: number;
    size?: number;
    imageUrl?: string;
 }

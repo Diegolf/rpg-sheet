@@ -1,5 +1,9 @@
 import { InventoryItem } from '../inventory-items/inventory-item';
 
+export const HP_INITIAL_VALUE = 20;
+export const ATRIBUTE_INITIAL_VALUE = 0;
+export const INVENTORY_LIMIT = 5;
+
 export interface CharacterInventory {
    limit: number;
    items: InventoryItem[];
@@ -9,13 +13,23 @@ export interface CharacterAtributes {
    [ID: string]: number;
 }
 
+export interface CharacterHealthPoints {
+   current: number;
+   max: number;
+}
+
+export interface CharacterConfigData {
+   healthPoints?: CharacterHealthPoints;
+   inventory?: CharacterInventory;
+   atributes?: CharacterAtributes;
+}
+
 export interface Character {
-   healthPoints: number;
+   healthPoints: CharacterHealthPoints;
    inventory: CharacterInventory;
    atributes: CharacterAtributes;
 
-   addInventoryItem(inventoryItem: InventoryItem): () => boolean;
-   removeInventoryItem(InventoryItem: InventoryItem): () => boolean;
-   loadConfig(config: any): () => void;
-   saveConfig(): () => void;
+   addInventoryItem(inventoryItem: InventoryItem): boolean;
+   removeInventoryItem(InventoryItem: InventoryItem): boolean;
+   loadConfig(data: CharacterConfigData): void;
 }
