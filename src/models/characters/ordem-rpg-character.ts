@@ -1,7 +1,7 @@
 import { InventoryItem } from '../inventory-items/inventory-item';
 import {
    CharacterAtributes, Character, CharacterInventory, CharacterHealthPoints,
-   HP_INITIAL_VALUE, ATRIBUTE_INITIAL_VALUE, INVENTORY_LIMIT, CharacterConfigData
+   HP_INITIAL_VALUE, ATRIBUTE_INITIAL_VALUE, INVENTORY_LIMIT, CharacterConfigData, CharacterAtributeInfo
 } from './character';
 
 
@@ -11,6 +11,33 @@ export interface OrdemRPGCharacterAtributes extends CharacterAtributes {
    dex: number;
    int: number;
 }
+
+export const characterAtributesInfo: CharacterAtributeInfo[] = [
+   {
+      code: 'agi',
+      name: 'Agilidade',
+      description: '',
+      modifierDescription: ''
+   },
+   {
+      code: 'vig',
+      name: 'Vigor',
+      description: '',
+      modifierDescription: ''
+   },
+   {
+      code: 'dex',
+      name: 'Destreza',
+      description: '',
+      modifierDescription: ''
+   },
+   {
+      code: 'int',
+      name: 'Inteligência',
+      description: '',
+      modifierDescription: ''
+   },
+];
 
 export interface OrdemRPGCharacterConfigData extends CharacterConfigData {
    healthPoints?: CharacterHealthPoints;
@@ -52,7 +79,7 @@ export class OrdemRPGCharacter implements Character {
          this.healthPoints = healthPoints;
       }
 
-      if (atributes && atributes.agi >=0 && atributes.dex >= 0 && atributes.int >= 0 && atributes.vig >= 0) {
+      if (atributes && atributes.agi >= 0 && atributes.dex >= 0 && atributes.int >= 0 && atributes.vig >= 0) {
          this.atributes = atributes;
       }
    }
