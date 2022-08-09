@@ -14,28 +14,36 @@ export interface OrdemRPGCharacterAtributes extends CharacterAtributes {
 
 export const characterAtributesInfo: CharacterAtributeInfo[] = [
    {
-      code: 'agi',
-      name: 'Agilidade',
-      description: '',
-      modifierDescription: ''
-   },
-   {
       code: 'vig',
       name: 'Vigor',
       description: '',
-      modifierDescription: ''
+      pros: '<p>Cada ponto aumenta a <b>Vida</b> em <b>4</b> pontos.</p>',
+      cons: '<p>Reduz a perícia <b>Esquiva</b>.</p>',
+      modifierDescription: '<p>A Cada <b>3</b> pontos o jogador pode realizar <b>mais uma ação</b> a cada <b>2</b> rodadas.</p>'
+   },
+   {
+      code: 'agi',
+      name: 'Agilidade',
+      description: '',
+      pros: '<p>Melhora a perícia <b>Esquiva</b>.</p>',
+      cons: '<p>Cada ponto reduz a <b>Vida</b> em <b>2</b> pontos.</p>',
+      modifierDescription: '<p>A cada <b>3</b> pontos o jogador pode <b>Esquivar, Aparar ou Revidar</b> mais <b>2</b> vezes por rodada.</p>'
    },
    {
       code: 'dex',
       name: 'Destreza',
       description: '',
-      modifierDescription: ''
+      pros: '<p>Melhora as perícias <b>Acerto, Aparar e Furtividade</b>.</p>',
+      cons: '',
+      modifierDescription: '<p>A cada <b>3</b> pontos aumenta <b>+3</b> de <b>dano final</b> para ataques do jogador.</p>'
    },
    {
       code: 'int',
       name: 'Inteligência',
       description: '',
-      modifierDescription: ''
+      pros: '<p>Melhora as perícias <b>Crítico e Percepção</b> e aumenta o resultado de <b>Curas (item)</b>.</p>',
+      cons: '',
+      modifierDescription: '<p>A cada <b>3</b> pontos aumenta em <b>+5</b> a chance de reanimar um aliado.</p>'
    },
 ];
 
@@ -43,6 +51,7 @@ export interface OrdemRPGCharacterConfigData extends CharacterConfigData {
    healthPoints?: CharacterHealthPoints;
    inventory?: CharacterInventory;
    atributes?: OrdemRPGCharacterAtributes;
+   remainingAtributes?: number;
 }
 
 export class OrdemRPGCharacter implements Character {

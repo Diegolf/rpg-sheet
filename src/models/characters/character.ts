@@ -18,6 +18,8 @@ export interface CharacterAtributeInfo {
    code: string;
    name: string;
    description: string;
+   pros?: string;
+   cons?: string;
    modifierDescription?: string;
 }
 

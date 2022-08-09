@@ -14,7 +14,7 @@ export class StorageService {
    }
 
    set(key: string, data: any, stringfyToJSON = false): void {
-      if (data) {
+      if (data != null && data !== undefined) {
          localStorage.setItem(key, btoa(stringfyToJSON ? JSON.stringify(data) : data));
       }
       else {

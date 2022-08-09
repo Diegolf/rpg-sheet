@@ -15,18 +15,30 @@
       </ion-card-header>
 
       <ion-card-content>
-         <h1 class="ion-text-center" *ngIf="gameService.characterRemainingAtributes >= 0"> Você possui {{gameService.characterRemainingAtributes}} para distribuir.</h1>
-         <ion-grid>
-            <ion-row>
-               <!-- <ion-col size-sm="12" size-md="12" size-lg="6" *ngFor="let atribute of Object.keys(gameService.character.atributes)">
-                  {{atribute}}
-                  <ion-item>
-                     <ion-label position="floating">Número de dados</ion-label>
-                     <ion-input type="number" [(ngModel)]="model.rollTimes" min="1" max="6"></ion-input>
-                  </ion-item>
-               </ion-col> -->
-            </ion-row>
-         </ion-grid>
+         <h1 class="ion-text-center ion-margin-bottom ion-padding-bottom" *ngIf="remainingAtributes >= 0"> Você possui
+            {{remainingAtributes}} ponto(s) para distribuir.</h1>
+         <ion-list lines="full" class="atributes-list ion-text-wrap ion-margin-top">
+            <ion-item *ngFor="let atribute of atributesInfo">
+               <div class="atribute-value" slot="start"><h2><ion-text [color]="atribute.value > 0 ? 'primary' : 'dark'">{{atribute.value}} </ion-text></h2></div>
+               <div class="atribute-description">
+                  <h2 class="ion-text-center"> <ion-text> {{atribute.name}} </ion-text></h2>
+                  <div *ngIf="atribute.pros">
+                     <ion-text color="success" [innerHTML]="atribute.pros"></ion-text>
+                  </div>
+                  <div *ngIf="atribute.cons">
+                     <ion-text color="danger" [innerHTML]="atribute.cons"></ion-text>
+                  </div>
+                  <div *ngIf="atribute.modifierDescription">
+                     <ion-text [color]="atribute.value >= 3 ? 'primary' : 'dark'"  [innerHTML]="atribute.modifierDescription"></ion-text>
+                  </div>
+               </div>
+               <div class="atribute-actions" slot="end">
+                  <ion-icon [style.visibility]="atribute.spentPoints ? '' : 'hidden'" color="danger" name="remove-circle-outline" style="cursor: pointer;" (click)="removeAtribute(atribute)"></ion-icon>
+                  <ion-icon [style.visibility]="(atribute.value >= 3 || !remainingAtributes) ? 'hidden' : ''"  color="success" name="add-circle-outline" style="cursor: pointer;" (click)="addAtribute(atribute)"></ion-icon>
+               </div>
+            </ion-item>
+         </ion-list>
+         <ion-button expand="block" (click)="salvarAtributos()">Salvar</ion-button>
       </ion-card-content>
    </ion-card>
 

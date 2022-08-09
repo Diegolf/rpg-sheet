@@ -29,7 +29,7 @@ export class GameService {
 
    public saveCharacterConfig(data: OrdemRPGCharacterConfigData) {
       Object.keys(data).forEach(key => {
-         this.storageService.set(key, data[key]);
+         this.storageService.set(key, data[key], true);
       });
    }
 
@@ -39,7 +39,7 @@ export class GameService {
       const atributes = this.storageService.get('atributes', true);
       this.character.loadConfig({ healthPoints, inventory, atributes });
 
-      const characterAtributesRemaining = this.storageService.get('remainingAtributes');
+      const characterAtributesRemaining = this.storageService.get('remainingAtributes', true);
       this.characterRemainingAtributes = characterAtributesRemaining ?? CHARACTER_FREE_ATRIBUTES;
    }
 }

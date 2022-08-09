@@ -1,8 +1,14 @@
 import { CharacterAtributes } from '../characters/character';
 
+/** Result of a dice roll */
 export interface RollResult {
+   /** Final value after modifiers */
    value: number;
+
+   /** Info like wheather it has or not hit a Critical */
    aditionalInfo?: string;
+
+   /** Explanation of the formula of the dice roll */
    formulaParsedDescription?: string;
 }
 
