@@ -15,7 +15,7 @@
       </ion-card-header>
 
       <ion-card-content>
-         <h1 class="ion-text-center ion-margin-bottom ion-padding-bottom" *ngIf="remainingAtributes >= 0"> Você possui
+         <h1 class="ion-text-center ion-margin-bottom ion-padding-bottom" *ngIf="remainingAtributes > 0"> Você possui
             {{remainingAtributes}} ponto(s) para distribuir.</h1>
          <ion-list lines="full" class="atributes-list ion-text-wrap ion-margin-top">
             <ion-item *ngFor="let atribute of atributesInfo">
@@ -33,8 +33,8 @@
                   </div>
                </div>
                <div class="atribute-actions" slot="end">
-                  <ion-icon [style.visibility]="atribute.spentPoints ? '' : 'hidden'" color="danger" name="remove-circle-outline" style="cursor: pointer;" (click)="removeAtribute(atribute)"></ion-icon>
-                  <ion-icon [style.visibility]="(atribute.value >= 3 || !remainingAtributes) ? 'hidden' : ''"  color="success" name="add-circle-outline" style="cursor: pointer;" (click)="addAtribute(atribute)"></ion-icon>
+                  <ion-icon [style.visibility]="atribute.spentPoints ? '' : 'hidden'" color="danger" name="remove-circle-outline" class="c-pointer" (click)="removeAtribute(atribute)"></ion-icon>
+                  <ion-icon [style.visibility]="(atribute.value >= 3 || !remainingAtributes) ? 'hidden' : ''"  color="success" name="add-circle-outline" class="c-pointer" (click)="addAtribute(atribute)"></ion-icon>
                </div>
             </ion-item>
          </ion-list>

@@ -42,4 +42,14 @@ export class LayoutComponent implements OnInit {
       await alert.present();
    }
 
+   decreaseHealthPoint() {
+      this.gameService.character.decreaseHealthPoint();
+      this.gameService.saveCharacterConfig({healthPoints: this.gameService.character.healthPoints});
+   }
+
+   increaseHealthPoint() {
+      this.gameService.character.increaseHealthPoint();
+      this.gameService.saveCharacterConfig({healthPoints: this.gameService.character.healthPoints});
+   }
+
 }

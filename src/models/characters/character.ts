@@ -39,7 +39,10 @@ export interface Character {
    inventory: CharacterInventory;
    atributes: CharacterAtributes;
 
+   increaseHealthPoint(amout?: number): void;
+   decreaseHealthPoint(amount?: number): void;
    addInventoryItem(inventoryItem: InventoryItem): boolean;
    removeInventoryItem(InventoryItem: InventoryItem): boolean;
+   increaseAtribute(atributeCode: string, amount: number);
    loadConfig(data: CharacterConfigData): void;
 }

@@ -28,44 +28,60 @@
 
 ion-note[slot="error"] {
    font-size: 0.9em;
- }
+}
 
- .flex {
+.flex {
    display: flex;
- }
+}
 
- .flex-direction-column {
+.flex-direction-column {
    flex-direction: column;
- }
+}
 
- .flex-direction-row {
+.flex-direction-row {
    flex-direction: row;
- }
+}
 
- .bold {
+.bold {
    font-weight: bold;
- }
+}
 
- .filtro-card-header {
+.filtro-card-header {
    background-color: #f5f5f5;
- }
+}
 
- ion-item ion-label[position="stacked"] {
+ion-item ion-label[position="stacked"] {
    font-weight: bold;
- }
+}
 
- .background-cinza-dot {
+.background-cinza-dot {
    --background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
- }
+}
 
- .result-accordion {
+.result-accordion {
    ion-accordion {
-     margin-bottom: 5px;
-     border-radius: 5px;
+      margin-bottom: 5px;
+      border-radius: 5px;
    }
- }
+}
 
- .ion-padding-horizontal-5 {
+.ion-padding-horizontal-5 {
    padding-left: 5px;
    padding-right: 5px;
- }
+}
+
+.ion-margin-left-5 {
+   margin-left: 5px;
+}
+
+.ion-margin-right-10 {
+   margin-right: 10px;
+}
+
+.ion-padding-right-41 {
+   padding-right: 41px;
+}
+
+.c-pointer {
+   cursor: pointer;
+}

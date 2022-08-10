@@ -77,7 +77,7 @@ ion-note {
    color: var(--ion-color-medium-shade);
 }
 
-ion-menu{
+ion-menu {
    ion-content {
       --background: var(--side-menu-content-background, --ion-item-background, var(--ion-background-color, #fff));
    }
@@ -108,10 +108,31 @@ ion-menu{
 .user-menu {
    background-color: var(--side-menu-header-background, #4185b5);
 
-   ion-note,
-   button,
-   ion-toolbar,
-   ion-label {
+   ion-item {
+      --background: var(--side-menu-header-background, #4185b5);
+
+      .health-bar {
+         width: 100%;
+
+         ion-progress-bar {
+            height: 15px;
+         }
+
+         p {
+            margin-top: 5px;
+         }
+      }
+
+      .health-buttons {
+         font-size: 1.4rem;
+         max-width: 50px;
+         min-width: 50px;
+         margin-left: 5px;
+         transform: translate(5px, -4px);
+      }
+   }
+
+   ion-note, button, ion-toolbar, ion-label {
       color: #FFF;
       text-shadow: 0 0 1px #000;
    }

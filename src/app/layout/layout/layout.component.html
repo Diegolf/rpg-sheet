@@ -1,52 +1,67 @@
 <div>
    <ion-split-pane contentId="main-content">
-     <ion-menu contentId="main-content" menuId="pages-menu" type="overlay" color="white">
-       <ion-header class="user-menu">
-         <ion-toolbar color="translucent">
-           <ion-buttons slot="start">
-             <ion-menu-toggle>
-               <ion-button>
-                 <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
-               </ion-button>
-             </ion-menu-toggle>
-           </ion-buttons>
-           <ion-title>Paranormal RPG</ion-title>
-           <ion-buttons slot="end">
-             <ion-button (click)="openCodeInput()">
-               <ion-icon name="code-working-outline"></ion-icon>
-             </ion-button>
-           </ion-buttons>
-         </ion-toolbar>
-         <ion-row>
-           <ion-col class="flex flex-direction-column ion-justify-content-center ion-align-items-center">
-             <ion-avatar>
-               <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-             </ion-avatar>
-             <ion-label class="ion-margin-top bold">Nome</ion-label>
-             <ion-note>email@email.com</ion-note>
-           </ion-col>
-         </ion-row>
-       </ion-header>
-       <ion-content>
-         <!-- <ion-list id="inbox-list">
+      <ion-menu contentId="main-content" menuId="pages-menu" type="overlay" color="white">
+         <ion-header class="user-menu">
+            <ion-toolbar color="translucent">
+               <ion-buttons slot="start">
+                  <ion-menu-toggle>
+                     <ion-button>
+                        <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+                     </ion-button>
+                  </ion-menu-toggle>
+               </ion-buttons>
+               <ion-title>Paranormal RPG</ion-title>
+               <ion-buttons slot="end">
+                  <ion-button (click)="openCodeInput()">
+                     <ion-icon name="code-working-outline"></ion-icon>
+                  </ion-button>
+               </ion-buttons>
+            </ion-toolbar>
+            <ion-row>
+               <ion-col size="12" class="flex flex-direction-column ion-justify-content-center ion-align-items-center ion-margin-bottom ion-padding-right-41">
+                  <ion-avatar>
+                     <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+                  </ion-avatar>
+                  <ion-label class="ion-margin-top bold">Nome</ion-label>
+                  <!-- <ion-note></ion-note> -->
+               </ion-col>
+               <ion-col size="10" offset="1">
+                  <ion-item lines="none" class="ion-align-items-start">
+                     <div slot="start" class="ion-margin-right-10">HP</div>
+                     <div class="health-bar">
+                        <ion-progress-bar color="danger" [value]="gameService.character.healthPoints.current/gameService.character.healthPoints.max"></ion-progress-bar>
+                        <p class="ion-text-center ion-no-margin">{{gameService.character.healthPoints.current}}/{{gameService.character.healthPoints.max}}</p>
+                     </div>
+                     <div class="health-buttons" slot="end">
+                        <!-- <ion-icon [style.visibility]="atribute.spentPoints ? '' : 'hidden'" color="danger" name="remove-outline" class="c-pointer" (click)="removeAtribute(atribute)"></ion-icon> -->
+                        <ion-icon color="danger" name="remove-outline" class="c-pointer" (click)="decreaseHealthPoint()"></ion-icon>
+                        <!-- <ion-icon [style.visibility]="(atribute.value >= 3 || !remainingAtributes) ? 'hidden' : ''"  color="success" name="add-outline" class="c-pointer" (click)="addAtribute(atribute)"></ion-icon> -->
+                        <ion-icon color="success" name="add-outline" class="c-pointer ion-margin-left-5" (click)="increaseHealthPoint()"></ion-icon>
+                     </div>
+                  </ion-item>
+               </ion-col>
+            </ion-row>
+         </ion-header>
+         <ion-content>
+            <!-- <ion-list id="inbox-list">
 
          </ion-list> -->
 
-         <ion-list id="inbox-list" lines="none" class="ion-no-padding">
-           <!-- <ion-list-header>Inbox</ion-list-header> -->
-           <!-- <ion-note>Opções</ion-note> -->
+            <ion-list id="inbox-list" lines="none" class="ion-no-padding">
+               <!-- <ion-list-header>Inbox</ion-list-header> -->
+               <!-- <ion-note>Opções</ion-note> -->
 
-           <ion-menu-toggle auto-hide="false">
-             <ion-item routerDirection="root" [routerLink]="rota.routerLink" lines="none" detail="false"
-               *ngFor="let rota of rotas" routerLinkActive="selected">
-               <ion-icon slot="start" name="cart-sharp"></ion-icon>
-               <ion-label>{{rota.titulo}}</ion-label>
-             </ion-item>
-           </ion-menu-toggle>
-         </ion-list>
+               <ion-menu-toggle auto-hide="false">
+                  <ion-item routerDirection="root" [routerLink]="rota.routerLink" lines="none" detail="false"
+                     *ngFor="let rota of rotas" routerLinkActive="selected">
+                     <ion-icon slot="start" name="cart-sharp"></ion-icon>
+                     <ion-label>{{rota.titulo}}</ion-label>
+                  </ion-item>
+               </ion-menu-toggle>
+            </ion-list>
 
-       </ion-content>
-     </ion-menu>
-     <ion-router-outlet id="main-content"></ion-router-outlet>
+         </ion-content>
+      </ion-menu>
+      <ion-router-outlet id="main-content"></ion-router-outlet>
    </ion-split-pane>
- </div>
+</div>

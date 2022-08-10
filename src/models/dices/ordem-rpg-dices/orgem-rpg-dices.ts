@@ -107,6 +107,6 @@ export class OrdemRPGDices implements Dices {
 
 const handleRollResult = (d20Result: number, modifierResult: number, aditionalInfo?: string): RollResult => ({
    value: (d20Result + modifierResult) <= 0 ? 1 : (d20Result + modifierResult),
-   formulaParsedDescription: `${d20Result} ${modifierResult > 0 ? '+' : '-'} ${modifierResult}`,
+   formulaParsedDescription: `${d20Result} ${modifierResult > 0 ? '+' : '-'} ${Math.abs(modifierResult)}`,
    aditionalInfo
 });

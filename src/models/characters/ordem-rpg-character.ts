@@ -70,6 +70,49 @@ export class OrdemRPGCharacter implements Character {
       };
    }
 
+   increaseHealthPoint(amount: number = 1) {
+      if (amount > 0){
+         const total = this.healthPoints.current + amount;
+         if (total > this.healthPoints.max){
+            this.healthPoints.current = this.healthPoints.max;
+         }
+         else {
+            this.healthPoints.current = total;
+         }
+      }
+   }
+
+   decreaseHealthPoint(amount: number = 1) {
+      if (amount > 0){
+         const total = this.healthPoints.current - amount;
+         if (total < 0){
+            this.healthPoints.current = 0;
+         }
+         else {
+            this.healthPoints.current = total;
+         }
+      }
+   }
+
+   increaseAtribute(atributeCode: string, amount: number) {
+      if (atributeCode in this.atributes){
+         this.atributes[atributeCode] += amount;
+
+         let healthChange = 0;
+         if (atributeCode === 'vig'){
+            healthChange = amount * 4;
+         }
+         else if (atributeCode === 'agi'){
+            healthChange = -(amount * 2);
+         }
+
+         if (healthChange){
+            this.healthPoints.max += healthChange;
+            this.healthPoints.current += healthChange;
+         }
+      }
+   }
+
    addInventoryItem(inventoryItem: InventoryItem): boolean {
       throw new Error('Method not implemented.');
    }
