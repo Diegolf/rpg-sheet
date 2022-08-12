@@ -108,8 +108,13 @@ ion-menu {
 .user-menu {
    background-color: var(--side-menu-header-background, #4185b5);
 
+   .avatar-col {
+      padding-right: 22px;
+   }
+
    ion-item {
       --background: var(--side-menu-header-background, #4185b5);
+      --inner-padding-end: 0;
 
       .health-bar {
          width: 100%;
