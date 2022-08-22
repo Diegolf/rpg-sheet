@@ -5,14 +5,14 @@ import {
 } from './character';
 
 
-export interface OrdemRPGCharacterAtributes extends CharacterAtributes {
+export interface ParanormalDNDCharacterAtributes extends CharacterAtributes {
    agi: number;
    vig: number;
    dex: number;
    int: number;
 }
 
-export const characterAtributesInfo: CharacterAtributeInfo[] = [
+export const paranormalDNDCharacterAtributesInfo: CharacterAtributeInfo[] = [
    {
       code: 'vig',
       name: 'Vigor',
@@ -47,19 +47,19 @@ export const characterAtributesInfo: CharacterAtributeInfo[] = [
    },
 ];
 
-export interface OrdemRPGCharacterConfigData extends CharacterConfigData {
-   atributes?: OrdemRPGCharacterAtributes;
+export interface ParanormalDNDCharacterConfigData extends CharacterConfigData {
+   atributes?: ParanormalDNDCharacterAtributes;
    remainingAtributes?: number;
 }
 
-export class OrdemRPGCharacter implements Character {
+export class ParanormalDNDCharacter implements Character {
    name: string;
    imageUrl?: string;
    healthPoints: CharacterHealthPoints;
    inventory: CharacterInventory;
-   atributes: OrdemRPGCharacterAtributes;
+   atributes: ParanormalDNDCharacterAtributes;
 
-   constructor(config: OrdemRPGCharacterConfigData = {}) {
+   constructor(config: ParanormalDNDCharacterConfigData = {}) {
       this.name = config.name ?? 'Nome';
       this.imageUrl = config.imageUrl ?? 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
       this.healthPoints = config.healthPoints ?? { current: HP_INITIAL_VALUE, max: HP_INITIAL_VALUE };
@@ -122,7 +122,7 @@ export class OrdemRPGCharacter implements Character {
       throw new Error('Method not implemented.');
    }
 
-   loadConfig(data: OrdemRPGCharacterConfigData) {
+   loadConfig(data: ParanormalDNDCharacterConfigData) {
       const { healthPoints, inventory, atributes } = data;
 
       if (inventory && inventory.limit > 0 && inventory.limit <= INVENTORY_LIMIT && inventory.items.length <= inventory.limit) {

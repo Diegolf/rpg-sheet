@@ -1,7 +1,7 @@
-import { OrdemRPGCharacterConfigData } from './../../models/characters/ordem-rpg-character';
+import { ParanormalDNDCharacterConfigData } from '../../models/characters/paranormal-dnd-character';
 import { StorageService } from './storage.service';
-import { OrdemRPGDices } from '../../models/dices/ordem-rpg-dices/orgem-rpg-dices';
-import { OrdemRPGCharacter } from '../../models/characters/ordem-rpg-character';
+import { ParanormalDNDDices } from '../../models/dices/paranormal-dnd-dices/paranormal-dnd-dices';
+import { ParanormalDNDCharacter } from '../../models/characters/paranormal-dnd-character';
 import { Dices } from '../../models/dices/dices';
 import { Character, CHARACTER_FREE_ATRIBUTES } from '../../models/characters/character';
 import { Injectable } from '@angular/core';
@@ -21,13 +21,13 @@ export class GameService {
    }
 
    init() {
-      this.character = new OrdemRPGCharacter();
-      this.dices = new OrdemRPGDices();
+      this.character = new ParanormalDNDCharacter();
+      this.dices = new ParanormalDNDDices();
 
       this.loadCharacterConfig();
    }
 
-   public saveCharacterConfig(data: OrdemRPGCharacterConfigData) {
+   public saveCharacterConfig(data: ParanormalDNDCharacterConfigData) {
       Object.keys(data).forEach(key => {
          this.storageService.set(key, data[key], true);
       });

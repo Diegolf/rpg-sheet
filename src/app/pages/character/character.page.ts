@@ -1,7 +1,7 @@
-import { OrdemRPGCharacterAtributes } from './../../../models/characters/ordem-rpg-character';
+import { ParanormalDNDCharacterAtributes } from '../../../models/characters/paranormal-dnd-character';
 import { GameService } from './../../services/game.service';
 import { Component, OnInit } from '@angular/core';
-import { characterAtributesInfo } from 'src/models/characters/ordem-rpg-character';
+import { paranormalDNDCharacterAtributesInfo } from 'src/models/characters/paranormal-dnd-character';
 import { ToastController } from '@ionic/angular';
 
 @Component({
@@ -46,7 +46,7 @@ export class CharacterPage implements OnInit {
          });
 
          this.gameService.saveCharacterConfig({
-            atributes: this.gameService.character.atributes as OrdemRPGCharacterAtributes,
+            atributes: this.gameService.character.atributes as ParanormalDNDCharacterAtributes,
             healthPoints: this.gameService.character.healthPoints,
             remainingAtributes: this.remainingAtributes
          });
@@ -68,7 +68,7 @@ export class CharacterPage implements OnInit {
 
    private loadAtributesInfo() {
       const characterAtributesKeys = Object.keys(this.gameService.character.atributes);
-      this.atributesInfo = characterAtributesInfo.filter(atribute => characterAtributesKeys.includes(atribute.code))
+      this.atributesInfo = paranormalDNDCharacterAtributesInfo.filter(atribute => characterAtributesKeys.includes(atribute.code))
          .map((atribute) => ({ ...atribute, value: this.gameService.character.atributes[atribute.code] }));
       this.remainingAtributes = this.gameService.characterRemainingAtributes;
    };
