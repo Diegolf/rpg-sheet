@@ -34,6 +34,7 @@ export interface CharacterConfigData {
    healthPoints?: CharacterHealthPoints;
    inventory?: CharacterInventory;
    atributes?: CharacterAtributes;
+   remainingAtributes?: number;
 }
 
 export interface Character {

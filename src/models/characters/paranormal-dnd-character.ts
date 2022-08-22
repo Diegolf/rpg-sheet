@@ -1,7 +1,5 @@
-import { InventoryItem } from '../inventory-items/inventory-item';
 import {
-   CharacterAtributes, Character, CharacterInventory, CharacterHealthPoints,
-   HP_INITIAL_VALUE, ATRIBUTE_INITIAL_VALUE, INVENTORY_LIMIT, CharacterConfigData, CharacterAtributeInfo
+   CharacterAtributes, Character, CharacterConfigData, CharacterAtributeInfo
 } from './character';
 
 
@@ -49,14 +47,9 @@ export const paranormalDNDCharacterAtributesInfo: CharacterAtributeInfo[] = [
 
 export interface ParanormalDNDCharacterConfigData extends CharacterConfigData {
    atributes?: ParanormalDNDCharacterAtributes;
-   remainingAtributes?: number;
 }
 
 export class ParanormalDNDCharacter extends Character {
-   name: string;
-   imageUrl?: string;
-   healthPoints: CharacterHealthPoints;
-   inventory: CharacterInventory;
    atributes: ParanormalDNDCharacterAtributes;
 
    constructor(config: ParanormalDNDCharacterConfigData = {}) {
