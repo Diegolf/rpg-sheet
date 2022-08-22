@@ -52,7 +52,7 @@ export interface ParanormalDNDCharacterConfigData extends CharacterConfigData {
    remainingAtributes?: number;
 }
 
-export class ParanormalDNDCharacter implements Character {
+export class ParanormalDNDCharacter extends Character {
    name: string;
    imageUrl?: string;
    healthPoints: CharacterHealthPoints;
@@ -60,40 +60,7 @@ export class ParanormalDNDCharacter implements Character {
    atributes: ParanormalDNDCharacterAtributes;
 
    constructor(config: ParanormalDNDCharacterConfigData = {}) {
-      this.name = config.name ?? 'Nome';
-      this.imageUrl = config.imageUrl ?? 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
-      this.healthPoints = config.healthPoints ?? { current: HP_INITIAL_VALUE, max: HP_INITIAL_VALUE };
-      this.inventory = config.inventory ?? { limit: INVENTORY_LIMIT, items: [] };
-      this.atributes = config.atributes ?? {
-         agi: ATRIBUTE_INITIAL_VALUE,
-         dex: ATRIBUTE_INITIAL_VALUE,
-         int: ATRIBUTE_INITIAL_VALUE,
-         vig: ATRIBUTE_INITIAL_VALUE
-      };
-   }
-
-   increaseHealthPoint(amount: number = 1) {
-      if (amount > 0){
-         const total = this.healthPoints.current + amount;
-         if (total > this.healthPoints.max){
-            this.healthPoints.current = this.healthPoints.max;
-         }
-         else {
-            this.healthPoints.current = total;
-         }
-      }
-   }
-
-   decreaseHealthPoint(amount: number = 1) {
-      if (amount > 0){
-         const total = this.healthPoints.current - amount;
-         if (total < 0){
-            this.healthPoints.current = 0;
-         }
-         else {
-            this.healthPoints.current = total;
-         }
-      }
+      super(config);
    }
 
    increaseAtribute(atributeCode: string, amount: number) {
@@ -112,29 +79,6 @@ export class ParanormalDNDCharacter implements Character {
             this.healthPoints.max += healthChange;
             this.healthPoints.current += healthChange;
          }
-      }
-   }
-
-   addInventoryItem(inventoryItem: InventoryItem): boolean {
-      throw new Error('Method not implemented.');
-   }
-   removeInventoryItem(inventoryItem: InventoryItem): boolean {
-      throw new Error('Method not implemented.');
-   }
-
-   loadConfig(data: ParanormalDNDCharacterConfigData) {
-      const { healthPoints, inventory, atributes } = data;
-
-      if (inventory && inventory.limit > 0 && inventory.limit <= INVENTORY_LIMIT && inventory.items.length <= inventory.limit) {
-         this.inventory = inventory;
-      }
-
-      if (healthPoints && healthPoints.current >= 0 && healthPoints.max >= 0) {
-         this.healthPoints = healthPoints;
-      }
-
-      if (atributes && atributes.agi >= 0 && atributes.dex >= 0 && atributes.int >= 0 && atributes.vig >= 0) {
-         this.atributes = atributes;
       }
    }
 }
