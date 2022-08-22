@@ -48,21 +48,23 @@ export const characterAtributesInfo: CharacterAtributeInfo[] = [
 ];
 
 export interface OrdemRPGCharacterConfigData extends CharacterConfigData {
-   healthPoints?: CharacterHealthPoints;
-   inventory?: CharacterInventory;
    atributes?: OrdemRPGCharacterAtributes;
    remainingAtributes?: number;
 }
 
 export class OrdemRPGCharacter implements Character {
+   name: string;
+   imageUrl?: string;
    healthPoints: CharacterHealthPoints;
    inventory: CharacterInventory;
    atributes: OrdemRPGCharacterAtributes;
 
-   constructor(healthPoints?: CharacterHealthPoints, inventory?: CharacterInventory, atributes?: OrdemRPGCharacterAtributes) {
-      this.healthPoints = healthPoints ?? { current: HP_INITIAL_VALUE, max: HP_INITIAL_VALUE };
-      this.inventory = inventory ?? { limit: INVENTORY_LIMIT, items: [] };
-      this.atributes = atributes ?? {
+   constructor(config: OrdemRPGCharacterConfigData = {}) {
+      this.name = config.name ?? 'Nome';
+      this.imageUrl = config.imageUrl ?? 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
+      this.healthPoints = config.healthPoints ?? { current: HP_INITIAL_VALUE, max: HP_INITIAL_VALUE };
+      this.inventory = config.inventory ?? { limit: INVENTORY_LIMIT, items: [] };
+      this.atributes = config.atributes ?? {
          agi: ATRIBUTE_INITIAL_VALUE,
          dex: ATRIBUTE_INITIAL_VALUE,
          int: ATRIBUTE_INITIAL_VALUE,

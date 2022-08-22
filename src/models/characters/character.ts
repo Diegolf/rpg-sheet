@@ -29,12 +29,16 @@ export interface CharacterHealthPoints {
 }
 
 export interface CharacterConfigData {
+   name?: string;
+   imageUrl?: string;
    healthPoints?: CharacterHealthPoints;
    inventory?: CharacterInventory;
    atributes?: CharacterAtributes;
 }
 
 export interface Character {
+   name: string;
+   imageUrl?: string;
    healthPoints: CharacterHealthPoints;
    inventory: CharacterInventory;
    atributes: CharacterAtributes;
