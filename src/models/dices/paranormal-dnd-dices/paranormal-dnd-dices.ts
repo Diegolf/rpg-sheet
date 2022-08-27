@@ -100,9 +100,9 @@ const paranormalDNDDicesFormula: ParanormalDNDDicesFormulas = {
 export class ParanormalDNDDices implements Dices {
    dicesFormulas: ParanormalDNDDicesFormulas = paranormalDNDDicesFormula;
 
-   rollDice(dice: Dice, atributes?: ParanormalDNDCharacterAtributes): RollResult {
-      return dice.roll(atributes);
-   }
+   // rollDice(dice: Dice, atributes?: ParanormalDNDCharacterAtributes): RollResult {
+   //    return dice.roll(atributes);
+   // }
 }
 
 const handleRollResult = (d20Result: number, modifierResult: number, aditionalInfo?: string): RollResult => ({

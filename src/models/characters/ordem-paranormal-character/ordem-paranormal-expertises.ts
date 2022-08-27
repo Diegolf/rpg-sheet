@@ -51,17 +51,17 @@ export const ordemParanormalExpertiseValueList: OrdemParanormalExpertiseInfo[] =
       value: 0,
    },
    {
-      text:'Treinado',
+      text:'Treinado (+5)',
       code: OrdemParanormalExpertiseInfoCodes.treinado,
       value: 5,
    },
    {
-      text:'Veterano',
+      text:'Veterano (+10)',
       code: OrdemParanormalExpertiseInfoCodes.veterano,
       value: 10,
    },
    {
-      text:'Expert',
+      text:'Expert (+15)',
       code: OrdemParanormalExpertiseInfoCodes.expert,
       value: 15,
    },
@@ -79,7 +79,7 @@ export interface OrdemParanormalExpertise {
 export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.acrobacia,
-      name: 'Acrobacia (AGI)',
+      name: 'Acrobacia',
       description: 'Você consegue fazer proezas acrobáticas. (Amortecer Queda, Equilíbrio, Escapar, Levantar-se Rapidamente,'+
          'Passar por Espaço Apertado, Passar por Inimigo)',
       afectedByAtributes: [OrdemParanormalAtributesCodes.agilidade],
