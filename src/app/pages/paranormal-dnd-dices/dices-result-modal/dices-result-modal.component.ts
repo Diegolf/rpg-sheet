@@ -1,5 +1,5 @@
 import { ParanormalDNDCharacterAtributes } from '../../../../models/characters/paranormal-dnd-character';
-import { RollResult, Dice } from './../../../../models/dices/dices';
+import { RollResult, Dice } from '../../../../models/dices/dices';
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Observable, Subject, timer } from 'rxjs';

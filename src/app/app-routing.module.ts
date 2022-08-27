@@ -4,42 +4,54 @@ import { LayoutComponent } from './layout/layout/layout.component';
 
 const routes: Routes = [
 
-  // Rota vazia
-  { path: '', pathMatch: 'full', redirectTo: 'pages/dices'},
+   // Rota vazia
+   { path: '', pathMatch: 'full', redirectTo: 'pages/dices' },
 
-  // Rotas com layout padrão
-  { path: '',
-    component: LayoutComponent,
-    children: [
-      // Rota "/pages"
-      {
-        path: 'pages',
-        children: [
-          // Rota "/pages/<vazio>"
-          { path: '', pathMatch:'full', redirectTo: 'dices' },
+   // Rotas com layout padrão
+   {
+      path: '',
+      component: LayoutComponent,
+      children: [
+         // Rota "/pages"
+         {
+            path: 'pages',
+            children: [
+               // Rota "/pages/<vazio>"
+               { path: '', pathMatch: 'full', redirectTo: 'dices' },
 
-          { path: 'character', loadChildren: () => import('./pages/character/character.module').then( m => m.CharacterPageModule) },
-          { path: 'dices', loadChildren: () => import('./pages/dices/dices.module').then( m => m.DicesPageModule)},
+               {
+                  path: 'op-character', loadChildren: () =>
+                     import('./pages/ordem-paranormal-character/ordem-paranormal-character.module')
+                     .then(m => m.OrdemParanormalCharacterPageModule)
+               },
 
-          // Rota não encontrada
-          { path: '**', redirectTo: 'dices' },
-        ]
-      },
-    ]
-  },
+               {
+                  path: 'paranormal-dnd-character',
+                  loadChildren: () => import('./pages/paranormal-dnd-character/character.module').then(m => m.CharacterPageModule)
+               },
+               {
+                  path: 'paranormal-dnd-dices',
+                  loadChildren: () => import('./pages/paranormal-dnd-dices/dices.module').then(m => m.DicesPageModule)
+               },
 
-  // Rotas sem o layout padrão
-  { path: 'home', loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule) },
+               // Rota não encontrada
+               { path: '**', redirectTo: 'dices' },
+            ]
+         },
+      ]
+   },
 
-  // Rota não encontrada
-  { path: '**', redirectTo: 'home' },
+   // Rotas sem o layout padrão
+   { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule) },
 
+   // Rota não encontrada
+   { path: '**', redirectTo: 'home' },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-  ],
-  exports: [RouterModule]
+   imports: [
+      RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+   ],
+   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

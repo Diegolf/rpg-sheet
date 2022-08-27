@@ -1,0 +1,40 @@
+
+.atributes {
+   display: flex;
+   justify-content: center;
+
+   .atributes-image {
+      filter: brightness(0);
+      max-width: 512px;
+   }
+
+   .atribute-value {
+      position: absolute;
+      font-size: 45px;
+   }
+
+   .atribute-agildiade {
+      top: 10%;
+   }
+
+   .atribute-forca {
+      top: 30%;
+      left: 20%;
+   }
+
+   .atribute-intelecto {
+      top: 30%;
+      right: 21%;
+   }
+
+   .atribute-presenca {
+      bottom: 20%;
+      left: 28%;
+   }
+
+   .atribute-vigor {
+      bottom: 20%;
+      right: 29%;
+   }
+
+}

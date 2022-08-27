@@ -1,5 +1,5 @@
 import { DicesResultModalComponent } from './dices-result-modal/dices-result-modal.component';
-import { Dice } from './../../../models/dices/dices';
+import { Dice } from '../../../models/dices/dices';
 import { GameService } from '../../services/game.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonModal, ModalController } from '@ionic/angular';
