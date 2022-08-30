@@ -4,7 +4,6 @@ import {
 } from './../../characters/ordem-paranormal-character/ordem-paranormal-expertises';
 import {
    ordemParanormalCharacterAtributesInfo,
-   OrdemParanormalCharacterAtributes,
    OrdemParanormalAtributesCodes
 } from './../../characters/ordem-paranormal-character/ordem-paranormal-atributes';
 import { DicesFormulas, Dices, Dice, rollFromTo, RollResult } from '../dices';

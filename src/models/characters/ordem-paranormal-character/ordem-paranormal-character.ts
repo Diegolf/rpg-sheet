@@ -23,7 +23,7 @@ export interface OrdemParanormalCharacterConfigData extends CharacterConfigData 
    expertises?: OrdemParanormalCharacterExpertise[];
 }
 
-export class OrdemParanormalCharacter extends Character {
+export class OrdemParanormalCharacter extends Character implements OrdemParanormalCharacterConfigData {
    // origin:
 
    /** Lista de atributos */

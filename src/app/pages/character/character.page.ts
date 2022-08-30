@@ -46,7 +46,7 @@ export class CharacterPage implements OnInit {
          });
 
          this.gameService.saveCharacterConfig({
-            atributes: this.gameService.character.atributes as ParanormalDNDCharacterAtributes,
+            atributes: this.gameService.character.atributes,
             healthPoints: this.gameService.character.healthPoints,
             remainingAtributes: this.remainingAtributes
          });

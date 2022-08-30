@@ -37,13 +37,7 @@ export interface CharacterConfigData {
    remainingAtributes?: number;
 }
 
-export interface Character {
-   name: string;
-   imageUrl?: string;
-   healthPoints: CharacterHealthPoints;
-   inventory: CharacterInventory;
-   atributes: CharacterAtributes;
-
+export interface Character extends CharacterConfigData {
    increaseHealthPoint(amout?: number): void;
    decreaseHealthPoint(amount?: number): void;
    addInventoryItem(inventoryItem: InventoryItem): boolean;
@@ -58,6 +52,7 @@ export class Character implements Character {
    healthPoints: CharacterHealthPoints;
    inventory: CharacterInventory;
    atributes: CharacterAtributes;
+   remainingAtributes: number;
 
    constructor(config: CharacterConfigData = {}) {
       this.name = config.name ?? 'Nome';
@@ -70,6 +65,7 @@ export class Character implements Character {
          int: ATRIBUTE_INITIAL_VALUE,
          vig: ATRIBUTE_INITIAL_VALUE
       };
+      this.remainingAtributes = config.remainingAtributes ?? CHARACTER_FREE_ATRIBUTES;
    }
 
    increaseHealthPoint(amount: number = 1) {
