@@ -1,0 +1,105 @@
+.atributes {
+   display: flex;
+   justify-content: center;
+
+   .atributes-image {
+      filter: brightness(0);
+      max-width: 512px;
+   }
+
+   .atribute-value {
+      width: 130px;
+      height: 120px;
+      position: fixed;
+      text-align: center;
+      font-size: 45px;
+      cursor: pointer;
+   }
+
+   .atribute-agildiade {
+      transform: translate3d(-2px, 50px, 0);
+   }
+
+   .atribute-forca {
+      transform: translate3d(-162px, 157px, 0);
+   }
+
+   .atribute-intelecto {
+      transform: translate3d(158px, 157px, 0);
+   }
+
+   .atribute-presenca {
+      transform: translate3d(-116px, 350px, 0);
+   }
+
+   .atribute-vigor {
+      transform: translate3d(111px, 350px, 0);
+   }
+
+}
+
+@media(max-width:569px) {
+   .atributes-image {
+      max-width: 388px !important;
+   }
+
+   .atribute-value {
+      width: 100px !important;
+      height: 87px !important;
+      font-size: 35px !important;
+   }
+
+   .atribute-agildiade {
+      transform: translate3d(-2px, 38px, 0) !important;
+   }
+
+   .atribute-forca {
+      transform: translate3d(-124px, 120px, 0) !important;
+   }
+
+   .atribute-intelecto {
+      transform: translate3d(120px, 120px, 0) !important;
+   }
+
+   .atribute-presenca {
+      transform: translate3d(-89px, 268px, 0) !important;
+   }
+
+   .atribute-vigor {
+      transform: translate3d(84px, 268px, 0) !important;
+   }
+
+}
+
+@media(max-width:440px) {
+   .atributes-image {
+      max-width: 300px !important;
+      min-width: 300px !important;
+   }
+
+   .atribute-value {
+      width: 77px !important;
+      height: 68px !important;
+      font-size: 30px !important;
+   }
+
+   .atribute-agildiade {
+      transform: translate3d(-2px, 30px, 0) !important;
+   }
+
+   .atribute-forca {
+      transform: translate3d(-96px, 93px, 0) !important;
+   }
+
+   .atribute-intelecto {
+      transform: translate3d(92px, 93px, 0) !important;
+   }
+
+   .atribute-presenca {
+      transform: translate3d(-69px, 207px, 0) !important;
+   }
+
+   .atribute-vigor {
+      transform: translate3d(66px, 207px, 0) !important;
+   }
+}
