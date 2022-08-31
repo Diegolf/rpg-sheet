@@ -18,7 +18,9 @@ const routes: Routes = [
           // Rota "/pages/<vazio>"
           { path: '', pathMatch:'full', redirectTo: 'dices' },
 
-          { path: 'character', loadChildren: () => import('./pages/character/character.module').then( m => m.CharacterPageModule) },
+         //  { path: 'character', loadChildren: () => import('./pages/character/character.module').then( m => m.CharacterPageModule) },
+          { path: 'character', loadChildren: () => import('./pages/ordem-paranormal-character/ordem-paranormal-character.module')
+            .then( m => m.OrdemParanormalCharacterPageModule) },
           { path: 'dices', loadChildren: () => import('./pages/dices/dices.module').then( m => m.DicesPageModule)},
 
           // Rota não encontrada
@@ -33,7 +35,6 @@ const routes: Routes = [
 
   // Rota não encontrada
   { path: '**', redirectTo: 'home' },
-
 ];
 
 @NgModule({

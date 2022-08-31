@@ -1,3 +1,4 @@
+import { ATRIBUTE_INITIAL_VALUE } from './../character';
 import { OrdemParanormalClass, ordemParanormalClasses } from './ordem-paranormal-character-classes';
 import { OrdemParanormalCharacterAtributes, OrdemParanormalAtributesCodes } from './ordem-paranormal-atributes';
 import {  OrdemParanormalExpertisesCodes, OrdemParanormalExpertiseInfo } from './ordem-paranormal-expertises';
@@ -43,6 +44,13 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
 
    constructor(config: OrdemParanormalCharacterConfigData = {}) {
       super(config);
+      this.atributes = config.atributes ?? {
+         agi: ATRIBUTE_INITIAL_VALUE,
+         int: ATRIBUTE_INITIAL_VALUE,
+         vig: ATRIBUTE_INITIAL_VALUE,
+         for: ATRIBUTE_INITIAL_VALUE,
+         pre: ATRIBUTE_INITIAL_VALUE,
+      };
       this.ep = config.pe ?? {current: 0, max: 0};
       this.nex = config.nex ?? NEX_INITIAL_VALUE;
       this.characterClass = config.characterClass ?? ordemParanormalClasses[0];

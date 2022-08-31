@@ -25,6 +25,9 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+ion-toolbar ion-title{
+   font-size: 20px;
+}
 
 ion-note[slot="error"] {
    font-size: 0.9em;
