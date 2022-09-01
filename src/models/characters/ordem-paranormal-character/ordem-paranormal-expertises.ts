@@ -80,7 +80,7 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.acrobacia,
       name: 'Acrobacia',
-      description: 'Você consegue fazer proezas acrobáticas. (Amortecer Queda, Equilíbrio, Escapar, Levantar-se Rapidamente,'+
+      description: 'Você consegue fazer proezas acrobáticas. (Amortecer Queda, Equilíbrio, Escapar, Levantar-se Rapidamente, '+
          'Passar por Espaço Apertado, Passar por Inimigo)',
       afectedByAtributes: [OrdemParanormalAtributesCodes.agilidade],
       onlyTreined: false,
@@ -105,7 +105,7 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.atualidades,
       name: 'Atualidades',
-      description: 'ocê é um conhecedor de assuntos gerais, como política, esporte e entretenimento,'+
+      description: 'ocê é um conhecedor de assuntos gerais, como política, esporte e entretenimento, '+
          'e pode responder dúvidas relativas a esses assuntos.',
       afectedByAtributes: [OrdemParanormalAtributesCodes.intelecto],
       onlyTreined: false,
@@ -163,7 +163,7 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.iniciativa,
       name: 'Iniciativa',
-      description: 'Esta perícia determina sua velocidade de reação. Quando uma cena de ação começa,'+
+      description: 'Esta perícia determina sua velocidade de reação. Quando uma cena de ação começa, '+
          'cada personagem envolvido faz um teste de Iniciativa.',
       afectedByAtributes: [OrdemParanormalAtributesCodes.agilidade],
       onlyTreined: false,
@@ -172,7 +172,7 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.intimidacao,
       name: 'Intimidação',
-      description: 'Você pode assustar ou coagir outras pessoas. Todos os usos de Intimidação são efeitos de'+
+      description: 'Você pode assustar ou coagir outras pessoas. Todos os usos de Intimidação são efeitos de '+
          'medo. (Assustar, Coagir)',
       afectedByAtributes: [OrdemParanormalAtributesCodes.presenca],
       onlyTreined: false,
@@ -205,7 +205,7 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.medicina,
       name: 'Medicina',
-      description: 'Você sabe tratar ferimentos, doenças e venenos. (Primeiros Socorros, Cuidados Prolongados'+
+      description: 'Você sabe tratar ferimentos, doenças e venenos. (Primeiros Socorros, Cuidados Prolongados, '+
          'Necropsia, Tratamento)',
       afectedByAtributes: [OrdemParanormalAtributesCodes.intelecto],
       onlyTreined: false,
@@ -247,8 +247,8 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.profissao,
       name: 'Profissão',
-      description: 'Você sabe exercer uma profissão específica, como advogado, engenheiro, jornalista'+
-         'ou publicitário. Converse com o mestre para definir os detalhes de sua profissão e que tipos'+
+      description: 'Você sabe exercer uma profissão específica, como advogado, engenheiro, jornalista '+
+         'ou publicitário. Converse com o mestre para definir os detalhes de sua profissão e que tipos '+
          'de testes você pode fazer com ela. ',
       afectedByAtributes: [OrdemParanormalAtributesCodes.intelecto],
       onlyTreined: true,
@@ -310,7 +310,7 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.artes,
       name: 'Artes',
-      description: 'Você sabe se expressar com diversas formas de arte, como música, dança, escrita, pintura,'+
+      description: 'Você sabe se expressar com diversas formas de arte, como música, dança, escrita, pintura, '+
          'atuação e outras. (Impressionar)',
       afectedByAtributes: [OrdemParanormalAtributesCodes.presenca],
       onlyTreined: true,
