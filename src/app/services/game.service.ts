@@ -1,7 +1,7 @@
 import { OrdemParanormalDices } from './../../models/dices/ordem-paranormal-dices/ordem-paranormal-dices';
 import {
    OrdemParanormalCharacter, OrdemParanormalCharacterConfigData
-} from './../../models/characters/ordem-paranormal-character/ordem-paranormal-character';
+} from '../../models/characters/ordem-paranormal-character/character';
 import { CharacterConfigData } from './../../models/characters/character';
 import { StorageService } from './storage.service';
 import { Dices } from '../../models/dices/dices';

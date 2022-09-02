@@ -19,7 +19,7 @@ const routes: Routes = [
           { path: '', pathMatch:'full', redirectTo: 'dices' },
 
          //  { path: 'character', loadChildren: () => import('./pages/character/character.module').then( m => m.CharacterPageModule) },
-          { path: 'character', loadChildren: () => import('./pages/ordem-paranormal-character/ordem-paranormal-character.module')
+          { path: 'character', loadChildren: () => import('./pages/ordem-paranormal/character/character.module')
             .then( m => m.OrdemParanormalCharacterPageModule) },
           { path: 'dices', loadChildren: () => import('./pages/dices/dices.module').then( m => m.DicesPageModule)},
 

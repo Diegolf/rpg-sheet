@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { OrdemParanormalCharacterPage } from './ordem-paranormal-character.page';
+import { OPCharacterPage } from './character.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: OrdemParanormalCharacterPage
+    component: OPCharacterPage
   }
 ];
 

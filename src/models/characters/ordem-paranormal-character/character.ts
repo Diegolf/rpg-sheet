@@ -1,7 +1,7 @@
-import { ATRIBUTE_INITIAL_VALUE } from './../character';
-import { OrdemParanormalClass, ordemParanormalClasses } from './ordem-paranormal-character-classes';
-import { OrdemParanormalCharacterAtributes, OrdemParanormalAtributesCodes } from './ordem-paranormal-atributes';
-import {  OrdemParanormalExpertisesCodes, OrdemParanormalExpertiseInfo } from './ordem-paranormal-expertises';
+import { ATRIBUTE_INITIAL_VALUE } from '../character';
+import { OrdemParanormalClass, ordemParanormalClasses } from './classes';
+import { OrdemParanormalCharacterAtributes, OrdemParanormalAtributesCodes } from './atributes';
+import {  OrdemParanormalExpertisesCodes, OrdemParanormalExpertiseInfo } from './expertises';
 import { Character, CharacterConfigData } from '../character';
 
 export const NEX_INITIAL_VALUE = 5;

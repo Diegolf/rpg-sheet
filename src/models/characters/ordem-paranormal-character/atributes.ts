@@ -1,4 +1,4 @@
-import { CharacterAtributes, CharacterAtributeInfo } from './../character';
+import { CharacterAtributes, CharacterAtributeInfo } from '../character';
 
 export enum OrdemParanormalAtributesCodes {
    agilidade = 'agi',

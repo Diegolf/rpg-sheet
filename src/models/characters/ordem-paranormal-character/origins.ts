@@ -1,4 +1,4 @@
-import { OrdemParanormalExpertisesCodes } from './ordem-paranormal-expertises';
+import { OrdemParanormalExpertisesCodes } from './expertises';
 
 export enum OrdemParanormalOriginCodes {
    academico = 1,

@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonModal, ToastController } from '@ionic/angular';
 import { GameService } from 'src/app/services/game.service';
-import { ordemParanormalCharacterAtributesInfo } from 'src/models/characters/ordem-paranormal-character/ordem-paranormal-atributes';
+import { ordemParanormalCharacterAtributesInfo } from 'src/models/characters/ordem-paranormal-character/atributes';
 
 @Component({
   selector: 'app-ordem-paranormal-atributes',
-  templateUrl: './ordem-paranormal-atributes.component.html',
-  styleUrls: ['./ordem-paranormal-atributes.component.scss'],
+  templateUrl: './atributes.component.html',
+  styleUrls: ['./atributes.component.scss'],
 })
-export class OrdemParanormalAtributesComponent implements OnInit {
+export class OPCAtributesComponent implements OnInit {
 
    @ViewChild('modal') modal: IonModal;
 

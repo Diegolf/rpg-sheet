@@ -1,11 +1,8 @@
-import {
-   ordemParanormalExpertises,
-   OrdemParanormalExpertisesCodes
-} from './../../characters/ordem-paranormal-character/ordem-paranormal-expertises';
+import { ordemParanormalExpertises, OrdemParanormalExpertisesCodes } from '../../characters/ordem-paranormal-character/expertises';
 import {
    ordemParanormalCharacterAtributesInfo,
    OrdemParanormalAtributesCodes
-} from './../../characters/ordem-paranormal-character/ordem-paranormal-atributes';
+} from '../../characters/ordem-paranormal-character/atributes';
 import { DicesFormulas, Dices, Dice, rollFromTo, RollResult } from '../dices';
 
 export interface OrdemParanormalDice extends Dice {
