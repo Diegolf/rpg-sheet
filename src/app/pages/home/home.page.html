@@ -1,12 +1,13 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button menu="pages-menu"></ion-menu-button>
-    </ion-buttons>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+   <ion-slides pager="true" [options]="slideOpts">
+      <ion-slide>
+         <h1>Slide 1</h1>
+      </ion-slide>
+      <ion-slide>
+         <app-ordem-paranormal-atributes style="width: 100%; height: 100%;"></app-ordem-paranormal-atributes>
+      </ion-slide>
+      <ion-slide>
+         <h1>Slide 3</h1>
+      </ion-slide>
+   </ion-slides>
 </ion-content>

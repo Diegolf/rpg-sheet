@@ -1,3 +1,4 @@
+import { OrdemParanormalAtributesComponent } from './ordem-paranormal-atributes/ordem-paranormal-atributes.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +16,7 @@ import { OrdemParanormalCharacterPage } from './ordem-paranormal-character.page'
     IonicModule,
     OrdemParanormalCharacterPageRoutingModule
   ],
-  declarations: [OrdemParanormalCharacterPage]
+  declarations: [OrdemParanormalCharacterPage, OrdemParanormalAtributesComponent],
+  exports: [OrdemParanormalAtributesComponent]
 })
 export class OrdemParanormalCharacterPageModule {}
