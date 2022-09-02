@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { OrdemParanormalCharacterPageRoutingModule } from './character-routing.module';
 
 import { OPCharacterPage } from './character.page';
+import { OPClassesComponent } from './classes/classes.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,11 @@ import { OPCharacterPage } from './character.page';
     IonicModule,
     OrdemParanormalCharacterPageRoutingModule
   ],
-  declarations: [OPCharacterPage, OPCAtributesComponent],
+  declarations: [
+   OPCharacterPage,
+   OPCAtributesComponent,
+   OPClassesComponent
+],
   exports: [OPCAtributesComponent]
 })
 export class OrdemParanormalCharacterPageModule {}

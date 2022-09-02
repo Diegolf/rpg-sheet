@@ -7,8 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OPCharacterPage implements OnInit {
 
+   public model = {};
+
    ngOnInit(): void {
 
+   }
+
+   toggleCard(cardKey){
+      this.model[cardKey] = !this.model[cardKey];
    }
 
 }

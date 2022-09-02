@@ -8,12 +8,27 @@
 </ion-header>
 
 <ion-content class="background-cinza-dot">
-   <ion-card>
-      <!-- <ion-card-header>
-         <ion-card-title>Atributos</ion-card-title>
-      </ion-card-header > -->
-      <ion-card-content>
+   <ion-card class="collapsible-card">
+      <ion-card-header class="collapsible-card-header" (click)="toggleCard('hideAtributes')">
+         <ion-card-title class="collapsible-card-title">
+            Atributos
+            <ion-icon name="chevron-down-outline"></ion-icon>
+         </ion-card-title>
+      </ion-card-header >
+      <ion-card-content class="collapsible-card-content" [ngClass]="{'hide-content': model.hideAtributes}">
          <app-ordem-paranormal-atributes></app-ordem-paranormal-atributes>
+      </ion-card-content>
+   </ion-card>
+
+   <ion-card class="collapsible-card">
+      <ion-card-header class="collapsible-card-header" (click)="toggleCard('hideClasses')">
+         <ion-card-title class="collapsible-card-title">
+            Classes
+            <ion-icon name="chevron-down-outline"></ion-icon>
+         </ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="collapsible-card-content" [ngClass]="{'hide-content': model.hideClasses}">
+         <app-ordem-paranormal-classes></app-ordem-paranormal-classes>
       </ion-card-content>
    </ion-card>
 </ion-content>
