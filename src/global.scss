@@ -98,6 +98,10 @@ ion-item ion-label[position="stacked"] {
          display: flex;
          justify-content: space-between;
 
+         ion-icon {
+            will-change: transform;
+            transition: transform 0.3s;
+         }
       }
    }
 
@@ -106,13 +110,18 @@ ion-item ion-label[position="stacked"] {
       transition: max-height 300ms cubic-bezier(0.24, 1, 0.54, 0.96), margin 0.3s, padding 0.3s;
       height: fit-content;
       max-height: 1500px;
+   }
 
-      &.hide-content {
+   &.hide-content {
+      .collapsible-card-header .collapsible-card-title ion-icon {
+         transform: rotate(180deg);
+      }
+
+      .collapsible-card-content {
          margin: 0;
          padding: 0;
          max-height: 0;
       }
    }
-
 }
 
