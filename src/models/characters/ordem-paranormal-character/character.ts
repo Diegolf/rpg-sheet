@@ -1,3 +1,4 @@
+import { InventoryItem } from './../../inventory-items/inventory-item';
 import { ATRIBUTE_INITIAL_VALUE } from '../character';
 import { OrdemParanormalClass, ordemParanormalClasses } from './classes';
 import { OrdemParanormalCharacterAtributes, OrdemParanormalAtributesCodes } from './atributes';
@@ -5,6 +6,8 @@ import {  OrdemParanormalExpertisesCodes, OrdemParanormalExpertiseInfo } from '.
 import { Character, CharacterConfigData } from '../character';
 
 export const NEX_INITIAL_VALUE = 5;
+export const WEIGHT_LIMIT_INITIAL_VALUE = 5;
+export const WEIGHT_PER_STRENGTH = 5;
 
 export interface OrdemParanormalCharacterExpertise {
    code: OrdemParanormalExpertisesCodes;
@@ -20,6 +23,8 @@ export interface OrdemParanormalCharacterConfigData extends CharacterConfigData 
    atributes?: OrdemParanormalCharacterAtributes;
    pe?: OrdemParanormalCharacterEffortPoints;
    nex?: number;
+   weightLimit?: number;
+   weightPenalty?: boolean;
    characterClass?: OrdemParanormalClass;
    expertises?: OrdemParanormalCharacterExpertise[];
 }
@@ -42,6 +47,12 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
    /** Nível de exposição paranormal */
    nex: number;
 
+   /** Limite de peso. Se ultrapassar esse limite, fica sobrecarregado até um máximo do dobro. */
+   weightLimit: number;
+
+   /** Indica se está atualmente sofrento penalidade por limite de peso */
+   weightPenalty: boolean;
+
    constructor(config: OrdemParanormalCharacterConfigData = {}) {
       super(config);
       this.atributes = config.atributes ?? {
@@ -55,19 +66,41 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       this.nex = config.nex ?? NEX_INITIAL_VALUE;
       this.characterClass = config.characterClass ?? ordemParanormalClasses[0];
       this.expertises = config.expertises ?? [];
+      this.weightLimit = config.weightLimit ?? WEIGHT_LIMIT_INITIAL_VALUE;
+      this.weightPenalty = config.weightPenalty ?? false;
    }
 
    increaseAtribute(atributeCode: string, amount: number) {
       if (atributeCode in this.atributes){
          this.atributes[atributeCode] += amount;
 
-         if (atributeCode === OrdemParanormalAtributesCodes.vigor){
+         if (atributeCode === OrdemParanormalAtributesCodes.vigor) {
             this.recalculateHP();
          }
-         else if (atributeCode === OrdemParanormalAtributesCodes.presenca){
+         else if (atributeCode === OrdemParanormalAtributesCodes.presenca) {
             this.recaulcualteEP();
          }
+         else if (atributeCode === OrdemParanormalAtributesCodes.forca) {
+            this.weightLimit = WEIGHT_LIMIT_INITIAL_VALUE + (this.atributes.for * WEIGHT_PER_STRENGTH);
+         }
       }
+   }
+
+   addInventoryItem(item: InventoryItem): boolean {
+      if ((this.inventory.currentWeight + item.size) < this.weightLimit * 2){
+         const result = !!this.inventory.items.push(item);
+         if (result) {
+            this.verifyWeightPenalty();
+         }
+         return result;
+      }
+      return false;
+   }
+
+   removeInventoryItem(index: number): boolean {
+      const result = super.removeInventoryItem(index);
+      this.verifyWeightPenalty();
+      return false;
    }
 
    private recalculateHP() {
@@ -80,5 +113,9 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       const epChange = this.ep.max - this.characterClass.calculateEffortPoints(this.atributes.pre, this.nex);
       this.ep.max += epChange;
       this.ep.current += epChange;
+   }
+
+   private verifyWeightPenalty() {
+      this.weightPenalty = this.inventory.items.reduce((acc, item) => acc + item.size, 0) > this.weightLimit;
    }
 }

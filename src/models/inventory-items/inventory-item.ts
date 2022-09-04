@@ -1,6 +1,5 @@
 /** Items that the character will carry */
 export interface InventoryItem {
-   code: string;
    name: string;
    description?: string;
 

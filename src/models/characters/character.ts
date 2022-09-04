@@ -7,6 +7,7 @@ export const CHARACTER_FREE_ATRIBUTES = 5;
 
 export interface CharacterInventory {
    limit: number;
+   currentWeight: number;
    items: InventoryItem[];
 }
 
@@ -40,8 +41,8 @@ export interface CharacterConfigData {
 export interface Character extends CharacterConfigData {
    increaseHealthPoint(amout?: number): void;
    decreaseHealthPoint(amount?: number): void;
-   addInventoryItem(inventoryItem: InventoryItem): boolean;
-   removeInventoryItem(InventoryItem: InventoryItem): boolean;
+   addInventoryItem(item: InventoryItem): boolean;
+   removeInventoryItem(index: number): boolean;
    increaseAtribute(atributeCode: string, amount: number);
    loadConfig(data: CharacterConfigData): void;
 }
@@ -58,7 +59,7 @@ export class Character implements Character {
       this.name = config.name ?? 'Nome';
       this.imageUrl = config.imageUrl ?? 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
       this.healthPoints = config.healthPoints ?? { current: HP_INITIAL_VALUE, max: HP_INITIAL_VALUE };
-      this.inventory = config.inventory ?? { limit: INVENTORY_LIMIT, items: [] };
+      this.inventory = config.inventory ?? { limit: INVENTORY_LIMIT, currentWeight: 0, items: [] };
       this.atributes = config.atributes ?? {
          agi: ATRIBUTE_INITIAL_VALUE,
          dex: ATRIBUTE_INITIAL_VALUE,
@@ -99,10 +100,14 @@ export class Character implements Character {
    }
 
    addInventoryItem(inventoryItem: InventoryItem): boolean {
-      throw new Error('Method not implemented.');
+      if (this.inventory.items.length < this.inventory.limit) {
+         return !!this.inventory.items.push(inventoryItem);
+      }
+      return false;
    }
-   removeInventoryItem(inventoryItem: InventoryItem): boolean {
-      throw new Error('Method not implemented.');
+
+   removeInventoryItem(index: number): boolean {
+      return !!this.inventory.items.splice(index, 1).length;
    }
 
    loadConfig(data: CharacterConfigData) {
