@@ -27,7 +27,7 @@ export interface DicesFormulas {
 
 export interface Dices {
    dicesFormulas: DicesFormulas;
-   rollDice(dice: Dice, atributes?: CharacterAtributes): RollResult;
+   // rollDice(dice: Dice, atributes?: CharacterAtributes): RollResult;
 }
 
 export const rollFromTo = (minValue: number, maxValue: number) => Math.round(Math.random() * (maxValue - minValue)) + minValue;

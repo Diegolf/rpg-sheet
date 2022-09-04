@@ -1,4 +1,4 @@
-import { OrdemRPGCharacterAtributes } from './../../../../models/characters/ordem-rpg-character';
+import { ParanormalDNDCharacterAtributes } from '../../../../models/characters/paranormal-dnd-character';
 import { RollResult, Dice } from './../../../../models/dices/dices';
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
@@ -12,7 +12,7 @@ import { map, startWith, switchMapTo, takeWhile } from 'rxjs/operators';
 })
 export class DicesResultModalComponent implements OnInit {
 
-   @Input() atributes: OrdemRPGCharacterAtributes;
+   @Input() atributes: ParanormalDNDCharacterAtributes;
    @Input() dice: Dice;
    @Input() times: number;
 

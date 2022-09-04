@@ -25,6 +25,9 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+ion-toolbar ion-title{
+   font-size: 20px;
+}
 
 ion-note[slot="error"] {
    font-size: 0.9em;
@@ -85,3 +88,31 @@ ion-item ion-label[position="stacked"] {
 .c-pointer {
    cursor: pointer;
 }
+
+.collapsible-card {
+
+   .collapsible-card-header {
+      cursor: pointer;
+
+      .collapsible-card-title {
+         display: flex;
+         justify-content: space-between;
+
+      }
+   }
+
+   .collapsible-card-content {
+      will-change: margin, padding, max-height;
+      transition: max-height 300ms cubic-bezier(0.24, 1, 0.54, 0.96), margin 0.3s, padding 0.3s;
+      height: fit-content;
+      max-height: 1500px;
+
+      &.hide-content {
+         margin: 0;
+         padding: 0;
+         max-height: 0;
+      }
+   }
+
+}
+
