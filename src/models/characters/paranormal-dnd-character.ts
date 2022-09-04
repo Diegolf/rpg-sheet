@@ -56,7 +56,7 @@ export class ParanormalDNDCharacter extends Character {
       super(config);
    }
 
-   increaseAtribute(atributeCode: string, amount: number) {
+   changeAtribute(atributeCode: string, amount: number) {
       if (atributeCode in this.atributes){
          this.atributes[atributeCode] += amount;
 

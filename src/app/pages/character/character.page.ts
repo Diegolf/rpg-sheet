@@ -40,7 +40,7 @@ export class CharacterPage implements OnInit {
       const consumedList = this.atributesInfo.filter(a => a.spentPoints);
       if (consumedList.length > 0) {
          consumedList.forEach(a => {
-            this.gameService.character.increaseAtribute(a.code, a.spentPoints);
+            this.gameService.character.changeAtribute(a.code, a.spentPoints);
             this.gameService.characterRemainingAtributes -= a.spentPoints;
             a.spentPoints = 0;
          });

@@ -43,7 +43,7 @@ export interface Character extends CharacterConfigData {
    decreaseHealthPoint(amount?: number): void;
    addInventoryItem(item: InventoryItem): boolean;
    removeInventoryItem(index: number): boolean;
-   increaseAtribute(atributeCode: string, amount: number);
+   changeAtribute(atributeCode: string, amount: number);
    loadConfig(data: CharacterConfigData): void;
 }
 
@@ -93,7 +93,7 @@ export class Character implements Character {
       }
    }
 
-   increaseAtribute(atributeCode: string, amount: number) {
+   changeAtribute(atributeCode: string, amount: number) {
       if (atributeCode in this.atributes){
          this.atributes[atributeCode] += amount;
       }

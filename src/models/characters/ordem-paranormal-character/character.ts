@@ -1,3 +1,4 @@
+import { GameService } from './../../../app/services/game.service';
 import { InventoryItem } from './../../inventory-items/inventory-item';
 import { ATRIBUTE_INITIAL_VALUE } from '../character';
 import { OrdemParanormalClass, ordemParanormalClasses } from './classes';
@@ -5,7 +6,9 @@ import { OrdemParanormalCharacterAtributes, OrdemParanormalAtributesCodes } from
 import {  OrdemParanormalExpertisesCodes, OrdemParanormalExpertiseInfo } from './expertises';
 import { Character, CharacterConfigData } from '../character';
 
-export const NEX_INITIAL_VALUE = 5;
+export const NEX_INITIAL_VALUE = 1;
+export const SANITY_INITIAL_VALUE = 20;
+export const EP_INITIAL_VALUE = 2;
 export const WEIGHT_LIMIT_INITIAL_VALUE = 5;
 export const WEIGHT_PER_STRENGTH = 5;
 
@@ -19,10 +22,16 @@ export interface OrdemParanormalCharacterEffortPoints {
    max: number;
 }
 
+export interface OrdemParanormalCharacterSanity {
+   current: number;
+   max: number;
+}
+
 export interface OrdemParanormalCharacterConfigData extends CharacterConfigData {
    atributes?: OrdemParanormalCharacterAtributes;
-   pe?: OrdemParanormalCharacterEffortPoints;
+   ep?: OrdemParanormalCharacterEffortPoints;
    nex?: number;
+   sanity?: OrdemParanormalCharacterSanity;
    weightLimit?: number;
    weightPenalty?: boolean;
    characterClass?: OrdemParanormalClass;
@@ -44,6 +53,9 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
    /** Pontos de esforço */
    ep: OrdemParanormalCharacterEffortPoints;
 
+   /** Sanidade */
+   sanity: OrdemParanormalCharacterSanity;
+
    /** Nível de exposição paranormal */
    nex: number;
 
@@ -62,17 +74,18 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
          for: ATRIBUTE_INITIAL_VALUE,
          pre: ATRIBUTE_INITIAL_VALUE,
       };
-      this.ep = config.pe ?? {current: 0, max: 0};
+      this.ep = config.ep ?? {current: EP_INITIAL_VALUE, max: EP_INITIAL_VALUE};
       this.nex = config.nex ?? NEX_INITIAL_VALUE;
+      this.sanity = config.sanity ?? {current: SANITY_INITIAL_VALUE, max: SANITY_INITIAL_VALUE};
       this.characterClass = config.characterClass ?? ordemParanormalClasses[0];
       this.expertises = config.expertises ?? [];
       this.weightLimit = config.weightLimit ?? WEIGHT_LIMIT_INITIAL_VALUE;
       this.weightPenalty = config.weightPenalty ?? false;
    }
 
-   increaseAtribute(atributeCode: string, amount: number) {
+   changeAtribute(atributeCode: string, value: number) {
       if (atributeCode in this.atributes){
-         this.atributes[atributeCode] += amount;
+         this.atributes[atributeCode] = value <= -1? -1 : value >= 5 ? 5 : value;
 
          if (atributeCode === OrdemParanormalAtributesCodes.vigor) {
             this.recalculateHP();
@@ -103,16 +116,28 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       return false;
    }
 
+   loadConfig(data: OrdemParanormalCharacterConfigData) {
+      Object.keys(data).forEach((key) => {
+         if (data[key]){
+            this[key] = data[key];
+         }
+      });
+   }
+
    private recalculateHP() {
-      const healthChange = this.healthPoints.max - this.characterClass.calculateHealthPoints(this.atributes.vig, this.nex);
-      this.healthPoints.max += healthChange;
-      this.healthPoints.current += healthChange;
+      if (this.characterClass != null) {
+         const health = this.characterClass.calculateHealthPoints(this.atributes.vig, this.nex);
+         this.healthPoints.max = health;
+         this.healthPoints.current = health;
+      }
    }
 
    private recaulcualteEP() {
-      const epChange = this.ep.max - this.characterClass.calculateEffortPoints(this.atributes.pre, this.nex);
-      this.ep.max += epChange;
-      this.ep.current += epChange;
+      if (this.characterClass != null) {
+      const ep = this.characterClass.calculateEffortPoints(this.atributes.pre, this.nex);
+      this.ep.max = ep;
+      this.ep.current = ep;
+      }
    }
 
    private verifyWeightPenalty() {
