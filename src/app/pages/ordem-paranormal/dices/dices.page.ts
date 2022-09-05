@@ -89,7 +89,6 @@ export class OPDicesPage implements OnInit {
 
          return dice;
       });
-      console.log(dicesformulas);
       return dicesformulas;
    }
 
