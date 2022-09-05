@@ -18,6 +18,7 @@ export interface Dice {
    name?: string;
    description?: string;
    formulaDescription?: string;
+   askAmount?: boolean;
    roll: DiceFormula;
 }
 

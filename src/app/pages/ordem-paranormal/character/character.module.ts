@@ -24,4 +24,4 @@ import { OPClassesComponent } from './classes/classes.component';
 ],
   exports: [OPCAtributesComponent]
 })
-export class OrdemParanormalCharacterPageModule {}
+export class OPCharacterPageModule {}

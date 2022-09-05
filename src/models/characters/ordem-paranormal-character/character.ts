@@ -3,7 +3,7 @@ import { InventoryItem } from './../../inventory-items/inventory-item';
 import { ATRIBUTE_INITIAL_VALUE } from '../character';
 import { OrdemParanormalClass, ordemParanormalClasses } from './classes';
 import { OrdemParanormalCharacterAtributes, OrdemParanormalAtributesCodes } from './atributes';
-import {  OrdemParanormalExpertisesCodes, OrdemParanormalExpertiseInfo } from './expertises';
+import { OrdemParanormalExpertisesCodes, OrdemParanormalExpertiseInfo, ordemParanormalExpertiseValueList } from './expertises';
 import { Character, CharacterConfigData } from '../character';
 
 export const NEX_INITIAL_VALUE = 1;
@@ -78,7 +78,40 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       this.nex = config.nex ?? NEX_INITIAL_VALUE;
       this.sanity = config.sanity ?? {current: SANITY_INITIAL_VALUE, max: SANITY_INITIAL_VALUE};
       this.characterClass = config.characterClass ?? ordemParanormalClasses[0];
-      this.expertises = config.expertises ?? [];
+      this.expertises = config.expertises ?? [
+         { code: OrdemParanormalExpertisesCodes.acrobacia, info: ordemParanormalExpertiseValueList[1] },
+         { code: OrdemParanormalExpertisesCodes.adestramento, info: ordemParanormalExpertiseValueList[2] },
+         { code: OrdemParanormalExpertisesCodes.atletismo, info: ordemParanormalExpertiseValueList[1] },
+         { code: OrdemParanormalExpertisesCodes.artes, info: ordemParanormalExpertiseValueList[3] },
+         { code: OrdemParanormalExpertisesCodes.atualidades, info: ordemParanormalExpertiseValueList[2] },
+         // { code: OrdemParanormalExpertisesCodes.ciencias, info: ordemParanormalExpertiseValueList[3] },
+         // { code: OrdemParanormalExpertisesCodes.crime, info: ordemParanormalExpertiseValueList[1] },
+         // { code: OrdemParanormalExpertisesCodes.diplomacia, info: ordemParanormalExpertiseValueList[2] },
+         // { code: OrdemParanormalExpertisesCodes.enganacao, info: ordemParanormalExpertiseValueList[3] },
+         // { code: OrdemParanormalExpertisesCodes.fortitude, info: ordemParanormalExpertiseValueList[1] },
+         // { code: OrdemParanormalExpertisesCodes.iniciativa, info: ordemParanormalExpertiseValueList[2] },
+         // { code: OrdemParanormalExpertisesCodes.intimidacao, info: ordemParanormalExpertiseValueList[3] },
+         // { code: OrdemParanormalExpertisesCodes.fortitude, info: ordemParanormalExpertiseValueList[1] },
+         // { code: OrdemParanormalExpertisesCodes.furtividade, info: ordemParanormalExpertiseValueList[2] },
+         // { code: OrdemParanormalExpertisesCodes.iniciativa, info: ordemParanormalExpertiseValueList[3] },
+         // { code: OrdemParanormalExpertisesCodes.intimidacao, info: ordemParanormalExpertiseValueList[1] },
+         // { code: OrdemParanormalExpertisesCodes.intuicao, info: ordemParanormalExpertiseValueList[2] },
+         // { code: OrdemParanormalExpertisesCodes.investigacao, info: ordemParanormalExpertiseValueList[1] },
+         // { code: OrdemParanormalExpertisesCodes.luta, info: ordemParanormalExpertiseValueList[3] },
+         // { code: OrdemParanormalExpertisesCodes.medicina, info: ordemParanormalExpertiseValueList[1] },
+         // { code: OrdemParanormalExpertisesCodes.ocultismo, info: ordemParanormalExpertiseValueList[2] },
+         { code: OrdemParanormalExpertisesCodes.percepcao, info: ordemParanormalExpertiseValueList[1] },
+         { code: OrdemParanormalExpertisesCodes.pilotagem, info: ordemParanormalExpertiseValueList[3] },
+         { code: OrdemParanormalExpertisesCodes.pontaria, info: ordemParanormalExpertiseValueList[1] },
+         { code: OrdemParanormalExpertisesCodes.profissao, info: ordemParanormalExpertiseValueList[2] },
+         { code: OrdemParanormalExpertisesCodes.reflexos, info: ordemParanormalExpertiseValueList[1] },
+         { code: OrdemParanormalExpertisesCodes.religiao, info: ordemParanormalExpertiseValueList[3] },
+         { code: OrdemParanormalExpertisesCodes.sobrevivencia, info: ordemParanormalExpertiseValueList[1] },
+         { code: OrdemParanormalExpertisesCodes.tatica, info: ordemParanormalExpertiseValueList[1] },
+         { code: OrdemParanormalExpertisesCodes.tecnologia, info: ordemParanormalExpertiseValueList[2] },
+         { code: OrdemParanormalExpertisesCodes.vontade, info: ordemParanormalExpertiseValueList[3] },
+         { code: OrdemParanormalExpertisesCodes.artes, info: ordemParanormalExpertiseValueList[1] },
+      ];
       this.weightLimit = config.weightLimit ?? WEIGHT_LIMIT_INITIAL_VALUE;
       this.weightPenalty = config.weightPenalty ?? false;
    }

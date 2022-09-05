@@ -1,9 +1,16 @@
-import { ParanormalDNDCharacterAtributes } from '../../../../models/characters/paranormal-dnd-character';
+import { CharacterAtributes } from './../../../../models/characters/character';
 import { RollResult, Dice } from './../../../../models/dices/dices';
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Observable, Subject, timer } from 'rxjs';
 import { map, startWith, switchMapTo, takeWhile } from 'rxjs/operators';
+
+export enum RollOperation {
+   none = 0,
+   sumResult = 1,
+   greaterResult = 2,
+   lowestResult = 3
+}
 
 @Component({
    selector: 'app-dices-result-modal',
@@ -12,9 +19,10 @@ import { map, startWith, switchMapTo, takeWhile } from 'rxjs/operators';
 })
 export class DicesResultModalComponent implements OnInit {
 
-   @Input() atributes: ParanormalDNDCharacterAtributes;
+   @Input() atributes: CharacterAtributes;
    @Input() dice: Dice;
    @Input() times: number;
+   @Input() rollOperation: RollOperation = RollOperation.none;
 
    public resultList;
    private readonly repeatRandomValueTimes = 30;

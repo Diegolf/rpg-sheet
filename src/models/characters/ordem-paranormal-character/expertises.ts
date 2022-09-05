@@ -51,17 +51,17 @@ export const ordemParanormalExpertiseValueList: OrdemParanormalExpertiseInfo[] =
       value: 0,
    },
    {
-      text:'Treinado (+5)',
+      text:'Treinado',
       code: OrdemParanormalExpertiseInfoCodes.treinado,
       value: 5,
    },
    {
-      text:'Veterano (+10)',
+      text:'Veterano',
       code: OrdemParanormalExpertiseInfoCodes.veterano,
       value: 10,
    },
    {
-      text:'Expert (+15)',
+      text:'Expert',
       code: OrdemParanormalExpertiseInfoCodes.expert,
       value: 15,
    },
@@ -317,3 +317,6 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
       weightPenalty: false,
    },
 ];
+
+export const ordemParanormalExpertisesObject = ordemParanormalExpertises.reduce((acc, exp) => ({...acc, [exp.code]: exp}), {});
+
