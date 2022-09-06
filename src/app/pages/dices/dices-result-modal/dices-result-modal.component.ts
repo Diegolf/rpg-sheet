@@ -3,7 +3,7 @@ import { RollResult, Dice } from './../../../../models/dices/dices';
 import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Observable, Subject, timer } from 'rxjs';
-import { map, startWith, switchMapTo, takeWhile } from 'rxjs/operators';
+import { map, startWith, switchMapTo, take, takeWhile } from 'rxjs/operators';
 
 export enum RollOperation {
    none = 0,
@@ -22,10 +22,14 @@ export class DicesResultModalComponent implements OnInit {
    @Input() atributes: CharacterAtributes;
    @Input() dice: Dice;
    @Input() times: number;
-   @Input() rollOperation: RollOperation = RollOperation.none;
+   @Input() rollOperation: RollOperation = RollOperation.lowestResult;
 
    public resultList;
+   public finalResult = 0;
+   public showFinalResult = false;
+
    private readonly repeatRandomValueTimes = 30;
+   private teste = new Subject<number>();
 
    constructor(public modalCtrl: ModalController) { }
 
@@ -34,12 +38,46 @@ export class DicesResultModalComponent implements OnInit {
          startWith(1),
          switchMapTo(this.generateRandomResults())
       ));
+      this.handleRollResult();
    }
 
    generateRandomResults(): Observable<RollResult> {
       return timer(500, 100).pipe(
-         map((_value, index) => ({ ...this.dice.roll(this.atributes), lastOne: index === this.repeatRandomValueTimes })),
+         map((_value, index) => {
+            const lastOne = index === this.repeatRandomValueTimes;
+            const result = this.dice.roll(this.atributes);
+
+            if (lastOne) {
+               this.teste.next(result.value);
+            }
+
+            return ({ ...result });
+         }),
          takeWhile<RollResult>((_value, index) => index !== this.repeatRandomValueTimes, true)
       );
    }
+
+   private handleRollResult() {
+      if (this.rollOperation === RollOperation.lowestResult) {
+         this.finalResult = 999;
+      }
+
+      this.teste.pipe(take(this.times)).subscribe(
+         (valor) => {
+            switch (this.rollOperation) {
+               case (RollOperation.sumResult): this.finalResult += valor; break;
+               case (RollOperation.greaterResult): this.finalResult = valor > this.finalResult ? valor : this.finalResult; break;
+               case (RollOperation.lowestResult): this.finalResult = valor < this.finalResult ? valor : this.finalResult; break;
+               case (RollOperation.none): default: break;
+            }
+         },
+         () => { },
+         () => {
+            if (this.rollOperation !== RollOperation.none) {
+               this.showFinalResult = true;
+            }
+         }
+      );
+   }
+
 }
