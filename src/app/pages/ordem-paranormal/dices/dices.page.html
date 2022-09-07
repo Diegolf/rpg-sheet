@@ -9,20 +9,50 @@
 
 <ion-content class="background-cinza-dot">
 
-   <!-- <ion-card>
+   <ion-card>
       <ion-card-content>
          <ion-grid>
             <ion-row>
-               <ion-col size-sm="6" size-md="5" size-lg="3">
-                  <ion-item>
-                     <ion-label position="floating">Número de dados</ion-label>
-                     <ion-input type="number" [(ngModel)]="model.rollTimes" min="1" max="6"></ion-input>
+               <ion-col size="12" >
+                  <ion-item class="ion-no-padding" mode="md">
+                     <!-- <ion-label position="fixed">Quantidade de dados</ion-label> -->
+                     <div class="ion-no-margin" slot="start">
+                        <ion-button (click)="rollTimesChange(-1)">
+                           <ion-icon slot="icon-only"  name="remove-outline"></ion-icon>
+                        </ion-button>
+                     </div>
+                     <ion-input class="ion-text-center ion-no-margin f-s-20" type="tel" [(ngModel)]="model.rollTimes" min="1" max="6"></ion-input>
+                     <div class="ion-no-margin" slot="end">
+                        <ion-button (click)="rollTimesChange(1)">
+                           <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+                         </ion-button>
+                     </div>
                   </ion-item>
                </ion-col>
+               <ion-col size="12">
+                  <ion-radio-group [(ngModel)]="model.rollOperation" class="radio-group c-pointer" mode="md">
+                     <div *ngFor="let operation of rollOperations" (click)="model.rollOperation = operation.id">
+                        <ion-radio slot="start" [value]="operation.id" class="ion-no-margin radio-icon"></ion-radio>
+                        <ion-label class="radio-label" >{{operation.title}}</ion-label>
+                     </div>
+                   </ion-radio-group>
+               </ion-col>
+               <!-- <ion-col size="12">
+                  <ion-radio-group [(ngModel)]="model.rollOperation">
+                     <ion-row>
+                        <ion-col size="12" size-sm="6" size-lg="4" size-xl="3" *ngFor="let operation of rollOperations">
+                           <ion-item lines="none">
+                              <ion-radio slot="start" [value]="operation.id" class="ion-no-margin"></ion-radio>
+                              <ion-label style="margin-left: 10px;">{{operation.title}}</ion-label>
+                            </ion-item>
+                        </ion-col>
+                     </ion-row>
+                   </ion-radio-group>
+               </ion-col> -->
             </ion-row>
          </ion-grid>
       </ion-card-content>
-   </ion-card> -->
+   </ion-card>
 
    <ion-card>
       <ion-card-header>

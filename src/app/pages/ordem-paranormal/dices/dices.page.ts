@@ -1,6 +1,6 @@
 import { ordemParanormalExpertisesObject } from './../../../../models/characters/ordem-paranormal-character/expertises';
 import { OrdemParanormalCharacter } from './../../../../models/characters/ordem-paranormal-character/character';
-import { DicesResultModalComponent } from './../../dices/dices-result-modal/dices-result-modal.component';
+import { DicesResultModalComponent, RollOperation, rollOperations } from './../../dices/dices-result-modal/dices-result-modal.component';
 import { OrdemParanormalDice } from './../../../../models/dices/ordem-paranormal-dices/ordem-paranormal-dices';
 import { GameService } from './../../../services/game.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,16 +15,22 @@ export class OPDicesPage implements OnInit {
 
    // @ViewChild('diceRollScreen', { read: IonModal }) diceRollScreen: IonModal;
 
+   /** Lista de dados e suas respectivas formulas, decrição e demais configurações. */
    public dicesFormulas;
-   // public model = {
-   //    rollTimes: 1,
-   // };
+   public rollOperations = [];
+   public model = {
+      rollTimes: 1,
+      rollOperation: RollOperation.none
+   };
+
+   private readonly maxDicesRoll = 20;
 
    constructor(
       private gameService: GameService,
       private modalCtrl: ModalController
    ) {
       this.dicesFormulas = this.loadDicesformulas();
+      this.rollOperations = rollOperations;
    }
 
    ngOnInit() {
@@ -33,16 +39,26 @@ export class OPDicesPage implements OnInit {
    async rollDices(dice: OrdemParanormalDice) {
 
       let times = 1;
-      if (dice.askAmount) {
+      let rollOperation = RollOperation.none;
 
+      // Dados como d2, d3, d6, d20...
+      if (dice.askAmount) {
+         this.model.rollTimes = (this.model.rollTimes < 1) ? 1 : (this.model.rollTimes > this.maxDicesRoll)
+            ? this.maxDicesRoll : this.model.rollTimes;
+         times = this.model.rollTimes;
       }
+      // Dados baseados em atributos e perícias
       else if (dice.attributeCode) {
          const characterAtribute = this.gameService.character.atributes[dice.attributeCode];
+
+         // Caso o atributo do personagem seja negativo, roda 2 dados e pega o menor resultado
          if (characterAtribute === -1) {
             times = 2;
+            rollOperation = RollOperation.lowestResult;
          }
          else {
             times += characterAtribute;
+            rollOperation = RollOperation.greaterResult;
          }
       }
 
@@ -50,10 +66,17 @@ export class OPDicesPage implements OnInit {
          component: DicesResultModalComponent,
          mode: 'ios',
          swipeToClose: true,
-         componentProps: { times, dice, atributes: this.gameService.character.atributes }
+         componentProps: { times, dice, rollOperation: this.model.rollOperation, atributes: this.gameService.character.atributes }
       });
 
       modal.present();
+   }
+
+   rollTimesChange(value) {
+      const result = this.model.rollTimes + value;
+      if (result > 0 && result <= this.maxDicesRoll) {
+         this.model.rollTimes = result;
+      }
    }
 
    private loadDicesformulas() {

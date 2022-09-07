@@ -12,6 +12,13 @@ export enum RollOperation {
    lowestResult = 3
 }
 
+export const rollOperations = [
+   { id: RollOperation.none, title: 'Nada' },
+   { id: RollOperation.sumResult, title: 'Somar Resultado' },
+   { id: RollOperation.greaterResult, title: 'Maior Resultado' },
+   { id: RollOperation.lowestResult, title: 'Menor Resultado' },
+];
+
 @Component({
    selector: 'app-dices-result-modal',
    templateUrl: './dices-result-modal.component.html',
@@ -22,7 +29,7 @@ export class DicesResultModalComponent implements OnInit {
    @Input() atributes: CharacterAtributes;
    @Input() dice: Dice;
    @Input() times: number;
-   @Input() rollOperation: RollOperation = RollOperation.lowestResult;
+   @Input() rollOperation: RollOperation = RollOperation.none;
 
    public resultList;
    public finalResult = 0;
@@ -73,7 +80,7 @@ export class DicesResultModalComponent implements OnInit {
          },
          () => { },
          () => {
-            if (this.rollOperation !== RollOperation.none) {
+            if (this.rollOperation !== RollOperation.none && this.times > 1) {
                this.showFinalResult = true;
             }
          }
