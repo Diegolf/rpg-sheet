@@ -25,6 +25,16 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 ion-item {
    --inner-padding-end: 0;
    --inner-margin-start: 0;
@@ -129,4 +139,3 @@ ion-item ion-label[position="stacked"] {
       }
    }
 }
-
