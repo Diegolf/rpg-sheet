@@ -79,7 +79,7 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       this.sanity = config.sanity ?? {current: SANITY_INITIAL_VALUE, max: SANITY_INITIAL_VALUE};
       this.characterClass = config.characterClass ?? ordemParanormalClasses[0];
       this.expertises = config.expertises ?? [
-         { code: OrdemParanormalExpertisesCodes.acrobacia, info: ordemParanormalExpertiseValueList[1] },
+         { code: OrdemParanormalExpertisesCodes.acrobacia, info: ordemParanormalExpertiseValueList[2] },
          { code: OrdemParanormalExpertisesCodes.adestramento, info: ordemParanormalExpertiseValueList[2] },
          { code: OrdemParanormalExpertisesCodes.atletismo, info: ordemParanormalExpertiseValueList[1] },
          { code: OrdemParanormalExpertisesCodes.artes, info: ordemParanormalExpertiseValueList[3] },

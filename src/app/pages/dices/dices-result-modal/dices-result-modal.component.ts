@@ -1,6 +1,6 @@
 import { CharacterAtributes } from './../../../../models/characters/character';
 import { RollResult, Dice } from './../../../../models/dices/dices';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Observable, Subject, timer } from 'rxjs';
 import { map, startWith, switchMapTo, take, takeWhile } from 'rxjs/operators';
@@ -23,6 +23,7 @@ export const rollOperations = [
    selector: 'app-dices-result-modal',
    templateUrl: './dices-result-modal.component.html',
    styleUrls: ['./dices-result-modal.component.scss'],
+   encapsulation: ViewEncapsulation.None
 })
 export class DicesResultModalComponent implements OnInit {
 

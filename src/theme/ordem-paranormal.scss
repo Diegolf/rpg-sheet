@@ -1,0 +1,20 @@
+.expertise-treinado {
+   color: var(--ion-color-primary);
+}
+
+.expertise-veterano {
+   color: #1a751a;
+}
+
+.expertise-expert {
+   color: var(--ion-color-warning-shade);
+}
+
+.expertise-not-treined {
+   color: #663a82;
+   text-decoration: line-through;
+
+   // &::after{
+   //    content: ' (ST)';
+   // }
+}

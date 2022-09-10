@@ -73,8 +73,11 @@
       </ion-card-header>
 
       <ion-card-content class="dices-list">
-         <ion-button size="large" color="light" class="ion-margin-start" *ngFor="let dice of dicesFormulas"
-            (click)="rollDices(dice);">{{dice.name}}</ion-button>
+         <ion-button size="large" color="light" class="ion-margin-start"
+            [expand]="(dice.expertises && dice.expertises.length > 0) ? 'block' : ''"
+            *ngFor="let dice of dicesFormulas"(click)="rollDices(dice);">
+               {{dice.name}}
+         </ion-button>
       </ion-card-content>
    </ion-card>
 

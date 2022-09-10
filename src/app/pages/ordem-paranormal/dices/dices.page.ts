@@ -39,7 +39,7 @@ export class OPDicesPage implements OnInit {
    async rollDices(dice: OrdemParanormalDice) {
 
       let times = 1;
-      let rollOperation = RollOperation.none;
+      let rollOperation = this.model.rollOperation;
 
       // Dados como d2, d3, d6, d20...
       if (dice.askAmount) {
@@ -66,7 +66,7 @@ export class OPDicesPage implements OnInit {
          component: DicesResultModalComponent,
          mode: 'ios',
          swipeToClose: true,
-         componentProps: { times, dice, rollOperation: this.model.rollOperation, atributes: this.gameService.character.atributes }
+         componentProps: { times, dice, rollOperation, atributes: this.gameService.character.atributes }
       });
 
       modal.present();
@@ -87,28 +87,54 @@ export class OPDicesPage implements OnInit {
       const dicesformulas = Object.values(this.gameService.dices.dicesFormulas).map((dice: OrdemParanormalDice) => {
 
          // Lista de perícias relacionadas ao dado
-         dice.formulaDescription = dice.expertises == null ? '' : dice.expertises.reduce((acc, expertise) => {
+         dice.formulaDescription = dice.expertises == null ? '' : dice.expertises
+            .sort((a, b) => ordemParanormalExpertisesObject[a].name.localeCompare(ordemParanormalExpertisesObject[b].name))
+            .reduce((acc, expertise) => {
 
-            // Informações da Perícia do personagem
-            const characterExpertise = characterExpertises.find(characterExpertiseInfo => characterExpertiseInfo.code === expertise);
+               // Informações da Perícia do personagem
+               const characterExpertise = characterExpertises.find(characterExpertiseInfo => characterExpertiseInfo.code === expertise);
 
-            // O quanto o personagem é treinado na perícia
-            const expertiseAditional =
-               characterExpertise != null ? ` (${characterExpertise.info.text} +${characterExpertise.info.value})` : '';
+               // O quanto o personagem é treinado na perícia
+               const expertiseAditional =
+                  characterExpertise != null
+                     ? ` (${characterExpertise.info.text} +${characterExpertise.info.value})`
+                     : '';
 
-            // Nome da perícia + o quanto o personagem é treinado nela
-            acc.push(`${ordemParanormalExpertisesObject[expertise].name}${expertiseAditional}`);
+               let expertiseClass = '';
+               if (characterExpertise){
+                  expertiseClass = `expertise-${characterExpertise.info.text.toLowerCase()}`;
+               }
+               else if (ordemParanormalExpertisesObject[expertise].onlyTreined) {
+                  expertiseClass = 'expertise-not-treined';
+               }
+               // Nome da perícia + o quanto o personagem é treinado nela
+               acc.push(`<span class="${expertiseClass}">${ordemParanormalExpertisesObject[expertise].name}${expertiseAditional}</span>`);
 
-            return acc;
+               return acc;
 
-         }, []).sort((a, b) => a.localeCompare(b)).join(', ');
-         //    acc.push({
-         //       value: characterExpertise?.info.value || 0,
-         //       text: `${ordemParanormalExpertisesObject[exp].name}${expertiseAditional}`
-         //    });
+            }, [])
+            .join(', ');
+         // const dicesformulas = Object.values(this.gameService.dices.dicesFormulas).map((dice: any) => { // OrdemParanormalDice
 
-         //    return acc;
-         // }, []).sort((a,b) => b.value - a.value).map(a => a.text).join(', ');
+         //    // Lista de perícias relacionadas ao dado
+         //    dice.expertisesInfo = dice.expertises == null ? [] : dice.expertises.reduce((acc, expertise) => {
+
+         //       // Informações da Perícia do personagem
+         //       const characterExpertise = characterExpertises.find(characterExpertiseInfo => characterExpertiseInfo.code === expertise);
+
+         //       // O quanto o personagem é treinado na perícia
+         //       const expertiseAditional =
+         //          characterExpertise != null ? ` (${characterExpertise.info.text} +${characterExpertise.info.value})` : '';
+
+         //       // Nome da perícia + o quanto o personagem é treinado nela
+         //       acc.push({
+         //          text: `${ordemParanormalExpertisesObject[expertise].name}${expertiseAditional}`,
+         //          classes: ''
+         //       });
+
+         //       return acc;
+         //    }, []).sort((a, b) => a.text.localeCompare(b.text));
+         //    dice.formulaDescription = dice.expertisesInfo.map(ei => ei.text).join(', ');
 
          return dice;
       });
