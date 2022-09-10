@@ -159,3 +159,10 @@ ion-item ion-label[position="stacked"] {
       }
    }
 }
+
+
+@media(max-width:600px) {
+   ion-card-title {
+      font-size: 19px;
+   }
+}

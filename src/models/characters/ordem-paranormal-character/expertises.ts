@@ -319,4 +319,3 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
 ];
 
 export const ordemParanormalExpertisesObject = ordemParanormalExpertises.reduce((acc, exp) => ({...acc, [exp.code]: exp}), {});
-

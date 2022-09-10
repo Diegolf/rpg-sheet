@@ -24,3 +24,15 @@
       }
    }
 }
+
+@media(max-width:600px) {
+   .expertises-list {
+      .expertise-description {
+         font-size: 1rem !important;
+
+         h2 {
+            font-size: 1em !important;
+         }
+      }
+   }
+}
