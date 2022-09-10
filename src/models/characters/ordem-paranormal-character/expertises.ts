@@ -105,7 +105,7 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.atualidades,
       name: 'Atualidades',
-      description: 'ocê é um conhecedor de assuntos gerais, como política, esporte e entretenimento, '+
+      description: 'Você é um conhecedor de assuntos gerais, como política, esporte e entretenimento, '+
          'e pode responder dúvidas relativas a esses assuntos.',
       afectedByAtributes: [OrdemParanormalAtributesCodes.intelecto],
       onlyTreined: false,

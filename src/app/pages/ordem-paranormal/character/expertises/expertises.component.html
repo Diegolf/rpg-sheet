@@ -1,0 +1,19 @@
+<ion-searchbar placeholder="Filtrar..." class="ion-no-padding ion-margin-bottom"></ion-searchbar>
+<cdk-virtual-scroll-viewport itemSize="1" minBufferPx="10" maxBufferPx="23">
+   <ion-list lines="full" class="expertises-list ion-text-wrap ion-margin-top">
+      <ion-item *cdkVirtualFor="let expertise of expertisesInfo" class="ion-no-padding">
+         <!-- <div class="expertise-value" slot="start"><h2><ion-text [color]="expertise.value > 0 ? 'primary' : 'dark'">{{expertise.value}} </ion-text></h2></div> -->
+         <div class="expertise-description">
+            <h2 class="ion-text-center"> <ion-text> {{expertise.name}} </ion-text> </h2>
+            <div class="ion-padding-start">
+               <ion-text color="dark"> {{expertise.description}} </ion-text>
+            </div>
+         </div>
+         <div class="expertise-actions" slot="end">
+            select...
+            <!-- <ion-icon [style.visibility]="expertise.spentPoints ? '' : 'hidden'" color="danger" name="remove-circle-outline" class="c-pointer" (click)="removeexpertise(expertise)"></ion-icon>
+            <ion-icon [style.visibility]="(expertise.value >= 3 || !remainingexpertises) ? 'hidden' : ''"  color="success" name="add-circle-outline" class="c-pointer" (click)="addexpertise(expertise)"></ion-icon> -->
+         </div>
+      </ion-item>
+   </ion-list>
+ </cdk-virtual-scroll-viewport>

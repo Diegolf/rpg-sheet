@@ -31,4 +31,16 @@
          <app-ordem-paranormal-classes></app-ordem-paranormal-classes>
       </ion-card-content>
    </ion-card>
+
+   <ion-card class="collapsible-card" [ngClass]="{'hide-content': model.hideExpertises}">
+      <ion-card-header class="collapsible-card-header" (click)="toggleCard('hideExpertises')">
+         <ion-card-title class="collapsible-card-title">
+            Perícias
+            <ion-icon name="chevron-down-outline"></ion-icon>
+         </ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="collapsible-card-content">
+         <app-ordem-paranormal-expertises></app-ordem-paranormal-expertises>
+      </ion-card-content>
+   </ion-card>
 </ion-content>
