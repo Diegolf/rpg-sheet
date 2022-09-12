@@ -11,7 +11,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OPExpertisesComponent implements OnInit {
 
-   expertisesInfo = [];
+   public expertisesList = [];
+
+   private expertisesInfo = [];
 
    constructor(private gameService: GameService) {
       this.loadExpertisesInfo();
@@ -19,7 +21,20 @@ export class OPExpertisesComponent implements OnInit {
 
    ngOnInit() { }
 
-   loadExpertisesInfo() {
+   filterExpertises(event) {
+      const filtro = event.detail.value;
+      if (filtro) {
+         this.expertisesList = this.expertisesInfo.filter(ei =>
+            ei.name.toLowerCase().includes(filtro)
+            || ei.description.toLowerCase().includes(filtro)
+         );
+      }
+      else {
+         this.expertisesList = this.expertisesInfo;
+      }
+   }
+
+   private loadExpertisesInfo() {
       const characterExpertises = (this.gameService.character as OrdemParanormalCharacter).expertises;
       this.expertisesInfo = ordemParanormalExpertises
          .sort((expertiseA, expertiseB) => expertiseA.name.localeCompare(expertiseB.name))
@@ -31,6 +46,7 @@ export class OPExpertisesComponent implements OnInit {
 
             return {...expertise, currentValue: (characterExpetiseInfo?.info.code || 0)};
          });
+      this.expertisesList = this.expertisesInfo;
    }
 
 }
