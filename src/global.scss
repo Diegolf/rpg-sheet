@@ -60,6 +60,18 @@ ion-item {
    --inner-margin-start: 0;
 }
 
+.action-sheet-title {
+   color: var(--ion-color-dark) !important;
+   font-size: 22px !important;
+
+   .action-sheet-sub-title {
+      color: var(--ion-color-dark-tint);
+      border-top: 1px solid #ccc;
+      margin-top: 5px;
+      font-size: 17px !important;
+   }
+}
+
 ion-toolbar ion-title, .f-s-20{
    font-size: 20px;
 }
