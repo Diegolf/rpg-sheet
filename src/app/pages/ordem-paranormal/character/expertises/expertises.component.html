@@ -1,19 +1,25 @@
-<ion-searchbar placeholder="Filtrar..." class="ion-no-padding ion-margin-bottom" (ionChange)="filterExpertises($event)"></ion-searchbar>
+<ion-searchbar placeholder="Filtrar..." class="ion-no-padding ion-margin-bottom" (ionChange)="filterExpertises($event)">
+</ion-searchbar>
 <cdk-virtual-scroll-viewport itemSize="100" minBufferPx="300" maxBufferPx="7800">
    <ion-list lines="full" class="expertises-list ion-text-wrap ion-margin-top">
       <ion-item *cdkVirtualFor="let expertise of expertisesList" class="ion-no-padding">
          <!-- <div class="expertise-value" slot="start"><h2><ion-text [color]="expertise.value > 0 ? 'primary' : 'dark'">{{expertise.value}} </ion-text></h2></div> -->
          <div class="expertise-description">
-            <h2 class="ion-text-center"> <ion-text class="bold"> {{expertise.name}} </ion-text> </h2>
+            <h2 class="ion-text-center">
+               <ion-text class="bold"> {{expertise.name}} </ion-text>
+            </h2>
             <div class="ion-padding-start">
                <ion-text color="dark"> {{expertise.description}} </ion-text>
             </div>
          </div>
-         <div class="expertise-actions ion-no-margin" slot="end">
-            +5
-            <!-- <ion-icon [style.visibility]="expertise.spentPoints ? '' : 'hidden'" color="danger" name="remove-circle-outline" class="c-pointer" (click)="removeexpertise(expertise)"></ion-icon>
-            <ion-icon [style.visibility]="(expertise.value >= 3 || !remainingexpertises) ? 'hidden' : ''"  color="success" name="add-circle-outline" class="c-pointer" (click)="addexpertise(expertise)"></ion-icon> -->
-         </div>
+         <ion-select mode="ios" slot="end" interface="action-sheet" placeholder="0" class="expertise-actions ion-text-center"
+            [selectedText]="expertise.currentValueText" [ngClass]="expertise.currentValueClass"
+            [(ngModel)]="expertise.currentValueCode" (ionChange)="changeExpertiseValue($event, expertise)">
+               <ion-select-option *ngFor="let expertiseValue of expertiseValueList"
+                  [value]="expertiseValue.code">
+                     {{expertiseValue.text}}
+               </ion-select-option>
+         </ion-select>
       </ion-item>
    </ion-list>
- </cdk-virtual-scroll-viewport>
+</cdk-virtual-scroll-viewport>

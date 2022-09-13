@@ -26,7 +26,8 @@
 
    .expertise-actions {
       margin: 0 20px;
-      font-size: 2em;
+      font-size: 1.5em;
+      min-width: 63px;
    }
 }
 
@@ -38,6 +39,12 @@
          h2 {
             font-size: 1em !important;
          }
+      }
+
+      .expertise-actions {
+         margin: 0 5px;
+         font-size: 1.3em;
+         min-width: 63px;
       }
    }
 }

@@ -96,8 +96,9 @@ export class OPDicesPage implements OnInit {
 
                // O quanto o personagem é treinado na perícia
                const expertiseAditional =
-                  characterExpertise != null
-                     ? ` (${characterExpertise.info.text} +${characterExpertise.info.value})`
+                  (characterExpertise != null && characterExpertise.info.value > 0)
+                     // ? ` (${characterExpertise.info.text} +${characterExpertise.info.value})`
+                     ? ` (+${characterExpertise.info.value})`
                      : '';
 
                let expertiseClass = '';

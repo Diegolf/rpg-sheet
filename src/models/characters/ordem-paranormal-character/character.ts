@@ -1,9 +1,11 @@
-import { GameService } from './../../../app/services/game.service';
 import { InventoryItem } from './../../inventory-items/inventory-item';
 import { ATRIBUTE_INITIAL_VALUE } from '../character';
 import { OrdemParanormalClass, ordemParanormalClasses } from './classes';
 import { OrdemParanormalCharacterAtributes, OrdemParanormalAtributesCodes } from './atributes';
-import { OrdemParanormalExpertisesCodes, OrdemParanormalExpertiseInfo, ordemParanormalExpertiseValueList } from './expertises';
+import {
+   OrdemParanormalExpertisesCodes, OrdemParanormalExpertiseInfo,
+   ordemParanormalExpertiseValueList, OrdemParanormalExpertiseInfoCodes, ordemParanormalExpertisesObject
+} from './expertises';
 import { Character, CharacterConfigData } from '../character';
 
 export const NEX_INITIAL_VALUE = 1;
@@ -74,9 +76,9 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
          for: ATRIBUTE_INITIAL_VALUE,
          pre: ATRIBUTE_INITIAL_VALUE,
       };
-      this.ep = config.ep ?? {current: EP_INITIAL_VALUE, max: EP_INITIAL_VALUE};
+      this.ep = config.ep ?? { current: EP_INITIAL_VALUE, max: EP_INITIAL_VALUE };
       this.nex = config.nex ?? NEX_INITIAL_VALUE;
-      this.sanity = config.sanity ?? {current: SANITY_INITIAL_VALUE, max: SANITY_INITIAL_VALUE};
+      this.sanity = config.sanity ?? { current: SANITY_INITIAL_VALUE, max: SANITY_INITIAL_VALUE };
       this.characterClass = config.characterClass ?? ordemParanormalClasses[0];
       this.expertises = config.expertises ?? [
          { code: OrdemParanormalExpertisesCodes.acrobacia, info: ordemParanormalExpertiseValueList[2] },
@@ -117,8 +119,8 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
    }
 
    changeAtribute(atributeCode: string, value: number) {
-      if (atributeCode in this.atributes){
-         this.atributes[atributeCode] = value <= -1? -1 : value >= 5 ? 5 : value;
+      if (atributeCode in this.atributes) {
+         this.atributes[atributeCode] = value <= -1 ? -1 : value >= 5 ? 5 : value;
 
          if (atributeCode === OrdemParanormalAtributesCodes.vigor) {
             this.recalculateHP();
@@ -132,8 +134,22 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       }
    }
 
+   changeExpertise(expertiseCode: OrdemParanormalExpertisesCodes, expertiseValueCode: OrdemParanormalExpertiseInfoCodes) {
+      const expertiseValue = ordemParanormalExpertiseValueList.find(eValues => eValues.code === expertiseValueCode);
+
+      const expertiseIndex = this.expertises.findIndex(e => e.code === expertiseCode);
+
+      if (expertiseIndex !== -1) {
+         this.expertises[expertiseIndex].info = expertiseValue;
+      }
+      else {
+         const expertise = ordemParanormalExpertisesObject[expertiseCode];
+         this.expertises.push({ code: expertiseCode, info: expertiseValue });
+      }
+   }
+
    addInventoryItem(item: InventoryItem): boolean {
-      if ((this.inventory.currentWeight + item.size) < this.weightLimit * 2){
+      if ((this.inventory.currentWeight + item.size) < this.weightLimit * 2) {
          const result = !!this.inventory.items.push(item);
          if (result) {
             this.verifyWeightPenalty();
@@ -151,7 +167,7 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
 
    loadConfig(data: OrdemParanormalCharacterConfigData) {
       Object.keys(data).forEach((key) => {
-         if (data[key]){
+         if (data[key]) {
             this[key] = data[key];
          }
       });
@@ -167,9 +183,9 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
 
    private recaulcualteEP() {
       if (this.characterClass != null) {
-      const ep = this.characterClass.calculateEffortPoints(this.atributes.pre, this.nex);
-      this.ep.max = ep;
-      this.ep.current = ep;
+         const ep = this.characterClass.calculateEffortPoints(this.atributes.pre, this.nex);
+         this.ep.max = ep;
+         this.ep.current = ep;
       }
    }
 
