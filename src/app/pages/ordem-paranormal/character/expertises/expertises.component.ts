@@ -1,3 +1,4 @@
+import { OrdemParanormalCharacterConfigData } from 'src/models/characters/ordem-paranormal-character/character';
 import { OrdemParanormalCharacter } from './../../../../../models/characters/ordem-paranormal-character/character';
 import { ordemParanormalCharacterAtributesInfoObject } from './../../../../../models/characters/ordem-paranormal-character/atributes';
 import {
@@ -57,7 +58,12 @@ export class OPExpertisesComponent implements OnInit {
       expertise.currentValueClass = selectedValue.valueClass;
 
       // Altera o valor no personagem
-      (this.gameService.character as OrdemParanormalCharacter).changeExpertise(expertise.code, selectedValue.code);
+      // (this.gameService.character as OrdemParanormalCharacter).changeExpertise(expertise.code, selectedValue.code);
+      const characterData = this.gameService.character as OrdemParanormalCharacter;
+      characterData.changeExpertise(expertise.code, selectedValue.code);
+      this.gameService.saveCharacterConfig({
+         expertises: characterData.expertises
+      } as OrdemParanormalCharacterConfigData);
    }
 
    /** Carrega a lista de perícias formatando os textos */
@@ -70,7 +76,7 @@ export class OPExpertisesComponent implements OnInit {
          const valueClass = `expertise-${ev.text.toLowerCase()}`;
 
          // Retorna um novo objeto para manter o objeto principal sem as formatações especiais da tela
-         return {...ev, text, valueClass};
+         return { ...ev, text, valueClass };
       });
    }
 
