@@ -1,10 +1,10 @@
 <ion-searchbar placeholder="Filtrar..." class="ion-no-padding ion-margin-bottom" (ionChange)="filterExpertises($event)">
 </ion-searchbar>
 <cdk-virtual-scroll-viewport itemSize="100" minBufferPx="300" maxBufferPx="7800">
-   <ion-list lines="full" class="expertises-list ion-text-wrap ion-margin-top">
+   <ion-list lines="full" class="minimalist-list ion-text-wrap ion-margin-top">
       <ion-item *cdkVirtualFor="let expertise of expertisesList" class="ion-no-padding ion-no-lines">
          <!-- <div class="expertise-value" slot="start"><h2><ion-text [color]="expertise.value > 0 ? 'primary' : 'dark'">{{expertise.value}} </ion-text></h2></div> -->
-         <div class="expertise-description">
+         <div class="minimalist-list-description">
             <h2 class="ion-text-center">
                <ion-text class="bold"> {{expertise.name}} </ion-text>
             </h2>
@@ -12,7 +12,7 @@
                <ion-text color="dark"> {{expertise.description}} </ion-text>
             </div>
          </div>
-         <ion-select mode="ios" slot="end" interface="action-sheet" placeholder="0" class="expertise-actions ion-text-center"
+         <ion-select mode="ios" slot="end" interface="action-sheet" placeholder="0" class="minimalist-list-actions ion-text-center"
             [selectedText]="expertise.currentValueText" [ngClass]="expertise.currentValueClass"
             [interfaceOptions]="{header: expertise.name, subHeader: expertise.description}"
             cancelText="Cancelar"

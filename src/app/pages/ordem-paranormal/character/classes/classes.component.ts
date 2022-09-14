@@ -1,14 +1,31 @@
+import { OrdemParanormalCharacter } from './../../../../../models/characters/ordem-paranormal-character/character';
+import { ordemParanormalClasses, OrdemParanormalClass } from './../../../../../models/characters/ordem-paranormal-character/classes';
+import { GameService } from 'src/app/services/game.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-ordem-paranormal-classes',
-  templateUrl: './classes.component.html',
-  styleUrls: ['./classes.component.scss'],
+   selector: 'app-ordem-paranormal-classes',
+   templateUrl: './classes.component.html',
+   styleUrls: ['./classes.component.scss'],
 })
 export class OPClassesComponent implements OnInit {
 
-  constructor() { }
+   public opClassesList = [];
+   public currentClassCode;
 
-  ngOnInit() {}
+   constructor(private gameService: GameService) {
+      this.loadClassesList();
+   }
+
+   ngOnInit() { }
+
+   changeCharacterClass(opClass: OrdemParanormalClass) {
+
+   }
+
+   private loadClassesList() {
+      this.opClassesList = ordemParanormalClasses;
+      this.currentClassCode = (this.gameService.character as OrdemParanormalCharacter).characterClass.code;
+   }
 
 }
