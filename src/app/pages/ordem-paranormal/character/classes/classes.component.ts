@@ -1,3 +1,4 @@
+import { OrdemParanormalCharacterConfigData } from 'src/models/characters/ordem-paranormal-character/character';
 import { OrdemParanormalCharacter } from './../../../../../models/characters/ordem-paranormal-character/character';
 import { ordemParanormalClasses, OrdemParanormalClass } from './../../../../../models/characters/ordem-paranormal-character/classes';
 import { GameService } from 'src/app/services/game.service';
@@ -21,7 +22,9 @@ export class OPClassesComponent implements OnInit {
 
    changeCharacterClass(opClass: OrdemParanormalClass) {
       this.currentClassCode = opClass.code;
-      (this.gameService.character as OrdemParanormalCharacter).changeClass(opClass);
+      const characterData = this.gameService.character as OrdemParanormalCharacter;
+      characterData.changeClass(opClass);
+      this.gameService.saveCharacterConfig(['characterClass']);
    }
 
    private loadClassesList() {

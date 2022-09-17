@@ -4,7 +4,7 @@ import { OrdemParanormalClass, ordemParanormalClasses } from './classes';
 import { OrdemParanormalCharacterAtributes, OrdemParanormalAtributesCodes } from './atributes';
 import {
    OrdemParanormalExpertisesCodes, OrdemParanormalExpertiseInfo,
-   ordemParanormalExpertiseValueList, OrdemParanormalExpertiseInfoCodes, ordemParanormalExpertisesObject
+   ordemParanormalExpertiseValueList, OrdemParanormalExpertiseInfoCodes, ordemParanormalExpertisesObject, ordemParanormalExpertises
 } from './expertises';
 import { Character, CharacterConfigData } from '../character';
 
@@ -139,12 +139,57 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       return false;
    }
 
-   loadConfig(data: OrdemParanormalCharacterConfigData) {
+   loadConfig(data: any) {
       Object.keys(data).forEach((key) => {
          if (data[key]) {
-            this[key] = data[key];
+            switch (key) {
+               case 'characterClass': {
+                  this.characterClass = ordemParanormalClasses.find(c => c.code === data[key]) || ordemParanormalClasses[0];
+                  break;
+               }
+               case 'expertises': {
+                  this.expertises = data[key].map(expertiseData => {
+                     const expertise = ordemParanormalExpertises.find(e => e.code === expertiseData.code);
+                     const info = ordemParanormalExpertiseValueList.find(i => i.code === expertiseData.infoCode);
+                     if (expertise && info) {
+                        return { code: expertise.code, info } as OrdemParanormalCharacterExpertise;
+                     }
+                     return null;
+                  }).filter(e => e);
+                  break;
+               }
+               default: {
+                  this[key] = data[key];
+                  break;
+               }
+            }
          }
       });
+   }
+
+   getConfig(dataKeys: string[]) {
+      const dadosFormatados = {};
+
+      dataKeys.forEach(key => {
+         if (this[key]) {
+            switch (key) {
+               case 'characterClass': {
+                  dadosFormatados[key] = this.characterClass.code;
+                  break;
+               }
+               case 'expertises': {
+                  dadosFormatados[key] = this.expertises.map(e => ({ code: e.code, infoCode: e.info.code }));
+                  break;
+               }
+               default: {
+                  dadosFormatados[key] = this[key];
+                  break;
+               }
+            }
+         }
+      });
+
+      return dadosFormatados;
    }
 
    private recalculateHP(reset: boolean = false) {

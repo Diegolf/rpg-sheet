@@ -58,12 +58,16 @@ export class OPExpertisesComponent implements OnInit {
       expertise.currentValueClass = selectedValue.valueClass;
 
       // Altera o valor no personagem
-      // (this.gameService.character as OrdemParanormalCharacter).changeExpertise(expertise.code, selectedValue.code);
-      const characterData = this.gameService.character as OrdemParanormalCharacter;
-      characterData.changeExpertise(expertise.code, selectedValue.code);
-      this.gameService.saveCharacterConfig({
-         expertises: characterData.expertises
-      } as OrdemParanormalCharacterConfigData);
+      (this.gameService.character as OrdemParanormalCharacter).changeExpertise(expertise.code, selectedValue.code);
+
+      // Salva as mudanças
+      this.gameService.saveCharacterConfig(['expertises']);
+
+      // const characterData = this.gameService.character as OrdemParanormalCharacter;
+      // characterData.changeExpertise(expertise.code, selectedValue.code);
+      // this.gameService.saveCharacterConfig({
+      //    expertises: characterData.expertises
+      // } as OrdemParanormalCharacterConfigData);
    }
 
    /** Carrega a lista de perícias formatando os textos */

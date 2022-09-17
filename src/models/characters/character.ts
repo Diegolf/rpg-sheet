@@ -45,6 +45,7 @@ export interface Character extends CharacterConfigData {
    removeInventoryItem(index: number): boolean;
    changeAtribute(atributeCode: string, amount: number);
    loadConfig(data: CharacterConfigData): void;
+   getConfig(dataKeys: string[]): any;
 }
 
 export class Character implements Character {

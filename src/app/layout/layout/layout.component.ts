@@ -44,12 +44,14 @@ export class LayoutComponent implements OnInit {
 
    decreaseHealthPoint() {
       this.gameService.character.decreaseHealthPoint();
-      this.gameService.saveCharacterConfig({healthPoints: this.gameService.character.healthPoints});
+      this.gameService.saveCharacterConfig(['healthPoints']);
+      // this.gameService.saveCharacterConfig({healthPoints: this.gameService.character.healthPoints});
    }
 
    increaseHealthPoint() {
       this.gameService.character.increaseHealthPoint();
-      this.gameService.saveCharacterConfig({healthPoints: this.gameService.character.healthPoints});
+      this.gameService.saveCharacterConfig(['healthPoints']);
+      // this.gameService.saveCharacterConfig({healthPoints: this.gameService.character.healthPoints});
    }
 
 }

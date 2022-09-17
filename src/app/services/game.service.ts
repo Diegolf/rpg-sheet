@@ -29,7 +29,8 @@ export class GameService {
       this.loadCharacterConfig(Object.keys(this.character) as Array<keyof OrdemParanormalCharacterConfigData>);
    }
 
-   public saveCharacterConfig(data: CharacterConfigData) {
+   public saveCharacterConfig(dataKeys: string[]) {
+      const data = this.character.getConfig(dataKeys);
       Object.keys(data).forEach(key => {
          this.storageService.set(key, data[key], true);
       });

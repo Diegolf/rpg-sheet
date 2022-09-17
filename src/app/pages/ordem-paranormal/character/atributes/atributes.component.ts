@@ -5,9 +5,9 @@ import { ordemParanormalCharacterAtributesInfo } from 'src/models/characters/ord
 import { OrdemParanormalCharacter, OrdemParanormalCharacterConfigData } from 'src/models/characters/ordem-paranormal-character/character';
 
 @Component({
-  selector: 'app-ordem-paranormal-atributes',
-  templateUrl: './atributes.component.html',
-  styleUrls: ['./atributes.component.scss'],
+   selector: 'app-ordem-paranormal-atributes',
+   templateUrl: './atributes.component.html',
+   styleUrls: ['./atributes.component.scss'],
 })
 export class OPCAtributesComponent implements OnInit {
 
@@ -26,7 +26,7 @@ export class OPCAtributesComponent implements OnInit {
    }
 
    async atributeDetail(atribute: any) {
-      this.modalData = {...atribute, auxValue: atribute.value};
+      this.modalData = { ...atribute, auxValue: atribute.value };
       this.modal.present();
 
       const { data: value, role } = await this.modal.onWillDismiss();
@@ -35,14 +35,15 @@ export class OPCAtributesComponent implements OnInit {
          this.gameService.character.changeAtribute(atribute.code, value);
          atribute.value = this.gameService.character.atributes[atribute.code];
 
-         const characterData = this.gameService.character as OrdemParanormalCharacter;
-         this.gameService.saveCharacterConfig({
-            atributes: characterData.atributes,
-            healthPoints: characterData.healthPoints,
-            weightLimit: characterData.weightLimit,
-            weightPenalty: characterData.weightPenalty,
-            ep: characterData.ep
-         } as OrdemParanormalCharacterConfigData);
+         this.gameService.saveCharacterConfig(['atributes', 'healthPoints', 'weightLimit', 'weightPenalty', 'ep']);
+         // const characterData = this.gameService.character as OrdemParanormalCharacter;
+         // this.gameService.saveCharacterConfig({
+         //    atributes: characterData.atributes,
+         //    healthPoints: characterData.healthPoints,
+         //    weightLimit: characterData.weightLimit,
+         //    weightPenalty: characterData.weightPenalty,
+         //    ep: characterData.ep
+         // } as OrdemParanormalCharacterConfigData);
       }
    }
 

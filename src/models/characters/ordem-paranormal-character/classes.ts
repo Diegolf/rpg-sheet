@@ -4,11 +4,13 @@ export enum OrdemParanormalClassesCodes {
    ocultista = 3
 }
 
-export interface OrdemParanormalClass {
+export interface OrdemParanormalClassData {
    code: OrdemParanormalClassesCodes;
    name: string;
    description: string;
+}
 
+export interface OrdemParanormalClass extends OrdemParanormalClassData {
    calculateHealthPoints: (vigor: number, nex: number) => number;
    calculateEffortPoints: (presenca: number, nex: number) => number;
    calculateSanity: (nex: number) => number;
