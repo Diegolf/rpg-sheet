@@ -227,6 +227,10 @@ ion-toast {
    &.warning-toast {
       --color: var(--ion-color-warning);
    }
+
+   &.error-toast {
+      --color: var(--ion-color-danger);
+   }
 }
 
 

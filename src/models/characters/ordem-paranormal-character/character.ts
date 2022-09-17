@@ -136,7 +136,7 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
    removeInventoryItem(index: number): boolean {
       const result = super.removeInventoryItem(index);
       this.verifyWeightPenalty();
-      return false;
+      return result;
    }
 
    loadConfig(data: any) {

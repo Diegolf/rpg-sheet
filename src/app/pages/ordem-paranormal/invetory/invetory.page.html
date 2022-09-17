@@ -24,7 +24,7 @@
                         <ion-label position="stacked">
                            Nome
                         </ion-label>
-                        <ion-input formControlName="name" placeholder="Equipamento / Documento / Arma ..." type="text" ></ion-input>
+                        <ion-input formControlName="name" placeholder="" type="text" ></ion-input>
                         <ion-text slot="error" *ngIf="itemForm.controls.name.touched && itemForm.controls.name.errors?.required">Informe o Nome</ion-text>
                      </ion-item>
                   </ion-col>
@@ -33,7 +33,7 @@
                         <ion-label position="stacked">
                            Descrição
                         </ion-label>
-                        <ion-textarea formControlName="description" placeholder="2D6 Energia / Documento encontrado..." type="text"></ion-textarea>
+                        <ion-textarea formControlName="description" placeholder="" type="text"></ion-textarea>
                         <ion-text slot="error" *ngIf="itemForm.controls.description.touched && itemForm.controls.description.errors?.required">Informe a Descrição</ion-text>
                      </ion-item>
                   </ion-col>
@@ -42,7 +42,7 @@
                         <ion-label position="stacked">
                            Carga
                         </ion-label>
-                        <ion-input class="ion-padding-left" formControlName="size" type="number" placeholder="Quantidade de espaços/carga ocupados pelo item"></ion-input>
+                        <ion-input class="ion-padding-left" formControlName="size" type="number" placeholder=""></ion-input>
                         <ion-text slot="error" *ngIf="itemForm.controls.size.touched && itemForm.controls.size.errors?.required">Informe a quantidade de espaços</ion-text>
                      </ion-item>
                   </ion-col>
@@ -76,13 +76,13 @@
                   <h2 class="ion-text-center">
                      <ion-text class="bold"> {{item.name}} </ion-text>
                   </h2>
-                  <div class="ion-padding-start">
+                  <div class="ion-padding-start" style="white-space: pre-line;">
                      <ion-text color="dark"> {{item.description}} </ion-text>
                   </div>
                </div>
                <div class="minimalist-list-actions" slot="end">
                   <!-- <ion-icon color="primary" name="create-sharp" class="c-pointer" (click)="addAtribute(atribute)"></ion-icon> -->
-                  <ion-icon color="danger" name="trash" class="c-pointer" (click)="removerItem(i)"></ion-icon>
+                  <ion-icon color="danger" name="trash" (click)="removerItem(i)"></ion-icon>
                </div>
             </ion-item>
          </ion-list>

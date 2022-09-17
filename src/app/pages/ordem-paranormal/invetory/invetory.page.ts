@@ -2,7 +2,7 @@ import { InventoryItem } from './../../../../models/inventory-items/inventory-it
 import { GameService } from './../../../services/game.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ToastService } from 'src/app/services/alert.service';
+import { ToastService, ToastType } from 'src/app/services/alert.service';
 
 @Component({
    selector: 'app-invetory',
@@ -37,26 +37,22 @@ export class InvetoryPage implements OnInit {
       } as InventoryItem;
 
       if (this.gameSerivce.character.addInventoryItem(item)) {
+         this.gameSerivce.saveCharacterConfig(['inventory', 'weightLimit', 'weightPenalty']);
          this.itemForm.reset({ size: 1 });
-
-         this.toastService.toast({
-            message: 'Item adicionado ao inventário',
-            icon: 'checkmark-circle-sharp',
-            cssClass: 'success-toast',
-         });
+         this.toastService.toast({ message: 'Item adicionado ao inventário', type: ToastType.success });
       }
       else {
-         this.toastService.toast({
-            message: 'Espaço do inventário insulficiente',
-            icon: 'alert-circle-sharp',
-            cssClass: 'warning-toast',
-         });
+         this.toastService.toast({ message: 'Espaço do inventário insulficiente', type: ToastType.warning });
       }
    }
 
    removerItem(index) {
-      if (this.gameSerivce.character.removeInventoryItem(index)){
-
+      if (this.gameSerivce.character.removeInventoryItem(index)) {
+         this.gameSerivce.saveCharacterConfig(['inventory', 'weightLimit', 'weightPenalty']);
+         this.toastService.toast({ message: 'Item removido do inventário', type: ToastType.success });
+      }
+      else {
+         this.toastService.toast({ message: 'Ocorreu um erro ao remover item do inventário', type: ToastType.error });
       }
    }
 
