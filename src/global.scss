@@ -175,6 +175,15 @@ ion-item ion-label[position="stacked"] {
 .minimalist-list {
    max-height: 100%;
 
+   .minimalist-item {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+
+      &:nth-child(n+2){
+         margin-top: 10px;
+      }
+   }
+
    .minimalist-list-description {
       width: 100%;
       font-size: 1.2rem;

@@ -20,7 +20,8 @@ export class OPClassesComponent implements OnInit {
    ngOnInit() { }
 
    changeCharacterClass(opClass: OrdemParanormalClass) {
-
+      this.currentClassCode = opClass.code;
+      (this.gameService.character as OrdemParanormalCharacter).changeClass(opClass);
    }
 
    private loadClassesList() {

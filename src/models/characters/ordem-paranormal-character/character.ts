@@ -85,6 +85,14 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       this.weightPenalty = config.weightPenalty ?? false;
    }
 
+   changeClass(opClass: OrdemParanormalClass) {
+      this.characterClass = opClass;
+      this.recalculateHP(true);
+      this.recalculateEP(true);
+      this.recalculateSanity(true);
+      this.verifyWeightPenalty();
+   }
+
    changeAtribute(atributeCode: string, value: number) {
       if (atributeCode in this.atributes) {
          this.atributes[atributeCode] = value <= -1 ? -1 : value >= 5 ? 5 : value;
@@ -93,7 +101,7 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
             this.recalculateHP();
          }
          else if (atributeCode === OrdemParanormalAtributesCodes.presenca) {
-            this.recaulcualteEP();
+            this.recalculateEP();
          }
          else if (atributeCode === OrdemParanormalAtributesCodes.forca) {
             this.weightLimit = WEIGHT_LIMIT_INITIAL_VALUE + (this.atributes.for * WEIGHT_PER_STRENGTH);
@@ -110,7 +118,6 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
          this.expertises[expertiseIndex].info = expertiseValue;
       }
       else {
-         const expertise = ordemParanormalExpertisesObject[expertiseCode];
          this.expertises.push({ code: expertiseCode, info: expertiseValue });
       }
    }
@@ -140,19 +147,27 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       });
    }
 
-   private recalculateHP() {
+   private recalculateHP(reset: boolean = false) {
       if (this.characterClass != null) {
-         const health = this.characterClass.calculateHealthPoints(this.atributes.vig, this.nex);
-         this.healthPoints.max = health;
-         this.healthPoints.current = health;
+         const newHealth = this.characterClass.calculateHealthPoints(this.atributes.vig, this.nex);
+         this.healthPoints.current = reset ? newHealth : (this.healthPoints.current + newHealth - this.healthPoints.max);
+         this.healthPoints.max = newHealth;
       }
    }
 
-   private recaulcualteEP() {
+   private recalculateEP(reset: boolean = false) {
       if (this.characterClass != null) {
-         const ep = this.characterClass.calculateEffortPoints(this.atributes.pre, this.nex);
-         this.ep.max = ep;
-         this.ep.current = ep;
+         const newEp = this.characterClass.calculateEffortPoints(this.atributes.pre, this.nex);
+         this.ep.current = reset ? newEp : (this.ep.current + newEp - this.ep.max);
+         this.ep.max = newEp;
+      }
+   }
+
+   private recalculateSanity(reset: boolean = false) {
+      if (this.characterClass != null) {
+         const newSanity = this.characterClass.calculateSanity(this.nex);
+         this.sanity.max = reset ? newSanity : (this.sanity.current + newSanity - this.sanity.max);
+         this.sanity.current = newSanity;
       }
    }
 
