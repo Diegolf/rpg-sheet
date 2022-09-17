@@ -2,7 +2,6 @@ import { OrdemParanormalDices } from './../../models/dices/ordem-paranormal-dice
 import {
    OrdemParanormalCharacter, OrdemParanormalCharacterConfigData
 } from '../../models/characters/ordem-paranormal-character/character';
-import { CharacterConfigData } from './../../models/characters/character';
 import { StorageService } from './storage.service';
 import { Dices } from '../../models/dices/dices';
 import { Character } from '../../models/characters/character';
@@ -18,9 +17,7 @@ export class GameService {
 
    public characterRemainingAtributes: number;
 
-   constructor(private storageService: StorageService) {
-
-   }
+   constructor(private storageService: StorageService) { }
 
    init() {
       this.character = new OrdemParanormalCharacter();

@@ -10,8 +10,9 @@ import { AlertController } from '@ionic/angular';
 export class LayoutComponent implements OnInit {
 
    public rotas = [
-      { routerLink: '/pages/character', titulo: 'Personagem' },
-      { routerLink: '/pages/dices', titulo: 'Dados' },
+      { routerLink: '/pages/character', titulo: 'Personagem', icon:'person' },
+      { routerLink: '/pages/dices', titulo: 'Dados', icon:'dice' },
+      { routerLink: '/pages/inventory', titulo: 'Inventário', icon:'file-tray-full' },
    ];
 
    constructor(private alertController: AlertController, public gameService: GameService) { }

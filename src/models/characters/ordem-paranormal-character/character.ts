@@ -123,7 +123,7 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
    }
 
    addInventoryItem(item: InventoryItem): boolean {
-      if ((this.inventory.currentWeight + item.size) < this.weightLimit * 2) {
+      if ((this.inventory.currentWeight + item.size) <= this.weightLimit * 2) {
          const result = !!this.inventory.items.push(item);
          if (result) {
             this.verifyWeightPenalty();
@@ -217,6 +217,7 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
    }
 
    private verifyWeightPenalty() {
-      this.weightPenalty = this.inventory.items.reduce((acc, item) => acc + item.size, 0) > this.weightLimit;
+      this.inventory.currentWeight = this.inventory.items.reduce((acc, item) => acc + item.size, 0);
+      this.weightPenalty = this.inventory.currentWeight > this.weightLimit;
    }
 }

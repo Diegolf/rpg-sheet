@@ -1,0 +1,9 @@
+.minimalist-list {
+   .minimalist-list-description {
+      border-left: 1px solid #ccc;
+   }
+
+   .minimalist-list-start, .minimalist-list-actions {
+      min-width: 0;
+   }
+}

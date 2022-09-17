@@ -23,6 +23,10 @@ const routes: Routes = [
                   loadChildren: () => import('./pages/ordem-paranormal/character/character.module').then(m => m.OPCharacterPageModule)
                },
                { path: 'dices', loadChildren: () => import('./pages/ordem-paranormal/dices/dices.module').then(m => m.OPDicesPageModule) },
+               {
+                 path: 'inventory',
+                 loadChildren: () => import('./pages/ordem-paranormal/invetory/invetory.module').then( m => m.InvetoryPageModule)
+               },
 
                // Rota não encontrada
                { path: '**', redirectTo: 'dices' },
@@ -41,7 +45,7 @@ const routes: Routes = [
 
 @NgModule({
    imports: [
-      RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+      RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
    ],
    exports: [RouterModule]
 })

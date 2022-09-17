@@ -1,6 +1,7 @@
 /** Items that the character will carry */
 export interface InventoryItem {
    name: string;
+   code: string;
    description?: string;
 
    /** Amout of space needed to carry the item */
