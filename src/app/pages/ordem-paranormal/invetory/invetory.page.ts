@@ -19,7 +19,6 @@ export class InvetoryPage implements OnInit {
    });
 
    model = {};
-   items = [];
 
    constructor(
       private fb: FormBuilder,

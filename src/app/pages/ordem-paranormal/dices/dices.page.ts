@@ -80,8 +80,11 @@ export class OPDicesPage implements OnInit {
    }
 
    private loadDicesformulas() {
+      // Dados do personagem
+      const characterData = this.gameService.character as OrdemParanormalCharacter;
+
       // Perícias treinadas do personagem
-      const characterExpertises = (this.gameService.character as OrdemParanormalCharacter).expertises;
+      const characterExpertises = characterData.expertises;
 
       // Carrega os dados com as descrições das perícias atribuidas a cada dado e o quanto o personagem é treinado na perícia
       const dicesformulas = Object.values(this.gameService.dices.dicesFormulas).map((dice: OrdemParanormalDice) => {
@@ -91,25 +94,32 @@ export class OPDicesPage implements OnInit {
             .sort((a, b) => ordemParanormalExpertisesObject[a].name.localeCompare(ordemParanormalExpertisesObject[b].name))
             .reduce((acc, expertise) => {
 
+               const expertiseInfo = ordemParanormalExpertisesObject[expertise];
+
                // Informações da Perícia do personagem
                const characterExpertise = characterExpertises.find(characterExpertiseInfo => characterExpertiseInfo.code === expertise);
 
                // O quanto o personagem é treinado na perícia
-               const expertiseAditional =
+               let expertiseAditional =
                   (characterExpertise != null && characterExpertise.info.value > 0)
                      // ? ` (${characterExpertise.info.text} +${characterExpertise.info.value})`
-                     ? ` (+${characterExpertise.info.value})`
+                     ? ` (+${characterExpertise.info.value}${expertiseInfo.weightPenalty && characterData.weightPenalty ? ' -5' : ''})`
                      : '';
 
                let expertiseClass = '';
                if (characterExpertise){
                   expertiseClass = `expertise-${characterExpertise.info.text.toLowerCase()}`;
                }
-               else if (ordemParanormalExpertisesObject[expertise].onlyTreined) {
-                  expertiseClass = 'expertise-not-treined';
+               else {
+                  if (expertiseInfo.weightPenalty && characterData.weightPenalty) {
+                     expertiseAditional = ' (-5)';
+                  }
+                  if (expertiseInfo.onlyTreined) {
+                     expertiseClass = 'expertise-not-treined';
+                  }
                }
                // Nome da perícia + o quanto o personagem é treinado nela
-               acc.push(`<span class="${expertiseClass}">${ordemParanormalExpertisesObject[expertise].name}${expertiseAditional}</span>`);
+               acc.push(`<span class="${expertiseClass}">${expertiseInfo.name}${expertiseAditional}</span>`);
 
                return acc;
 
