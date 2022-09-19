@@ -1,3 +1,4 @@
+import packageJson from '../../../package.json';
 import { OrdemParanormalDices } from './../../models/dices/ordem-paranormal-dices/ordem-paranormal-dices';
 import {
    OrdemParanormalCharacter, OrdemParanormalCharacterConfigData
@@ -12,6 +13,7 @@ import { Injectable } from '@angular/core';
 })
 export class GameService {
 
+   public currentVersion: string;
    public character: Character;
    public dices: Dices;
 
@@ -20,6 +22,15 @@ export class GameService {
    constructor(private storageService: StorageService) { }
 
    init() {
+      this.currentVersion = packageJson.version;
+      const lastVersion = this.storageService.get('appVersion');
+
+      // Limpa o storage caso a versão seja antiga
+      if (!lastVersion || this.currentVersion.localeCompare(lastVersion) > 1) {
+         this.storageService.clearStorage();
+      }
+      this.storageService.set('appVersion', this.currentVersion);
+
       this.character = new OrdemParanormalCharacter();
       this.dices = new OrdemParanormalDices();
 
