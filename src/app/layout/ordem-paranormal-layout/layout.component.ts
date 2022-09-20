@@ -1,13 +1,14 @@
+import { OrdemParanormalCharacter } from './../../../models/characters/ordem-paranormal-character/character';
 import { GameService } from './../../services/game.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
 @Component({
-   selector: 'app-layout',
+   selector: 'app-ordem-paranormal-layout',
    templateUrl: './layout.component.html',
    styleUrls: ['./layout.component.scss'],
 })
-export class LayoutComponent implements OnInit {
+export class OPLayoutComponent implements OnInit {
 
    public rotas = [
       { routerLink: '/pages/character', titulo: 'Personagem', icon:'person' },
@@ -43,16 +44,19 @@ export class LayoutComponent implements OnInit {
       await alert.present();
    }
 
-   decreaseHealthPoint() {
-      this.gameService.character.changeHealthByAmout(-1);
+   changeHealthByAmout(value: number) {
+      this.gameService.character.changeHealthByAmout(value);
       this.gameService.saveCharacterConfig(['healthPoints']);
-      // this.gameService.saveCharacterConfig({healthPoints: this.gameService.character.healthPoints});
    }
 
-   increaseHealthPoint() {
-      this.gameService.character.changeHealthByAmout(1);
-      this.gameService.saveCharacterConfig(['healthPoints']);
-      // this.gameService.saveCharacterConfig({healthPoints: this.gameService.character.healthPoints});
+   changeSanityByAmount(value: number) {
+      (this.gameService.character as OrdemParanormalCharacter).changeSanityByAmount(value);
+      this.gameService.saveCharacterConfig(['sanity']);
+   }
+
+   changeEffortByamout(value: number) {
+      (this.gameService.character as OrdemParanormalCharacter).changeEffortByamout(value);
+      this.gameService.saveCharacterConfig(['ep']);
    }
 
 }

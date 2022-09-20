@@ -18,4 +18,4 @@ import { InvetoryPage } from './invetory.page';
   ],
   declarations: [InvetoryPage]
 })
-export class InvetoryPageModule {}
+export class OPInvetoryPageModule {}

@@ -76,13 +76,28 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
          for: ATRIBUTE_INITIAL_VALUE,
          pre: ATRIBUTE_INITIAL_VALUE,
       };
-      this.ep = config.ep ?? { current: EP_INITIAL_VALUE, max: EP_INITIAL_VALUE };
       this.nex = config.nex ?? NEX_INITIAL_VALUE;
-      this.sanity = config.sanity ?? { current: SANITY_INITIAL_VALUE, max: SANITY_INITIAL_VALUE };
       this.characterClass = config.characterClass ?? ordemParanormalClasses[0];
       this.expertises = config.expertises ?? [];
-      this.weightLimit = config.weightLimit ?? WEIGHT_LIMIT_INITIAL_VALUE;
-      this.weightPenalty = config.weightPenalty ?? false;
+
+      if (config.ep) {
+         this.ep = config.ep;
+      }
+      else {
+         const ep = this.characterClass.calculateEffortPoints(this.atributes.pre, this.nex);
+         this.ep = { current: ep, max: ep };
+      }
+
+      if (config.sanity) {
+         this.sanity = config.sanity;
+      }
+      else {
+         const sanity = this.characterClass.calculateSanity(this.nex);
+         this.sanity = { current: sanity, max: sanity };
+      }
+
+      this.recalculateWeightLimit(this.atributes.for);
+      this.verifyWeightPenalty();
    }
 
    changeClass(opClass: OrdemParanormalClass) {
@@ -104,7 +119,7 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
             this.recalculateEP();
          }
          else if (atributeCode === OrdemParanormalAtributesCodes.forca) {
-            this.weightLimit = WEIGHT_LIMIT_INITIAL_VALUE + (this.atributes.for * WEIGHT_PER_STRENGTH);
+            this.recalculateWeightLimit(value);
          }
       }
    }
@@ -119,6 +134,30 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       }
       else {
          this.expertises.push({ code: expertiseCode, info: expertiseValue });
+      }
+   }
+
+   changeEffortByamout(amount: number) {
+      const total = this.ep.current + amount;
+      if (total > 0){
+         // Permite ultrapassar o máximo porque algumas skills podem ter esse efeito
+         this.ep.current = total;
+      }
+      else {
+         // Os ponto de esforço mínimo é 0
+         this.ep.current = 0;
+      }
+   }
+
+   changeSanityByAmount(amount: number) {
+      const total = this.sanity.current + amount;
+      if (total > 0){
+         // Permite ultrapassar o máximo porque algumas skills podem ter esse efeito
+         this.sanity.current = total;
+      }
+      else {
+         // Sanidade mínima é 0
+         this.sanity.current = 0;
       }
    }
 
@@ -214,6 +253,10 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
          this.sanity.max = reset ? newSanity : (this.sanity.current + newSanity - this.sanity.max);
          this.sanity.current = newSanity;
       }
+   }
+
+   private recalculateWeightLimit(forceAtributeValue: number) {
+      this.weightLimit = WEIGHT_LIMIT_INITIAL_VALUE + (forceAtributeValue * WEIGHT_PER_STRENGTH);
    }
 
    private verifyWeightPenalty() {

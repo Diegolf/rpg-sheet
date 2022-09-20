@@ -39,8 +39,7 @@ export interface CharacterConfigData {
 }
 
 export interface Character extends CharacterConfigData {
-   increaseHealthPoint(amout?: number): void;
-   decreaseHealthPoint(amount?: number): void;
+   changeHealthByAmout(amount?: number): void;
    addInventoryItem(item: InventoryItem): boolean;
    removeInventoryItem(index: number): boolean;
    changeAtribute(atributeCode: string, amount: number);
@@ -70,29 +69,47 @@ export class Character implements Character {
       this.remainingAtributes = config.remainingAtributes ?? CHARACTER_FREE_ATRIBUTES;
    }
 
-   increaseHealthPoint(amount: number = 1) {
-      if (amount > 0){
-         const total = this.healthPoints.current + amount;
-         if (total > this.healthPoints.max){
-            this.healthPoints.current = this.healthPoints.max;
-         }
-         else {
-            this.healthPoints.current = total;
-         }
+   changeHealthByAmout(amount: number) {
+      const total = this.healthPoints.current + amount;
+      if (total > 0){
+         // Permite ultrapassar a vida máxima porque algumas skills podem ter esse efeito
+         this.healthPoints.current = total;
+         // if (total > this.healthPoints.max) {
+         //    this.healthPoints.current = this.healthPoints.max;
+         // }
+         // else {
+         //    this.healthPoints.current = total;
+         // }
+      }
+      else {
+         // Vida mínima é 0
+         this.healthPoints.current = 0;
       }
    }
 
-   decreaseHealthPoint(amount: number = 1) {
-      if (amount > 0){
-         const total = this.healthPoints.current - amount;
-         if (total < 0){
-            this.healthPoints.current = 0;
-         }
-         else {
-            this.healthPoints.current = total;
-         }
-      }
-   }
+   // increaseHealthPoint(amount: number = 1) {
+   //    if (amount > 0){
+   //       const total = this.healthPoints.current + amount;
+   //       if (total > this.healthPoints.max){
+   //          this.healthPoints.current = this.healthPoints.max;
+   //       }
+   //       else {
+   //          this.healthPoints.current = total;
+   //       }
+   //    }
+   // }
+
+   // decreaseHealthPoint(amount: number = 1) {
+   //    if (amount > 0){
+   //       const total = this.healthPoints.current - amount;
+   //       if (total < 0){
+   //          this.healthPoints.current = 0;
+   //       }
+   //       else {
+   //          this.healthPoints.current = total;
+   //       }
+   //    }
+   // }
 
    changeAtribute(atributeCode: string, amount: number) {
       if (atributeCode in this.atributes){

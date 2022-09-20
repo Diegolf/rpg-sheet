@@ -1,3 +1,4 @@
+import { OPLayoutComponent } from './layout/ordem-paranormal-layout/layout.component';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './layout/layout/layout.component';
@@ -10,7 +11,7 @@ const routes: Routes = [
    // Rotas com layout padrão
    {
       path: '',
-      component: LayoutComponent,
+      component: OPLayoutComponent,
       children: [
          // Rota "/pages"
          {
@@ -25,7 +26,7 @@ const routes: Routes = [
                { path: 'dices', loadChildren: () => import('./pages/ordem-paranormal/dices/dices.module').then(m => m.OPDicesPageModule) },
                {
                  path: 'inventory',
-                 loadChildren: () => import('./pages/ordem-paranormal/invetory/invetory.module').then( m => m.InvetoryPageModule)
+                 loadChildren: () => import('./pages/ordem-paranormal/invetory/invetory.module').then( m => m.OPInvetoryPageModule)
                },
 
                // Rota não encontrada
