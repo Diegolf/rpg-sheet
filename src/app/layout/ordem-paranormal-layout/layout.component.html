@@ -18,7 +18,9 @@
                </ion-buttons>
             </ion-toolbar>
             <ion-row class="ion-margin-bottom">
-               <ion-col size="12" class="flex flex-direction-column ion-justify-content-center ion-align-items-center ion-margin-bottom avatar-col">
+               <ion-col size="12"
+                  class="flex flex-direction-column ion-justify-content-center ion-align-items-center ion-margin-bottom avatar-col c-pointer"
+                  (click)="showOtherCharacterInfo()">
                   <ion-avatar>
                      <img [src]="gameService.character.imageUrl">
                   </ion-avatar>
@@ -29,14 +31,19 @@
                   <ion-item lines="none" class="ion-align-items-start progress-item">
                      <div slot="start" class="ion-margin-right-10 progressbar-info ion-text-end">HP</div>
                      <div class="health-bar">
-                        <ion-progress-bar color="danger" [value]="gameService.character.healthPoints.current/gameService.character.healthPoints.max"></ion-progress-bar>
-                        <p class="ion-text-center ion-no-margin progress-value">{{gameService.character.healthPoints.current}}/{{gameService.character.healthPoints.max}}</p>
+                        <ion-progress-bar color="danger"
+                           [value]="gameService.character.healthPoints.current/gameService.character.healthPoints.max">
+                        </ion-progress-bar>
+                        <p class="ion-text-center ion-no-margin progress-value">
+                           {{gameService.character.healthPoints.current}}/{{gameService.character.healthPoints.max}}</p>
                      </div>
                      <div class="health-buttons" slot="end">
                         <!-- <ion-icon [style.visibility]="atribute.spentPoints ? '' : 'hidden'" color="danger" name="remove-outline" class="c-pointer" (click)="removeAtribute(atribute)"></ion-icon> -->
-                        <ion-icon color="danger" name="remove-outline" class="c-pointer" (click)="changeHealthByAmout(-1)"></ion-icon>
+                        <ion-icon color="danger" name="remove-outline" class="c-pointer"
+                           (click)="changeHealthByAmout(-1)"></ion-icon>
                         <!-- <ion-icon [style.visibility]="(atribute.value >= 3 || !remainingAtributes) ? 'hidden' : ''"  color="success" name="add-outline" class="c-pointer" (click)="addAtribute(atribute)"></ion-icon> -->
-                        <ion-icon color="success" name="add-outline" class="c-pointer ion-margin-left-5" (click)="changeHealthByAmout(1)"></ion-icon>
+                        <ion-icon color="success" name="add-outline" class="c-pointer ion-margin-left-5"
+                           (click)="changeHealthByAmout(1)"></ion-icon>
                      </div>
                   </ion-item>
                </ion-col>
@@ -44,12 +51,17 @@
                   <ion-item lines="none" class="ion-align-items-start progress-item">
                      <div slot="start" class="ion-margin-right-10 progressbar-info ion-text-end">S</div>
                      <div class="health-bar">
-                        <ion-progress-bar color="primary" [value]="gameService.character.sanity.current/gameService.character.sanity.max"></ion-progress-bar>
-                        <p class="ion-text-center ion-no-margin progress-value">{{gameService.character.sanity.current}}/{{gameService.character.sanity.max}}</p>
+                        <ion-progress-bar color="primary"
+                           [value]="gameService.character.sanity.current/gameService.character.sanity.max">
+                        </ion-progress-bar>
+                        <p class="ion-text-center ion-no-margin progress-value">
+                           {{gameService.character.sanity.current}}/{{gameService.character.sanity.max}}</p>
                      </div>
                      <div class="health-buttons" slot="end">
-                        <ion-icon color="danger" name="remove-outline" class="c-pointer" (click)="changeSanityByAmount(-1)"></ion-icon>
-                        <ion-icon color="success" name="add-outline" class="c-pointer ion-margin-left-5" (click)="changeSanityByAmount(1)"></ion-icon>
+                        <ion-icon color="danger" name="remove-outline" class="c-pointer"
+                           (click)="changeSanityByAmount(-1)"></ion-icon>
+                        <ion-icon color="success" name="add-outline" class="c-pointer ion-margin-left-5"
+                           (click)="changeSanityByAmount(1)"></ion-icon>
                      </div>
                   </ion-item>
                </ion-col>

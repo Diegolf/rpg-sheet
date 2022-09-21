@@ -1,10 +1,10 @@
 import { InventoryItem } from './../../inventory-items/inventory-item';
-import { ATRIBUTE_INITIAL_VALUE } from '../character';
+import { ATRIBUTE_INITIAL_VALUE, HP_INITIAL_VALUE } from '../character';
 import { OrdemParanormalClass, ordemParanormalClasses } from './classes';
 import { OrdemParanormalCharacterAtributes, OrdemParanormalAtributesCodes } from './atributes';
 import {
    OrdemParanormalExpertisesCodes, OrdemParanormalExpertiseInfo,
-   ordemParanormalExpertiseValueList, OrdemParanormalExpertiseInfoCodes, ordemParanormalExpertisesObject, ordemParanormalExpertises
+   ordemParanormalExpertiseValueList, OrdemParanormalExpertiseInfoCodes, ordemParanormalExpertises
 } from './expertises';
 import { Character, CharacterConfigData } from '../character';
 
@@ -79,23 +79,29 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       this.nex = config.nex ?? NEX_INITIAL_VALUE;
       this.characterClass = config.characterClass ?? ordemParanormalClasses[0];
       this.expertises = config.expertises ?? [];
+      this.healthPoints = config.healthPoints ?? { current: HP_INITIAL_VALUE, max: HP_INITIAL_VALUE };
+      this.ep = config.ep ?? { current: EP_INITIAL_VALUE, max: EP_INITIAL_VALUE };
+      this.sanity = config.sanity ?? { current: SANITY_INITIAL_VALUE, max: SANITY_INITIAL_VALUE };
 
-      if (config.ep) {
-         this.ep = config.ep;
-      }
-      else {
-         const ep = this.characterClass.calculateEffortPoints(this.atributes.pre, this.nex);
-         this.ep = { current: ep, max: ep };
-      }
+      // if (config.ep) {
+      //    this.ep = config.ep;
+      // }
+      // else {
+      //    const ep = this.characterClass.calculateEffortPoints(this.atributes.pre, this.nex);
+      //    this.ep = { current: ep, max: ep };
+      // }
 
-      if (config.sanity) {
-         this.sanity = config.sanity;
-      }
-      else {
-         const sanity = this.characterClass.calculateSanity(this.nex);
-         this.sanity = { current: sanity, max: sanity };
-      }
+      // if (config.sanity) {
+      //    this.sanity = config.sanity;
+      // }
+      // else {
+      //    const sanity = this.characterClass.calculateSanity(this.nex);
+      //    this.sanity = { current: sanity, max: sanity };
+      // }
 
+      this.recalculateHP();
+      this.recalculateEP();
+      this.recalculateSanity();
       this.recalculateWeightLimit(this.atributes.for);
       this.verifyWeightPenalty();
    }

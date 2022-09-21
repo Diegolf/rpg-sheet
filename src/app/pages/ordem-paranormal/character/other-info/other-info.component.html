@@ -1,0 +1,19 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-title> Informações do Personagem </ion-title>
+      <ion-buttons slot="end" style="margin-right: 5px;">
+         <ion-button strong="true" color="dark" (click)="modalCtrl.dismiss()"> X </ion-button>
+      </ion-buttons>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+   <ion-item class="ion-no-padding">
+      <ion-label position="stacked">URL Thumbnail</ion-label>
+      <ion-input [(ngModel)]="gameService.character.imageUrl"></ion-input>
+   </ion-item>
+   <ion-item class="ion-no-padding">
+      <ion-label position="stacked">Nome</ion-label>
+      <ion-input [(ngModel)]="gameService.character.name"></ion-input>
+   </ion-item>
+</ion-content>

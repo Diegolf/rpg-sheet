@@ -1,7 +1,8 @@
 import { OrdemParanormalCharacter } from './../../../models/characters/ordem-paranormal-character/character';
 import { GameService } from './../../services/game.service';
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
+import { OtherOPInfoComponent } from 'src/app/pages/ordem-paranormal/character/other-info/other-info.component';
 
 @Component({
    selector: 'app-ordem-paranormal-layout',
@@ -16,9 +17,24 @@ export class OPLayoutComponent implements OnInit {
       { routerLink: '/pages/inventory', titulo: 'Inventário', icon:'file-tray-full' },
    ];
 
-   constructor(private alertController: AlertController, public gameService: GameService) { }
+   constructor(
+      public gameService: GameService,
+      private alertController: AlertController,
+      private modalCtrl: ModalController
+   ) { }
 
    ngOnInit() { }
+
+   async showOtherCharacterInfo() {
+      const modal = await this.modalCtrl.create({
+         component: OtherOPInfoComponent,
+         mode: 'ios',
+         swipeToClose: true,
+         // componentProps: { times: this.model.rollTimes, dice, atributes: this.gameService.character.atributes }
+      });
+
+      modal.present();
+   }
 
    async openCodeInput() {
       const alert = await this.alertController.create({
