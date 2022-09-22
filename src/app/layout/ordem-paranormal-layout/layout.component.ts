@@ -17,13 +17,41 @@ export class OPLayoutComponent implements OnInit {
       { routerLink: '/pages/inventory', titulo: 'Inventário', icon:'file-tray-full' },
    ];
 
+   public otherInfoModel = {
+      imageUrl: '',
+      name: ''
+   };
+
    constructor(
       public gameService: GameService,
       private alertController: AlertController,
       private modalCtrl: ModalController
    ) { }
 
-   ngOnInit() { }
+   ngOnInit() {
+      this.otherInfoModel = {
+         imageUrl: this.gameService.character.imageUrl,
+         name: this.gameService.character.name
+      };
+   }
+
+   otherInfoWillDismiss() {
+      const changes = [];
+
+      if (this.otherInfoModel.imageUrl !== this.gameService.character.imageUrl) {
+         this.gameService.character.imageUrl = this.otherInfoModel.imageUrl;
+         changes.push('imageUrl');
+      }
+
+      if (this.otherInfoModel.name !== this.gameService.character.name) {
+         this.gameService.character.name = this.otherInfoModel.name;
+         changes.push('name');
+      }
+
+      if (changes.length > 0) {
+         this.gameService.saveCharacterConfig(changes);
+      }
+   }
 
    async showOtherCharacterInfo() {
       const modal = await this.modalCtrl.create({

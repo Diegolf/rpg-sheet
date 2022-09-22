@@ -11,7 +11,7 @@ import { ToastService, ToastType } from 'src/app/services/alert.service';
 })
 export class InvetoryPage implements OnInit {
 
-   itemForm = this.fb.group({
+   itemForm = this.formBuilder.group({
       code: [''],
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -21,7 +21,7 @@ export class InvetoryPage implements OnInit {
    model = {};
 
    constructor(
-      private fb: FormBuilder,
+      private formBuilder: FormBuilder,
       private gameSerivce: GameService,
       private toastService: ToastService
    ) { }
