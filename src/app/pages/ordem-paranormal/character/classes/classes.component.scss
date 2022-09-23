@@ -1,0 +1,17 @@
+.minimalist-list {
+
+   .minimalist-item {
+      margin-left: 4px;
+      margin-right: 4px;
+
+      &.minimalist-item-selected {
+         border-color: var(--ion-color-primary);
+         box-shadow: 0 0 5px -1px var(--ion-color-primary);
+      }
+   }
+
+   .minimalist-list-description {
+      border: none;
+   }
+}
+

@@ -1,0 +1,22 @@
+.dices-list {
+   display: flex;
+   justify-content: space-around;
+   flex-flow: row wrap;
+   row-gap: 15px;
+}
+
+.radio-group {
+   display: flex;
+   flex-flow: wrap;
+   gap: 15px;
+   margin-top: 10px;
+
+   .radio-icon {
+      transform: translateY(3px);
+   }
+
+   .radio-label {
+      margin-left: 10px;
+      font-size: 18px;
+   }
+}

@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
-import { OrdemParanormalCharacterPageModule } from '../ordem-paranormal/character/character.module';
+import { OPCharacterPageModule } from '../ordem-paranormal/character/character.module';
 
 @NgModule({
    imports: [
@@ -15,7 +15,7 @@ import { OrdemParanormalCharacterPageModule } from '../ordem-paranormal/characte
       FormsModule,
       IonicModule,
       HomePageRoutingModule,
-      OrdemParanormalCharacterPageModule
+      OPCharacterPageModule
    ],
    declarations: [HomePage]
 })

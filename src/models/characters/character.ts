@@ -7,6 +7,7 @@ export const CHARACTER_FREE_ATRIBUTES = 5;
 
 export interface CharacterInventory {
    limit: number;
+   currentWeight: number;
    items: InventoryItem[];
 }
 
@@ -38,12 +39,12 @@ export interface CharacterConfigData {
 }
 
 export interface Character extends CharacterConfigData {
-   increaseHealthPoint(amout?: number): void;
-   decreaseHealthPoint(amount?: number): void;
-   addInventoryItem(inventoryItem: InventoryItem): boolean;
-   removeInventoryItem(InventoryItem: InventoryItem): boolean;
-   increaseAtribute(atributeCode: string, amount: number);
+   changeHealthByAmout(amount?: number): void;
+   addInventoryItem(item: InventoryItem): boolean;
+   removeInventoryItem(index: number): boolean;
+   changeAtribute(atributeCode: string, amount: number);
    loadConfig(data: CharacterConfigData): void;
+   getConfig(dataKeys: string[]): any;
 }
 
 export class Character implements Character {
@@ -58,7 +59,7 @@ export class Character implements Character {
       this.name = config.name ?? 'Nome';
       this.imageUrl = config.imageUrl ?? 'https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y';
       this.healthPoints = config.healthPoints ?? { current: HP_INITIAL_VALUE, max: HP_INITIAL_VALUE };
-      this.inventory = config.inventory ?? { limit: INVENTORY_LIMIT, items: [] };
+      this.inventory = config.inventory ?? { limit: INVENTORY_LIMIT, currentWeight: 0, items: [] };
       this.atributes = config.atributes ?? {
          agi: ATRIBUTE_INITIAL_VALUE,
          dex: ATRIBUTE_INITIAL_VALUE,
@@ -68,41 +69,63 @@ export class Character implements Character {
       this.remainingAtributes = config.remainingAtributes ?? CHARACTER_FREE_ATRIBUTES;
    }
 
-   increaseHealthPoint(amount: number = 1) {
-      if (amount > 0){
-         const total = this.healthPoints.current + amount;
-         if (total > this.healthPoints.max){
-            this.healthPoints.current = this.healthPoints.max;
-         }
-         else {
-            this.healthPoints.current = total;
-         }
+   changeHealthByAmout(amount: number) {
+      const total = this.healthPoints.current + amount;
+      if (total > 0){
+         // Permite ultrapassar a vida máxima porque algumas skills podem ter esse efeito
+         this.healthPoints.current = total;
+         // if (total > this.healthPoints.max) {
+         //    this.healthPoints.current = this.healthPoints.max;
+         // }
+         // else {
+         //    this.healthPoints.current = total;
+         // }
+      }
+      else {
+         // Vida mínima é 0
+         this.healthPoints.current = 0;
       }
    }
 
-   decreaseHealthPoint(amount: number = 1) {
-      if (amount > 0){
-         const total = this.healthPoints.current - amount;
-         if (total < 0){
-            this.healthPoints.current = 0;
-         }
-         else {
-            this.healthPoints.current = total;
-         }
-      }
-   }
+   // increaseHealthPoint(amount: number = 1) {
+   //    if (amount > 0){
+   //       const total = this.healthPoints.current + amount;
+   //       if (total > this.healthPoints.max){
+   //          this.healthPoints.current = this.healthPoints.max;
+   //       }
+   //       else {
+   //          this.healthPoints.current = total;
+   //       }
+   //    }
+   // }
 
-   increaseAtribute(atributeCode: string, amount: number) {
+   // decreaseHealthPoint(amount: number = 1) {
+   //    if (amount > 0){
+   //       const total = this.healthPoints.current - amount;
+   //       if (total < 0){
+   //          this.healthPoints.current = 0;
+   //       }
+   //       else {
+   //          this.healthPoints.current = total;
+   //       }
+   //    }
+   // }
+
+   changeAtribute(atributeCode: string, amount: number) {
       if (atributeCode in this.atributes){
          this.atributes[atributeCode] += amount;
       }
    }
 
    addInventoryItem(inventoryItem: InventoryItem): boolean {
-      throw new Error('Method not implemented.');
+      if (this.inventory.items.length < this.inventory.limit) {
+         return !!this.inventory.items.push(inventoryItem);
+      }
+      return false;
    }
-   removeInventoryItem(inventoryItem: InventoryItem): boolean {
-      throw new Error('Method not implemented.');
+
+   removeInventoryItem(index: number): boolean {
+      return !!this.inventory.items.splice(index, 1).length;
    }
 
    loadConfig(data: CharacterConfigData) {

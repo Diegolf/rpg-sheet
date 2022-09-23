@@ -51,17 +51,17 @@ export const ordemParanormalExpertiseValueList: OrdemParanormalExpertiseInfo[] =
       value: 0,
    },
    {
-      text:'Treinado (+5)',
+      text:'Treinado',
       code: OrdemParanormalExpertiseInfoCodes.treinado,
       value: 5,
    },
    {
-      text:'Veterano (+10)',
+      text:'Veterano',
       code: OrdemParanormalExpertiseInfoCodes.veterano,
       value: 10,
    },
    {
-      text:'Expert (+15)',
+      text:'Expert',
       code: OrdemParanormalExpertiseInfoCodes.expert,
       value: 15,
    },
@@ -105,7 +105,7 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.atualidades,
       name: 'Atualidades',
-      description: 'ocê é um conhecedor de assuntos gerais, como política, esporte e entretenimento, '+
+      description: 'Você é um conhecedor de assuntos gerais, como política, esporte e entretenimento, '+
          'e pode responder dúvidas relativas a esses assuntos.',
       afectedByAtributes: [OrdemParanormalAtributesCodes.intelecto],
       onlyTreined: false,
@@ -147,7 +147,8 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.fortitude,
       name: 'Fortitude',
-      description: 'Você usa esta perícia para testes de resistência contra efeitos que exigem vitalidade, como doenças e venenos.',
+      description: 'Você usa esta perícia para testes de resistência contra efeitos que exigem vitalidade, como doenças e venenos. '+
+         'Permite utilizar a ação especial de defesa "Bloqueio".',
       afectedByAtributes: [OrdemParanormalAtributesCodes.vigor],
       onlyTreined: false,
       weightPenalty: false,
@@ -197,7 +198,8 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.luta,
       name: 'Luta',
-      description: 'Você usa Luta para fazer ataques corpo a corpo. A DT é a Defesa do alvo.',
+      description: 'Você usa Luta para fazer ataques corpo a corpo. A DT é a Defesa do alvo. '+
+         'Permite utilizar a ação especial de defesa "Contra-Ataque".',
       afectedByAtributes: [OrdemParanormalAtributesCodes.forca],
       onlyTreined: false,
       weightPenalty: false,
@@ -258,7 +260,7 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
       code: OrdemParanormalExpertisesCodes.reflexos,
       name: 'Reflexos',
       description: 'Você usa esta perícia para testes de resistência contra efeitos que exigem reação rápida'+
-         ', como armadilhas e explosões.',
+         ', como armadilhas e explosões. Permite utilizar a ação especial de defesa "Esquiva".',
       afectedByAtributes: [OrdemParanormalAtributesCodes.agilidade],
       onlyTreined: false,
       weightPenalty: false,
@@ -317,3 +319,5 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
       weightPenalty: false,
    },
 ];
+
+export const ordemParanormalExpertisesObject = ordemParanormalExpertises.reduce((acc, exp) => ({...acc, [exp.code]: exp}), {});

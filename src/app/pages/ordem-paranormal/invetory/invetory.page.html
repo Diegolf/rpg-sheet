@@ -1,0 +1,91 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start">
+         <ion-menu-button menu="pages-menu"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Inventário</ion-title>
+   </ion-toolbar>
+</ion-header>
+
+<ion-content class="background-cinza-dot">
+   <ion-card class="collapsible-card" [ngClass]="{'hide-content': model.hideInsert}">
+      <ion-card-header class="collapsible-card-header" (click)="toggleCard('hideInsert')">
+         <ion-card-title class="collapsible-card-title">
+            Inserir Item
+            <ion-icon name="chevron-down-outline"></ion-icon>
+         </ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="collapsible-card-content">
+         <form [formGroup]="itemForm" (ngSubmit)="inserirItem()">
+            <ion-grid class="ion-no-padding">
+               <ion-row>
+                  <ion-col size="12">
+                     <ion-item class="ion-no-padding">
+                        <ion-label position="stacked">
+                           Nome
+                        </ion-label>
+                        <ion-input formControlName="name" placeholder="" type="text" ></ion-input>
+                        <ion-text slot="error" *ngIf="itemForm.controls.name.touched && itemForm.controls.name.errors?.required">Informe o Nome</ion-text>
+                     </ion-item>
+                  </ion-col>
+                  <ion-col size="12">
+                     <ion-item class="ion-no-padding">
+                        <ion-label position="stacked">
+                           Descrição
+                        </ion-label>
+                        <ion-textarea formControlName="description" placeholder="" type="text"></ion-textarea>
+                        <ion-text slot="error" *ngIf="itemForm.controls.description.touched && itemForm.controls.description.errors?.required">Informe a Descrição</ion-text>
+                     </ion-item>
+                  </ion-col>
+                  <ion-col size="12">
+                     <ion-item class="ion-no-padding">
+                        <ion-label position="stacked">
+                           Carga
+                        </ion-label>
+                        <ion-input class="ion-padding-left" formControlName="size" type="number" placeholder=""></ion-input>
+                        <ion-text slot="error" *ngIf="itemForm.controls.size.touched && itemForm.controls.size.errors?.required">Informe a quantidade de espaços</ion-text>
+                     </ion-item>
+                  </ion-col>
+               </ion-row>
+            </ion-grid>
+
+            <ion-button size="block" color="primary" type="submit" [disabled]="itemForm.invalid" class="ion-margin-top">
+               Inserir <ion-icon slot="end" name="add"></ion-icon>
+            </ion-button>
+         </form>
+      </ion-card-content>
+   </ion-card>
+
+   <ion-card class="collapsible-card" [ngClass]="{'hide-content': model.hideItems}">
+      <ion-card-header class="collapsible-card-header" (click)="toggleCard('hideItems')">
+         <ion-card-title class="collapsible-card-title">
+            Items [{{gameSerivce.character.inventory.currentWeight}}/{{gameSerivce.character.weightLimit}}]
+            <ion-icon name="chevron-down-outline"></ion-icon>
+         </ion-card-title>
+      </ion-card-header >
+      <ion-card-content class="collapsible-card-content">
+         <h2 *ngIf="gameSerivce.character.inventory.items.length === 0" class="ion-text-center">
+            Nenhum item no inventário
+         </h2>
+         <ion-list lines="full" class="minimalist-list ion-text-wrap ion-margin-top" *ngIf="gameSerivce.character.inventory.items.length > 0">
+            <ion-item *ngFor="let item of gameSerivce.character.inventory.items; index as i" class="ion-no-padding ion-no-lines">
+               <div class="minimalist-list-start" slot="start">
+                  <ion-text color="dark"><b>{{item.size}}</b></ion-text>
+               </div>
+               <div class="minimalist-list-description">
+                  <h2 class="ion-text-center">
+                     <ion-text class="bold"> {{item.name}} </ion-text>
+                  </h2>
+                  <div class="ion-padding-start" style="white-space: pre-line;">
+                     <ion-text color="dark"> {{item.description}} </ion-text>
+                  </div>
+               </div>
+               <div class="minimalist-list-actions" slot="end">
+                  <!-- <ion-icon color="primary" name="create-sharp" class="c-pointer" (click)="addAtribute(atribute)"></ion-icon> -->
+                  <ion-icon class="c-pointer" color="danger" name="trash" (click)="removerItem(i)"></ion-icon>
+               </div>
+            </ion-item>
+         </ion-list>
+      </ion-card-content>
+   </ion-card>
+</ion-content>

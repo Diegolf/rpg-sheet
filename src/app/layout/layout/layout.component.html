@@ -54,7 +54,7 @@
                <ion-menu-toggle auto-hide="false">
                   <ion-item routerDirection="root" [routerLink]="rota.routerLink" lines="none" detail="false"
                      *ngFor="let rota of rotas" routerLinkActive="selected">
-                     <ion-icon slot="start" name="cart-sharp"></ion-icon>
+                     <ion-icon slot="start" [name]="rota.icon"></ion-icon>
                      <ion-label>{{rota.titulo}}</ion-label>
                   </ion-item>
                </ion-menu-toggle>
