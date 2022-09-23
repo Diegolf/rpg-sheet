@@ -147,7 +147,8 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.fortitude,
       name: 'Fortitude',
-      description: 'Você usa esta perícia para testes de resistência contra efeitos que exigem vitalidade, como doenças e venenos.',
+      description: 'Você usa esta perícia para testes de resistência contra efeitos que exigem vitalidade, como doenças e venenos. '+
+         'Permite utilizar a ação especial de defesa "Bloqueio".',
       afectedByAtributes: [OrdemParanormalAtributesCodes.vigor],
       onlyTreined: false,
       weightPenalty: false,
@@ -197,7 +198,8 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
    {
       code: OrdemParanormalExpertisesCodes.luta,
       name: 'Luta',
-      description: 'Você usa Luta para fazer ataques corpo a corpo. A DT é a Defesa do alvo.',
+      description: 'Você usa Luta para fazer ataques corpo a corpo. A DT é a Defesa do alvo. '+
+         'Permite utilizar a ação especial de defesa "Contra-Ataque".',
       afectedByAtributes: [OrdemParanormalAtributesCodes.forca],
       onlyTreined: false,
       weightPenalty: false,
@@ -258,7 +260,7 @@ export const ordemParanormalExpertises: OrdemParanormalExpertise[] = [
       code: OrdemParanormalExpertisesCodes.reflexos,
       name: 'Reflexos',
       description: 'Você usa esta perícia para testes de resistência contra efeitos que exigem reação rápida'+
-         ', como armadilhas e explosões.',
+         ', como armadilhas e explosões. Permite utilizar a ação especial de defesa "Esquiva".',
       afectedByAtributes: [OrdemParanormalAtributesCodes.agilidade],
       onlyTreined: false,
       weightPenalty: false,

@@ -13,6 +13,7 @@ export const SANITY_INITIAL_VALUE = 20;
 export const EP_INITIAL_VALUE = 2;
 export const WEIGHT_LIMIT_INITIAL_VALUE = 5;
 export const WEIGHT_PER_STRENGTH = 5;
+export const DEFENSE_INITIAL_VALUE = 10;
 
 export interface OrdemParanormalCharacterExpertise {
    code: OrdemParanormalExpertisesCodes;
@@ -36,6 +37,7 @@ export interface OrdemParanormalCharacterConfigData extends CharacterConfigData 
    sanity?: OrdemParanormalCharacterSanity;
    weightLimit?: number;
    weightPenalty?: boolean;
+   defense?: number;
    characterClass?: OrdemParanormalClass;
    expertises?: OrdemParanormalCharacterExpertise[];
 }
@@ -61,6 +63,9 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
    /** Nível de exposição paranormal */
    nex: number;
 
+   /** Defesa do personagem */
+   defense: number;
+
    /** Limite de peso. Se ultrapassar esse limite, fica sobrecarregado até um máximo do dobro. */
    weightLimit: number;
 
@@ -82,6 +87,9 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       this.healthPoints = config.healthPoints ?? { current: HP_INITIAL_VALUE, max: HP_INITIAL_VALUE };
       this.ep = config.ep ?? { current: EP_INITIAL_VALUE, max: EP_INITIAL_VALUE };
       this.sanity = config.sanity ?? { current: SANITY_INITIAL_VALUE, max: SANITY_INITIAL_VALUE };
+      this.defense = config.defense ?? DEFENSE_INITIAL_VALUE;
+      this.weightLimit = config.weightLimit ?? WEIGHT_LIMIT_INITIAL_VALUE;
+      this.weightPenalty = config.weightPenalty ?? false;
 
       // if (config.ep) {
       //    this.ep = config.ep;
@@ -98,12 +106,6 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       //    const sanity = this.characterClass.calculateSanity(this.nex);
       //    this.sanity = { current: sanity, max: sanity };
       // }
-
-      this.recalculateHP();
-      this.recalculateEP();
-      this.recalculateSanity();
-      this.recalculateWeightLimit(this.atributes.for);
-      this.verifyWeightPenalty();
    }
 
    changeClass(opClass: OrdemParanormalClass) {
@@ -127,6 +129,9 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
          else if (atributeCode === OrdemParanormalAtributesCodes.forca) {
             this.recalculateWeightLimit(value);
          }
+         else if (atributeCode === OrdemParanormalAtributesCodes.agilidade) {
+            this.recalculateDefense();
+         }
       }
    }
 
@@ -145,7 +150,7 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
 
    changeEffortByamout(amount: number) {
       const total = this.ep.current + amount;
-      if (total > 0){
+      if (total > 0) {
          // Permite ultrapassar o máximo porque algumas skills podem ter esse efeito
          this.ep.current = total;
       }
@@ -157,7 +162,7 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
 
    changeSanityByAmount(amount: number) {
       const total = this.sanity.current + amount;
-      if (total > 0){
+      if (total > 0) {
          // Permite ultrapassar o máximo porque algumas skills podem ter esse efeito
          this.sanity.current = total;
       }
@@ -172,6 +177,7 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
          const result = !!this.inventory.items.push(item);
          if (result) {
             this.verifyWeightPenalty();
+            this.recalculateDefense();
          }
          return result;
       }
@@ -180,11 +186,15 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
 
    removeInventoryItem(index: number): boolean {
       const result = super.removeInventoryItem(index);
-      this.verifyWeightPenalty();
+      console.log(result);
+      if (result) {
+         this.recalculateDefense();
+         this.verifyWeightPenalty();
+      }
       return result;
    }
 
-   loadConfig(data: any) {
+   loadConfig(data: any, recalculateInfo: boolean = false) {
       Object.keys(data).forEach((key) => {
          if (data[key]) {
             switch (key) {
@@ -210,6 +220,15 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
             }
          }
       });
+
+      if (recalculateInfo) {
+         this.recalculateHP();
+         this.recalculateEP();
+         this.recalculateSanity();
+         this.recalculateWeightLimit(this.atributes.for);
+         this.verifyWeightPenalty();
+         this.recalculateDefense();
+      }
    }
 
    getConfig(dataKeys: string[]) {
@@ -268,5 +287,22 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
    private verifyWeightPenalty() {
       this.inventory.currentWeight = this.inventory.items.reduce((acc, item) => acc + item.size, 0);
       this.weightPenalty = this.inventory.currentWeight > this.weightLimit;
+   }
+
+   private recalculateDefense() {
+      const equipmentDefenseModifier = this.inventory.items.reduce((acc, item) => {
+         const match = item.description.match(/#DEF([+-])(\d{1,2})/);
+         if (match) {
+            if (match[1] === '+') {
+               acc += parseInt(match[2], 10);
+            }
+            else {
+               acc -= parseInt(match[2], 10);
+            }
+         }
+         return acc;
+      }, 0);
+      const defense = DEFENSE_INITIAL_VALUE + this.atributes.agi + equipmentDefenseModifier;
+      this.defense = defense < 0 ? 0 : defense;
    }
 }

@@ -50,6 +50,6 @@ export class GameService {
          return acc;
       }, {});
 
-      this.character.loadConfig(configData);
+      (this.character as OrdemParanormalCharacter).loadConfig(configData, true);
    }
 }

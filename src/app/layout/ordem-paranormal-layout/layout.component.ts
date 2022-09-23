@@ -2,7 +2,6 @@ import { OrdemParanormalCharacter } from './../../../models/characters/ordem-par
 import { GameService } from './../../services/game.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
-import { OtherOPInfoComponent } from 'src/app/pages/ordem-paranormal/character/other-info/other-info.component';
 
 @Component({
    selector: 'app-ordem-paranormal-layout',
@@ -51,17 +50,6 @@ export class OPLayoutComponent implements OnInit {
       if (changes.length > 0) {
          this.gameService.saveCharacterConfig(changes);
       }
-   }
-
-   async showOtherCharacterInfo() {
-      const modal = await this.modalCtrl.create({
-         component: OtherOPInfoComponent,
-         mode: 'ios',
-         swipeToClose: true,
-         // componentProps: { times: this.model.rollTimes, dice, atributes: this.gameService.character.atributes }
-      });
-
-      modal.present();
    }
 
    async openCodeInput() {
