@@ -29,8 +29,8 @@
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+   -webkit-appearance: none;
+   margin: 0;
 }
 
 cdk-virtual-scroll-viewport {
@@ -52,7 +52,7 @@ ion-searchbar.ltr {
 }
 
 input[type=number] {
-  -moz-appearance: textfield;
+   -moz-appearance: textfield;
 }
 
 ion-item {
@@ -72,8 +72,16 @@ ion-item {
    }
 }
 
-ion-toolbar ion-title, .f-s-20{
-   font-size: 20px;
+ion-toolbar {
+
+   ion-title,
+   .f-s-20 {
+      font-size: 20px;
+   }
+
+   ion-title {
+      padding: 3px 40px;
+   }
 }
 
 ion-note[slot="error"] {
@@ -179,7 +187,7 @@ ion-item ion-label[position="stacked"] {
       border: 1px solid #ccc;
       border-radius: 5px;
 
-      &:nth-child(n+2){
+      &:nth-child(n+2) {
          margin-top: 10px;
       }
    }
@@ -208,7 +216,8 @@ ion-item ion-label[position="stacked"] {
       }
    }
 
-   .minimalist-list-start, .minimalist-list-actions {
+   .minimalist-list-start,
+   .minimalist-list-actions {
       margin: 0 20px;
       font-size: 1.5em;
       min-width: 63px;
@@ -249,7 +258,8 @@ ion-toast {
          }
       }
 
-      .minimalist-list-start, .minimalist-list-actions {
+      .minimalist-list-start,
+      .minimalist-list-actions {
          margin: 0 5px;
          font-size: 1.3em;
          min-width: 63px;

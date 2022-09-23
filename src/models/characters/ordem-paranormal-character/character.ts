@@ -150,26 +150,23 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
 
    changeEffortByamout(amount: number) {
       const total = this.ep.current + amount;
-      if (total > 0) {
-         // Permite ultrapassar o máximo porque algumas skills podem ter esse efeito
-         this.ep.current = total;
-      }
-      else {
-         // Os ponto de esforço mínimo é 0
-         this.ep.current = 0;
-      }
+
+      // Permite ultrapassar o máximo porque algumas skills podem ter esse efeito
+      this.ep.current = total < 0 ? 0 : total;
    }
 
    changeSanityByAmount(amount: number) {
       const total = this.sanity.current + amount;
-      if (total > 0) {
-         // Permite ultrapassar o máximo porque algumas skills podem ter esse efeito
-         this.sanity.current = total;
-      }
-      else {
-         // Sanidade mínima é 0
-         this.sanity.current = 0;
-      }
+
+      // Permite ultrapassar o máximo porque algumas skills podem ter esse efeito
+      this.sanity.current = total < 0 ? 0 : total;
+   }
+
+   changeNex(value: number) {
+      this.nex = value < 0 ? 0 : (value > 20 ? 20 : value);
+      this.recalculateEP();
+      this.recalculateHP();
+      this.recalculateSanity();
    }
 
    addInventoryItem(item: InventoryItem): boolean {

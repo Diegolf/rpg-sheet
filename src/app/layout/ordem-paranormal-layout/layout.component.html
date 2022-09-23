@@ -20,7 +20,7 @@
             <ion-row class="ion-margin-bottom">
                <ion-col size="12"
                   class="flex flex-direction-column ion-justify-content-center ion-align-items-center avatar-col c-pointer"
-                  (click)="otherInfoModal.present()">
+                  (click)="otherInfoModel.ep = this.gameService.character.ep.current; otherInfoModal.present()">
                   <ion-avatar>
                      <img [src]="gameService.character.imageUrl">
                   </ion-avatar>
@@ -29,8 +29,17 @@
                </ion-col>
                <ion-col size="10" offset="1" class="ion-text-center ion-padding-end ion-margin-end">
                   <ion-text color="light">
-                     <ion-icon name="shield-sharp" style="transform: translateY(2px);"></ion-icon> {{gameService.character.defense}}
+                     <ion-icon name="shield-sharp" style="transform: translateY(2px);"></ion-icon>
+                     {{gameService.character.defense}}
                      <ion-text color="danger" *ngIf="gameService.character.weightPenalty">-5</ion-text>
+                     •
+                     <ion-text class="c-pointer" (click)="changeEffortByamout(-1)">
+                        {{gameService.character.ep.current}}
+                     </ion-text>
+                     •
+                     <ion-text>
+                        {{nexPercentage}}
+                     </ion-text>
                   </ion-text>
                </ion-col>
                <ion-col size="10" offset="1">
@@ -125,13 +134,33 @@
                         <ion-label position="stacked">Nome</ion-label>
                         <ion-input [(ngModel)]="otherInfoModel.name"></ion-input>
                      </ion-item>
+                     <ion-item class="ion-no-padding">
+                        <ion-label position="stacked">Pontos de Esforço (N/{{gameService.character.ep.max}})</ion-label>
+                        <ion-input type="number" [(ngModel)]="otherInfoModel.ep"></ion-input>
+                     </ion-item>
+                     <ion-item class="ion-no-padding">
+                        <ion-label position="stacked">Nível de Exposição Paranormal</ion-label>
+                        <ion-select [(ngModel)]="otherInfoModel.nex" placeholder="Selecione..."  okText="OK" cancelText="Cancelar">
+                           <ion-select-option [value]="nexInfo.value" *ngFor="let nexInfo of nexList">{{nexInfo.text}}
+                           </ion-select-option>
+                        </ion-select>
+                     </ion-item>
                   </ion-content>
                </ng-template>
             </ion-modal>
 
          </ion-content>
          <ion-footer class="ion-no-border">
-            {{ gameService.currentVersion }}
+            <ion-grid >
+               <ion-row>
+                  <ion-col size="auto">
+                     {{ gameService.currentVersion }}
+                  </ion-col>
+                  <!-- <ion-col class="ion-text-center">
+                     Feito por <a href="https://github.com/diegolf" target="_blank">Diego Leonardo</a>
+                  </ion-col> -->
+               </ion-row>
+            </ion-grid>
          </ion-footer>
       </ion-menu>
       <ion-router-outlet id="main-content"></ion-router-outlet>

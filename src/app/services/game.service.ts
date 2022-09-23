@@ -26,7 +26,7 @@ export class GameService {
       const lastVersion = this.storageService.get('appVersion');
 
       // Limpa o storage caso a versão seja antiga
-      if (!lastVersion || this.currentVersion.localeCompare(lastVersion) > 1) {
+      if (!lastVersion) {
          this.storageService.clearStorage();
       }
       this.storageService.set('appVersion', this.currentVersion);

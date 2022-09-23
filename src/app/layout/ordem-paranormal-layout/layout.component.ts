@@ -18,8 +18,13 @@ export class OPLayoutComponent implements OnInit {
 
    public otherInfoModel = {
       imageUrl: '',
-      name: ''
+      name: '',
+      nex: 0,
+      ep: 0
    };
+
+   public nexPercentage;
+   public nexList = [];
 
    constructor(
       public gameService: GameService,
@@ -28,27 +33,46 @@ export class OPLayoutComponent implements OnInit {
    ) { }
 
    ngOnInit() {
+      const characterData = this.gameService.character as OrdemParanormalCharacter;
       this.otherInfoModel = {
-         imageUrl: this.gameService.character.imageUrl,
-         name: this.gameService.character.name
+         imageUrl: characterData.imageUrl,
+         name: characterData.name,
+         nex: characterData.nex,
+         ep: characterData.ep.current
       };
+      this.calculateNexPercentage();
+
+      this.nexList = [...Array(21).keys()].map((v: number) => ({ value: v, text: `${v * 5 === 100 ? 99 : v * 5}%` }));
+      console.log(this.nexList);
    }
 
    otherInfoWillDismiss() {
       const changes = [];
+      const characterData = this.gameService.character as OrdemParanormalCharacter;
 
-      if (this.otherInfoModel.imageUrl !== this.gameService.character.imageUrl) {
-         this.gameService.character.imageUrl = this.otherInfoModel.imageUrl;
+      if (this.otherInfoModel.imageUrl !== characterData.imageUrl) {
+         characterData.imageUrl = this.otherInfoModel.imageUrl;
          changes.push('imageUrl');
       }
 
-      if (this.otherInfoModel.name !== this.gameService.character.name) {
-         this.gameService.character.name = this.otherInfoModel.name;
+      if (this.otherInfoModel.name !== characterData.name) {
+         characterData.name = this.otherInfoModel.name;
          changes.push('name');
       }
 
+      if (this.otherInfoModel.nex !== characterData.nex) {
+         characterData.changeNex(this.otherInfoModel.nex);
+         this.calculateNexPercentage();
+         changes.push(...['nex', 'healthPoints', 'ep', 'sanity']);
+      }
+
+      if (this.otherInfoModel.ep !== characterData.ep.current) {
+         characterData.changeEffortByamout(this.otherInfoModel.ep - characterData.ep.current);
+         changes.push('ep');
+      }
+
       if (changes.length > 0) {
-         this.gameService.saveCharacterConfig(changes);
+         this.gameService.saveCharacterConfig([...new Set(changes)]);
       }
    }
 
@@ -91,4 +115,8 @@ export class OPLayoutComponent implements OnInit {
       this.gameService.saveCharacterConfig(['ep']);
    }
 
+   private calculateNexPercentage() {
+      const nexPercentage = (this.gameService.character as OrdemParanormalCharacter).nex * 5;
+      this.nexPercentage = nexPercentage >= 100 ? '99%' : (nexPercentage + '%');
+   }
 }
