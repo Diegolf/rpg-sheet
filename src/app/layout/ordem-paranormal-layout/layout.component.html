@@ -17,7 +17,7 @@
                   </ion-button>
                </ion-buttons>
             </ion-toolbar>
-            <ion-row class="ion-margin-bottom">
+            <ion-row class="ion-margin-bottom" [ngClass]="{'low-health-animated': gameService.character.healthPoints.current >= 1 && gameService.character.healthPoints.current <= 5}">
                <ion-col size="12"
                   class="flex flex-direction-column ion-justify-content-center ion-align-items-center avatar-col c-pointer"
                   (click)="otherInfoModel.ep = this.gameService.character.ep.current; otherInfoModal.present()">

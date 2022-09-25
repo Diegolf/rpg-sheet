@@ -242,6 +242,26 @@ ion-toast {
    }
 }
 
+.low-health-animated {
+   animation: low-health 0.9s infinite ease-in-out;
+}
+
+@keyframes low-health {
+   0% { transform: translateX(0px); }
+   30% { transform: translateX(0px); }
+   40% { transform: translateX(3px); filter: blur(1px) sepia(25%); }
+   50% { transform: translateX(1px); }
+   60% { transform: translateX(3px); filter: blur(1px) sepia(25%); }
+   70% { transform: translateX(0px); }
+   100% { transform: translateX(0px); }
+   // 0% { transform: rotate(0deg); }
+   // 30% { transform: rotate(0deg); }
+   // 40% { transform: rotate(4deg); filter: blur(1px) sepia(25%); }
+   // 50% { transform: rotate(1deg); }
+   // 60% { transform: rotate(4deg); filter: blur(1px) sepia(25%); }
+   // 70% { transform: rotate(0deg); }
+   // 100% { transform: rotate(0deg); }
+}
 
 @media(max-width:600px) {
    ion-card-title {
