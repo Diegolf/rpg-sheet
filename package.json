@@ -1,6 +1,6 @@
 {
   "name": "RPG-Sheet",
-  "version": "0.2.1",
+  "version": "0.3.12",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^14.2.1",
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0",
     "@angular/forms": "^14.0.0",

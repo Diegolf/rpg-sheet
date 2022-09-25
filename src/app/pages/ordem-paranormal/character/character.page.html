@@ -8,27 +8,39 @@
 </ion-header>
 
 <ion-content class="background-cinza-dot">
-   <ion-card class="collapsible-card">
+   <ion-card class="collapsible-card" [ngClass]="{'hide-content': model.hideAtributes}">
       <ion-card-header class="collapsible-card-header" (click)="toggleCard('hideAtributes')">
          <ion-card-title class="collapsible-card-title">
             Atributos
             <ion-icon name="chevron-down-outline"></ion-icon>
          </ion-card-title>
       </ion-card-header >
-      <ion-card-content class="collapsible-card-content" [ngClass]="{'hide-content': model.hideAtributes}">
+      <ion-card-content class="collapsible-card-content">
          <app-ordem-paranormal-atributes></app-ordem-paranormal-atributes>
       </ion-card-content>
    </ion-card>
 
-   <ion-card class="collapsible-card">
+   <ion-card class="collapsible-card" [ngClass]="{'hide-content': model.hideClasses}">
       <ion-card-header class="collapsible-card-header" (click)="toggleCard('hideClasses')">
          <ion-card-title class="collapsible-card-title">
             Classes
             <ion-icon name="chevron-down-outline"></ion-icon>
          </ion-card-title>
       </ion-card-header>
-      <ion-card-content class="collapsible-card-content" [ngClass]="{'hide-content': model.hideClasses}">
+      <ion-card-content class="collapsible-card-content">
          <app-ordem-paranormal-classes></app-ordem-paranormal-classes>
+      </ion-card-content>
+   </ion-card>
+
+   <ion-card class="collapsible-card" [ngClass]="{'hide-content': model.hideExpertises}">
+      <ion-card-header class="collapsible-card-header" (click)="toggleCard('hideExpertises')">
+         <ion-card-title class="collapsible-card-title">
+            Perícias
+            <ion-icon name="chevron-down-outline"></ion-icon>
+         </ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="collapsible-card-content">
+         <app-ordem-paranormal-expertises></app-ordem-paranormal-expertises>
       </ion-card-content>
    </ion-card>
 </ion-content>

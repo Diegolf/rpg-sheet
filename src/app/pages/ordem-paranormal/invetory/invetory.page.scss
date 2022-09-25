@@ -1,0 +1,20 @@
+.minimalist-list {
+   .minimalist-list-description {
+      border-left: 1px solid #ccc;
+   }
+
+   .minimalist-list-start, .minimalist-list-actions {
+      min-width: 0;
+   }
+}
+
+
+@media(max-width:600px) {
+
+   .minimalist-list {
+
+      .minimalist-list-start, .minimalist-list-actions {
+         margin: 0 10px;
+      }
+   }
+}

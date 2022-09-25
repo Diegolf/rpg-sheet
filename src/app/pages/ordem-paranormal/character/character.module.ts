@@ -1,3 +1,5 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { OPExpertisesComponent } from './expertises/expertises.component';
 import { OPCAtributesComponent } from './atributes/atributes.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,13 +17,15 @@ import { OPClassesComponent } from './classes/classes.component';
     CommonModule,
     FormsModule,
     IonicModule,
-    OrdemParanormalCharacterPageRoutingModule
+    OrdemParanormalCharacterPageRoutingModule,
+    ScrollingModule
   ],
   declarations: [
    OPCharacterPage,
    OPCAtributesComponent,
-   OPClassesComponent
+   OPClassesComponent,
+   OPExpertisesComponent
 ],
   exports: [OPCAtributesComponent]
 })
-export class OrdemParanormalCharacterPageModule {}
+export class OPCharacterPageModule {}

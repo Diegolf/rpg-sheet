@@ -1,3 +1,11 @@
 ion-slides {
    height: 100%;
+
+   .fixed-slide-grid {
+      display: flex;
+      justify-content: center;
+      align-items: initial;
+      max-width: 1000px;
+      height: 100%;
+   }
 }

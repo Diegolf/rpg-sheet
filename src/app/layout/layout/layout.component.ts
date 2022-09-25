@@ -10,8 +10,9 @@ import { AlertController } from '@ionic/angular';
 export class LayoutComponent implements OnInit {
 
    public rotas = [
-      { routerLink: '/pages/character', titulo: 'Personagem' },
-      { routerLink: '/pages/dices', titulo: 'Dados' },
+      { routerLink: '/pages/character', titulo: 'Personagem', icon:'person' },
+      { routerLink: '/pages/dices', titulo: 'Dados', icon:'dice' },
+      { routerLink: '/pages/inventory', titulo: 'Inventário', icon:'file-tray-full' },
    ];
 
    constructor(private alertController: AlertController, public gameService: GameService) { }
@@ -43,13 +44,15 @@ export class LayoutComponent implements OnInit {
    }
 
    decreaseHealthPoint() {
-      this.gameService.character.decreaseHealthPoint();
-      this.gameService.saveCharacterConfig({healthPoints: this.gameService.character.healthPoints});
+      this.gameService.character.changeHealthByAmout(-1);
+      this.gameService.saveCharacterConfig(['healthPoints']);
+      // this.gameService.saveCharacterConfig({healthPoints: this.gameService.character.healthPoints});
    }
 
    increaseHealthPoint() {
-      this.gameService.character.increaseHealthPoint();
-      this.gameService.saveCharacterConfig({healthPoints: this.gameService.character.healthPoints});
+      this.gameService.character.changeHealthByAmout(1);
+      this.gameService.saveCharacterConfig(['healthPoints']);
+      // this.gameService.saveCharacterConfig({healthPoints: this.gameService.character.healthPoints});
    }
 
 }

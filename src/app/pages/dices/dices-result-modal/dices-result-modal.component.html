@@ -14,7 +14,7 @@
       <h3 class="ion-text-center ion-no-margin"> {{dice.description}} </h3>
    </ion-text>
    <ion-text color="medium" *ngIf="dice.formulaDescription">
-      <h5 class="ion-text-center" style="margin: 10px 0 25px 0;"> ({{dice.formulaDescription}}) </h5>
+      <h5 class="ion-text-center" style="margin: 10px 0 25px 0;" [innerHTML]="dice.formulaDescription"> </h5>
    </ion-text>
    <div class="result-set">
       <div *ngFor="let result$ of resultList">
@@ -33,4 +33,5 @@
          </ng-container>
       </div>
    </div>
+   <h1 class="ion-text-center" *ngIf="showFinalResult">{{finalResult}}</h1>
 </ion-content>

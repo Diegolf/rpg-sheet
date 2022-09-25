@@ -1,3 +1,13 @@
-<p>
-  classes works!
-</p>
+<ion-list lines="none" class="minimalist-list ion-text-wrap ion-margin-top">
+   <ion-item *ngFor="let opClass of opClassesList" class="ion-no-padding ion-no-lines minimalist-item c-pointer"
+      [ngClass]="{'minimalist-item-selected': currentClassCode === opClass.code}" (click)="changeCharacterClass(opClass)">
+      <div class="minimalist-list-description">
+         <h2 class="ion-text-center">
+            <ion-text class="bold"> {{opClass.name}} </ion-text>
+         </h2>
+         <div class="ion-padding-start">
+            <ion-text color="dark"> {{opClass.description}} </ion-text>
+         </div>
+      </div>
+   </ion-item>
+</ion-list>

@@ -67,3 +67,6 @@ export const ordemParanormalCharacterAtributesInfo: OrdemParanormalCharacterAtri
          'seu Vigor, mais resistente e duro você será, sendo capaz de aguentar mais ferimentos antes de cair inconsciente'
    },
 ];
+
+export const ordemParanormalCharacterAtributesInfoObject = ordemParanormalCharacterAtributesInfo
+   .reduce((acc, atrib) => ({...acc, [atrib.code]: atrib}), {});

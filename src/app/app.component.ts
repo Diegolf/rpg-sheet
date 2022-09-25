@@ -1,5 +1,5 @@
 import { GameService } from './services/game.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Platform } from '@ionic/angular';
 @Component({
   selector: 'app-root',
@@ -8,7 +8,9 @@ import { Platform } from '@ionic/angular';
 })
 export class AppComponent {
 
-   constructor(private platform: Platform, gameService: GameService) {
+   constructor(private renderer: Renderer2, private platform: Platform, gameService: GameService) {
+      renderer.setAttribute(document.body, 'color-theme', 'light');
+
       platform.ready().then(() => {
          gameService.init();
       });
