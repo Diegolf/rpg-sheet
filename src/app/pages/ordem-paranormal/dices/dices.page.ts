@@ -17,6 +17,7 @@ export class OPDicesPage implements OnInit {
 
    /** Lista de dados e suas respectivas formulas, decrição e demais configurações. */
    public dicesFormulas;
+   public especialDicesFormulas;
    public rollOperations = [];
    public model = {
       rollTimes: 1,
@@ -29,7 +30,9 @@ export class OPDicesPage implements OnInit {
       private gameService: GameService,
       private modalCtrl: ModalController
    ) {
-      this.dicesFormulas = this.loadDicesformulas();
+      const allDicesFormulas = this.loadDicesformulas();
+      this.dicesFormulas = allDicesFormulas.filter(d => !d.formulaDescription);
+      this.especialDicesFormulas = allDicesFormulas.filter(d => d.formulaDescription);
       this.rollOperations = rollOperations;
    }
 
