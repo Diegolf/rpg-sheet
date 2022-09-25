@@ -145,6 +145,41 @@
                            </ion-select-option>
                         </ion-select>
                      </ion-item>
+                     <ion-grid class="ion-margin-top">
+                        <ion-row>
+                           <ion-col size="12" size-md="6">
+                              <ion-button (click)="otherInfoModel.showImportInput = !otherInfoModel.showImportInput; otherInfoModel.exportedData=''" color="light" expand="block">
+                                 Importar Configuração
+                              </ion-button>
+                           </ion-col>
+                           <ion-col size="12" size-md="6">
+                              <ion-button (click)="otherInfoModel.showImportInput = false;exportConfig()" color="primary" expand="block">
+                                 Exportar Configuração
+                              </ion-button>
+                           </ion-col>
+                        </ion-row>
+                        <ion-row *ngIf="otherInfoModel.exportedData">
+                           <ion-col size="12">
+                              <ion-item class="ion-no-padding" lines="none">
+                                 <ion-label position="stacked">Configuração Exportada</ion-label>
+                                 <ion-textarea class="export-textarea" rows="6" readonly [value]="otherInfoModel.exportedData"></ion-textarea>
+                              </ion-item>
+                           </ion-col>
+                        </ion-row>
+                        <ion-row *ngIf="otherInfoModel.showImportInput">
+                           <ion-col size="12">
+                              <ion-item class="ion-no-padding" lines="none">
+                                 <ion-label position="stacked">Configuração a Ser Importada</ion-label>
+                                 <ion-textarea class="export-textarea" rows="6" placeHolder="Cole aqui as configurações a serem importadas" [(ngModel)]="otherInfoModel.importData"></ion-textarea>
+                              </ion-item>
+                           </ion-col>
+                           <ion-col size="12">
+                              <ion-button (click)="importConfig()" expand="block" color="primary">
+                                 Importar
+                              </ion-button>
+                           </ion-col>
+                        </ion-row>
+                     </ion-grid>
                   </ion-content>
                </ng-template>
             </ion-modal>

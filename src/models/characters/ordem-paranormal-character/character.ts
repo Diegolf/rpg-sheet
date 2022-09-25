@@ -183,7 +183,6 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
 
    removeInventoryItem(index: number): boolean {
       const result = super.removeInventoryItem(index);
-      console.log(result);
       if (result) {
          this.recalculateDefense();
          this.verifyWeightPenalty();
@@ -272,8 +271,8 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
    private recalculateSanity(reset: boolean = false) {
       if (this.characterClass != null) {
          const newSanity = this.characterClass.calculateSanity(this.nex);
-         this.sanity.max = reset ? newSanity : (this.sanity.current + newSanity - this.sanity.max);
-         this.sanity.current = newSanity;
+         this.sanity.current = reset ? newSanity : (this.sanity.current + newSanity - this.sanity.max);
+         this.sanity.max = newSanity;
       }
    }
 

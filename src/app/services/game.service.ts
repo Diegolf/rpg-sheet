@@ -37,6 +37,25 @@ export class GameService {
       this.loadCharacterConfig(Object.keys(this.character) as Array<keyof OrdemParanormalCharacterConfigData>);
    }
 
+   public exportCharacterConfig() {
+      // Salva todas as configurações
+      const characterDataKeys = Object.keys(this.character) as Array<keyof OrdemParanormalCharacterConfigData>;
+      this.saveCharacterConfig(characterDataKeys);
+      const config = this.character.getConfig(characterDataKeys);
+      config.appVersion = this.currentVersion;
+      return btoa(JSON.stringify(config));
+   }
+
+   public importCharacterConfig(data: any) {
+      (this.character as OrdemParanormalCharacter).loadConfig(data, true);
+      if (data.appVersion){
+         this.currentVersion = data.appVersion;
+      }
+
+      const characterDataKeys = Object.keys(this.character) as Array<keyof OrdemParanormalCharacterConfigData>;
+      this.saveCharacterConfig(characterDataKeys);
+   }
+
    public saveCharacterConfig(dataKeys: string[]) {
       const data = this.character.getConfig(dataKeys);
       Object.keys(data).forEach(key => {
@@ -50,6 +69,7 @@ export class GameService {
          return acc;
       }, {});
 
-      (this.character as OrdemParanormalCharacter).loadConfig(configData, true);
+      (this.character as OrdemParanormalCharacter).loadConfig(configData, false);
    }
+
 }

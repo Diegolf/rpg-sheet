@@ -9,8 +9,7 @@ ion-menu.md ion-note {
    margin-bottom: 30px;
 }
 
-ion-menu.md ion-list-header,
-ion-menu.md ion-note {
+ion-menu.md ion-list-header, ion-menu.md ion-note {
    padding-left: 10px;
 }
 
@@ -166,6 +165,12 @@ ion-menu {
       border: 1px solid #ccc;
    }
 
+}
+
+.export-textarea {
+   padding: 5px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
 }
 
 // .user-menu::after {
