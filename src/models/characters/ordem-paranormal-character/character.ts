@@ -128,6 +128,7 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
          }
          else if (atributeCode === OrdemParanormalAtributesCodes.forca) {
             this.recalculateWeightLimit(value);
+            this.verifyWeightPenalty();
          }
          else if (atributeCode === OrdemParanormalAtributesCodes.agilidade) {
             this.recalculateDefense();
