@@ -72,7 +72,7 @@
                <div class="minimalist-list-start" slot="start">
                   <ion-text color="dark"><b>{{item.size}}</b></ion-text>
                </div>
-               <div class="minimalist-list-description">
+               <div class="minimalist-list-description c-pointer" (click)="editItem(i)">
                   <h2 class="ion-text-center">
                      <ion-text class="bold"> {{item.name}} </ion-text>
                   </h2>

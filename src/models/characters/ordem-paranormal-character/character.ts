@@ -191,9 +191,28 @@ export class OrdemParanormalCharacter extends Character implements OrdemParanorm
       return result;
    }
 
+   changeInventoryItem(index: number, props: InventoryItem) {
+      const item = this.inventory.items[index];
+      Object.keys(props).forEach(key => {
+         if (item[key] != null) {
+            if (key === 'size') {
+               if (props.size < 0) {
+                  props.size = 0;
+               }
+               else if ((this.inventory.currentWeight + props.size - item.size) > this.weightLimit * 2) {
+                  return;
+               }
+            }
+            item[key] = props[key];
+         }
+      });
+      this.recalculateDefense();
+      this.verifyWeightPenalty();
+   }
+
    loadConfig(data: any, recalculateInfo: boolean = false) {
       Object.keys(data).forEach((key) => {
-         if (data[key]) {
+         if (data[key] != null) {
             switch (key) {
                case 'characterClass': {
                   this.characterClass = ordemParanormalClasses.find(c => c.code === data[key]) || ordemParanormalClasses[0];
