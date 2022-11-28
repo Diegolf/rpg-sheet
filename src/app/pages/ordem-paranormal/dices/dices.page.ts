@@ -55,12 +55,12 @@ export class OPDicesPage implements OnInit {
          const characterAtribute = this.gameService.character.atributes[dice.attributeCode];
 
          // Caso o atributo do personagem seja negativo, roda 2 dados e pega o menor resultado
-         if (characterAtribute === -1) {
-            times = 2;
+         if (characterAtribute <= 0) {
+            times = 2 - characterAtribute;
             rollOperation = RollOperation.lowestResult;
          }
          else {
-            times += characterAtribute;
+            times += characterAtribute - 1;
             rollOperation = RollOperation.greaterResult;
          }
       }
