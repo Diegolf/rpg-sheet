@@ -159,8 +159,8 @@ ion-menu {
    }
 
    ion-avatar {
-      width: 70px;
-      height: 70px;
+      width: 120px;
+      height: 120px;
       box-shadow: 0px 0px 6px 2px #464646;
       border: 1px solid #ccc;
    }
@@ -176,3 +176,12 @@ ion-menu {
 // .user-menu::after {
 //   height: 1px;
 // }
+
+@media(max-width:569px) {
+   .user-menu {
+      ion-avatar {
+         width: 100px;
+         height: 100px;
+      }
+   }
+}

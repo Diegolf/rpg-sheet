@@ -1,3 +1,5 @@
+import { OrdemParanormalCharacter } from './../../../../models/characters/ordem-paranormal-character/character';
+import { AlertController } from '@ionic/angular';
 import { InventoryItem } from './../../../../models/inventory-items/inventory-item';
 import { GameService } from './../../../services/game.service';
 import { Component, OnInit } from '@angular/core';
@@ -23,7 +25,8 @@ export class InvetoryPage implements OnInit {
    constructor(
       private formBuilder: FormBuilder,
       private gameSerivce: GameService,
-      private toastService: ToastService
+      private toastService: ToastService,
+      private alertController: AlertController
    ) { }
 
    ngOnInit() {
@@ -53,6 +56,61 @@ export class InvetoryPage implements OnInit {
       else {
          this.toastService.toast({ message: 'Ocorreu um erro ao remover item do inventário', type: ToastType.error });
       }
+   }
+
+   async editItem(index) {
+      const character = (this.gameSerivce.character as OrdemParanormalCharacter);
+      const item = character.inventory.items[index];
+      const alert = await this.alertController.create({
+         mode: 'ios',
+         header: 'Editar Descrição do Item',
+         buttons: [
+            'Cancelar',
+            {
+               text: 'Confirmar',
+               handler: (values) => {
+                  if (values) {
+                     if (!values.name) {
+                        delete values.name;
+                     }
+                     if (!values.description) {
+                        delete values.description;
+                     }
+                     if (!values.size) {
+                        delete values.size;
+                     }
+                     else {
+                        values.size = parseInt(values.size, 10);
+                     }
+                     character.changeInventoryItem(index, values as InventoryItem);
+                     this.gameSerivce.saveCharacterConfig(['inventory']);
+                  }
+               }
+            }
+         ],
+         inputs: [
+            {
+               placeholder: 'Descrição',
+               type: 'text',
+               name: 'name',
+               value: item.name
+            },
+            {
+               placeholder: 'Descrição',
+               type: 'textarea',
+               name: 'description',
+               value: item.description
+            },
+            {
+               placeholder: 'Carga',
+               type: 'number',
+               name: 'size',
+               value: item.size
+            },
+         ],
+      });
+
+      await alert.present();
    }
 
    toggleCard(cardKey) {
