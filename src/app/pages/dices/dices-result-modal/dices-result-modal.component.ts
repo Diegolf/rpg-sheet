@@ -4,6 +4,8 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Observable, Subject, timer } from 'rxjs';
 import { map, startWith, switchMapTo, take, takeWhile } from 'rxjs/operators';
+import { DiscordService } from 'src/app/services/discord.service';
+import { GameService } from 'src/app/services/game.service';
 
 export enum RollOperation {
    none = 0,
@@ -38,8 +40,9 @@ export class DicesResultModalComponent implements OnInit {
 
    private readonly repeatRandomValueTimes = 30;
    private teste = new Subject<number>();
+   private individualResultValues: number[] = [];
 
-   constructor(public modalCtrl: ModalController) { }
+   constructor(public modalCtrl: ModalController, private discordService: DiscordService, private gameService: GameService) { }
 
    ngOnInit() {
       this.resultList = Array.from({ length: this.times }, () => new Subject<void>().pipe(
@@ -72,6 +75,7 @@ export class DicesResultModalComponent implements OnInit {
 
       this.teste.pipe(take(this.times)).subscribe(
          (valor) => {
+            this.individualResultValues.push(valor);
             switch (this.rollOperation) {
                case (RollOperation.sumResult): this.finalResult += valor; break;
                case (RollOperation.greaterResult): this.finalResult = valor > this.finalResult ? valor : this.finalResult; break;
@@ -84,8 +88,18 @@ export class DicesResultModalComponent implements OnInit {
             if (this.rollOperation !== RollOperation.none && this.times > 1) {
                this.showFinalResult = true;
             }
+            if (this.discordService.ligado) {
+               this.discordService.sendDiceRoll({
+                  characterName: this.gameService.character.name,
+                  diceName: this.dice.name,
+                  finalResult: this.showFinalResult ? this.finalResult : null,
+                  individualResults: this.times > 1 ? this.individualResultValues : null,
+               }).subscribe(() => {
+               }, (e) => {
+                  console.error('Failed to send dice roll result to Discord.', e);
+               });
+            }
          }
       );
    }
-
 }

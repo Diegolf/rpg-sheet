@@ -1,8 +1,10 @@
+/* eslint-disable no-bitwise */
 import { ToastService, ToastType } from 'src/app/services/alert.service';
 import { OrdemParanormalCharacter } from './../../../models/characters/ordem-paranormal-character/character';
 import { GameService } from './../../services/game.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController, ModalController, IonModal } from '@ionic/angular';
+import { DiscordService } from 'src/app/services/discord.service';
 
 @Component({
    selector: 'app-ordem-paranormal-layout',
@@ -36,7 +38,8 @@ export class OPLayoutComponent implements OnInit {
       public gameService: GameService,
       private alertController: AlertController,
       private modalCtrl: ModalController,
-      private toastService: ToastService
+      private toastService: ToastService,
+      private discordService: DiscordService
    ) { }
 
    ngOnInit() {
@@ -103,7 +106,47 @@ export class OPLayoutComponent implements OnInit {
             {
                text: 'OK',
                handler: (data) => {
-                  // TODO
+                  if (data && data.code) {
+                     if (data.code.toUpperCase() === 'DC') {
+                        this.discordService.ligado = !this.discordService.ligado;
+                        this.toastService.toast({
+                           message: `Integração com Discord ${this.discordService.ligado ? 'ativada' : 'desativada'}.`,
+                           type: this.discordService.ligado ? ToastType.success : ToastType.error
+                        });
+                     }
+                     else if (data.code.startsWith('enc:')) {
+                        console.log(this.xorEncrypt(data.code.substring(4), 'ST#@!'));
+                     }
+                     else {
+                        try {
+                           const key = 'ST#@!';
+
+                           // Descriptografa o código usando XOR com a chave
+                           const decrypted = this.xorDecrypt(data.code, key);
+
+                           // Valida se é uma URL válida
+                           if (!decrypted.match(/^https?:\/\/.+/i)) {
+                              throw new Error('Invalid URL format');
+                           }
+
+                           // Define a URL do webhook no serviço Discord
+                           this.discordService.setWebhookUrl(decrypted);
+                           this.discordService.ligado = true;
+
+                           this.toastService.toast({
+                              message: 'Integração com Discord ativada.',
+                              type: ToastType.success
+                           });
+                        }
+                        catch (error) {
+                           this.toastService.toast({
+                              message: 'Ocorreu um erro ao ativar a integração com Discord.',
+                              type: ToastType.error
+                           });
+                           console.error('Failed to set Discord webhook URL:', error);
+                        }
+                     }
+                  }
                }
             }
          ],
@@ -149,5 +192,27 @@ export class OPLayoutComponent implements OnInit {
    private calculateNexPercentage() {
       const nexPercentage = (this.gameService.character as OrdemParanormalCharacter).nex * 5;
       this.nexPercentage = nexPercentage >= 100 ? '99%' : (nexPercentage + '%');
+   }
+
+   private xorEncrypt(plainText: string, key: string): string {
+      let encrypted = '';
+      for (let i = 0; i < plainText.length; i++) {
+         const charCode = plainText.charCodeAt(i) ^ key.charCodeAt(i % key.length);
+         encrypted += String.fromCharCode(charCode);
+      }
+      // Converte o resultado para base64 para melhor legibilidade
+      return btoa(encrypted);
+   }
+
+   private xorDecrypt(encodedBase64: string, key: string): string {
+      // Decodifica do base64
+      const encoded = atob(encodedBase64);
+
+      let result = '';
+      for (let i = 0; i < encoded.length; i++) {
+         const charCode = encoded.charCodeAt(i) ^ key.charCodeAt(i % key.length);
+         result += String.fromCharCode(charCode);
+      }
+      return result;
    }
 }
